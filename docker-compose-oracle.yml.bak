@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  # Database from https://hub.docker.com/_/oracle-database-enterprise-edition
+  # Must login
+  # Production ready database
+  oracle-db:
+    image: store/oracle/database-enterprise:12.2.0.1
+    volumes:
+      - ./migrations/oracle/init.sql:/docker-entrypoint-initdb.d/init.sql
+      # - ./oracle_database/oracle/oradata:/opt/oracle/oradata
+    ports:
+      - 1521:1521
+  # Database for tests
+  oracle-db-test:
+    image: store/oracle/database-enterprise:12.2.0.1
+    volumes:
+      - ./migrations/oracle/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 1522:1521

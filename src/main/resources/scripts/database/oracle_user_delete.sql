@@ -1,0 +1,2 @@
+DELETE FROM T_HT_USUARIO
+  WHERE cd_usuario = ?
