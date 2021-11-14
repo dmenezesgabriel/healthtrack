@@ -58,14 +58,11 @@ public class UserServlet {
         // Set user information
         User user = new User();
         user.setName(name);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
-        Calendar cal = Calendar.getInstance();
-        user.setBirthDate(cal.setTime(sdf.parse(birthDate)));
         user.setGender(gender);
         user.setEmail(email);
         user.setPassword(password);
         // Register to database
-        if (userDAO.register(user)) {
+        if (userDAO.register(user) > 0) {
             request.setAttribute("user", user);
             HttpSession session = request.getSession();
             // user = userDAO.getOne(userDAO.getLastId());

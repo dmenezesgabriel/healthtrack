@@ -10,13 +10,6 @@ services:
       - ./m2_data:/root/.m2/
     depends_on:
       - postgres
-    # TODO
-    # Replace properties with environment variables
-    # environment:
-    #   DRIVER_CLASS_NAME: org.postgresql.Driver
-    #   DB_URL: jdbc:postgresql://localhost:5432/postgres
-    #   DB_USER: postgres
-    #   DB_PASSWORD: postgres
 
   postgres:
     container_name: postgres

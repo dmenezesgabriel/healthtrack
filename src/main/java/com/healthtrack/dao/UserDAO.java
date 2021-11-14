@@ -9,7 +9,7 @@ import java.util.List;
 import com.healthtrack.entity.User;
 
 public interface UserDAO {
-    boolean register(User user);
+    int register(User user);
 
     List<User> getAll();
 
