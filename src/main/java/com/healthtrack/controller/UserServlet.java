@@ -1,7 +1,10 @@
 package com.healthtrack.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -54,6 +57,14 @@ public class UserServlet {
         String password = request.getParameter("password");
         // Set user information
         User user = new User();
+        user.setName(name);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
+        Calendar cal = Calendar.getInstance();
+        user.setBirthDate(cal.setTime(sdf.parse(birthDate)));
+        user.setGender(gender);
+        user.setEmail(email);
+        user.setPassword(password);
+        // Register to database
         if (userDAO.register(user)) {
             request.setAttribute("user", user);
             HttpSession session = request.getSession();
