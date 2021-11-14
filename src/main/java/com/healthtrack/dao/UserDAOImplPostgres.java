@@ -1,14 +1,16 @@
 package com.healthtrack.dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.sql.ResultSet;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import com.healthtrack.entity.User;
 import com.healthtrack.jdbc.ConnectionManager;
@@ -27,8 +29,7 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt = (connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS));
             // Set values
             stmt.setString(1, user.getName());
-            java.sql.Date date = (new java.sql.Date(user.getBirthDate().getTimeInMillis()));
-            stmt.setDate(2, date);
+            stmt.setObject(2, user.getBirthDate());
             stmt.setString(3, user.getGender());
             stmt.setString(4, user.getEmail());
             stmt.setString(5, user.getPassword());
@@ -69,8 +70,7 @@ public class UserDAOImplPostgres implements UserDAO {
 
             // Set values
             stmt.setString(1, user.getName());
-            java.sql.Date date = (new java.sql.Date(user.getBirthDate().getTimeInMillis()));
-            stmt.setDate(2, date);
+            stmt.setObject(2, user.getBirthDate());
             stmt.setString(3, user.getGender());
             stmt.setString(4, user.getEmail());
             stmt.setString(5, user.getPassword());
@@ -103,9 +103,8 @@ public class UserDAOImplPostgres implements UserDAO {
             while (result.next()) {
                 int id = result.getInt("cd_usuario");
                 String name = result.getString("nm_usuario");
-                java.sql.Date date = result.getDate("dt_nascimento");
-                Calendar birthDate = Calendar.getInstance();
-                birthDate.setTimeInMillis(date.getTime());
+                DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu, HH:mm:ss");
+                LocalDate birthDate = result.getObject(1, LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");
@@ -140,9 +139,7 @@ public class UserDAOImplPostgres implements UserDAO {
             if (result.next()) {
                 int id = result.getInt("cd_usuario");
                 String name = result.getString("nm_usuario");
-                java.sql.Date date = result.getDate("dt_nascimento");
-                Calendar birthDate = Calendar.getInstance();
-                birthDate.setTimeInMillis(date.getTime());
+                LocalDate birthDate = result.getObject(1, LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");

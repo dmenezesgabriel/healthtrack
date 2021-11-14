@@ -1,10 +1,7 @@
 package com.healthtrack.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

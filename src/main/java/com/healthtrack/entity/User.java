@@ -1,12 +1,12 @@
 package com.healthtrack.entity;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class User {
     private int id;
     private String name;
-    private Calendar birthDate;
+    private LocalDate birthDate;
     private String gender;
     private String email;
     private String password;
@@ -14,7 +14,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, Calendar birthDate, String gender, String email, String password) {
+    public User(int id, String name, LocalDate birthDate, String gender, String email, String password) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -39,11 +39,11 @@ public class User {
         this.name = name;
     }
 
-    public Calendar getBirthDate() {
+    public LocalDate getBirthDate() {
         return this.birthDate;
     }
 
-    public void setBirthDate(Calendar birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -81,7 +81,7 @@ public class User {
         return this;
     }
 
-    public User birthDate(Calendar birthDate) {
+    public User birthDate(LocalDate birthDate) {
         setBirthDate(birthDate);
         return this;
     }
