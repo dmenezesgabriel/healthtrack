@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="5" />
+    <!-- <meta http-equiv="refresh" content="5" /> -->
     <title>HealthTrack</title>
     <link rel="stylesheet" href="resources/css/styles.css" />
     <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
@@ -17,14 +17,41 @@
         <jsp:param name="title" value="This is the page title" />
       </jsp:include>
     </header>
-    <main class="flex-shrink-0">
+    <main>
       <div class="container">
-        <h1 class="mt-5">Sticky footer</h1>
-
-        <h2>hello</h2>
-        <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
+        <div class="row align-items-center p-3">
+          <div class="col p-3">
+            <h1>img</h1>
+          </div>
+          <div class="col p-3">
+            <!-- login -->
+            <div class="card p-3">
+              <h3 class="card-title">Login</h3>
+              <div class="card-body">
+                <form class="needs-validation" action="login" method="post" novalidate>
+                  <div class="has-validation mb-3">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" type="email" name="Email" id="email" placeholder="email@email.com.br" required />
+                    <div class="invalid-feedback">Campo obrigatório</div>
+                  </div>
+                  <div class="has-validation mb-3">
+                    <label class="form-label" for="password">Senha</label>
+                    <input class="form-control" type="text" name="password" id="password" placeholder="Password" required />
+                    <div class="invalid-feedback">Campo obrigatório</div>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit">Login</button>
+                    <a class="text-muted" href="">Registrar</a>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- login -->
+          </div>
+        </div>
       </div>
     </main>
     <jsp:include page="/_includes/footer.jsp" />
+    <script src="resources/js/form-validate.js"></script>
   </body>
 </html>
