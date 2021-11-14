@@ -14,8 +14,6 @@ import com.healthtrack.dao.UserDAO;
 import com.healthtrack.entity.User;
 import com.healthtrack.factory.DAOFactory;
 
-import org.w3c.dom.UserDataHandler;
-
 @WebServlet(name = "User", urlPatterns = { "/user" })
 public class UserServlet {
     UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
