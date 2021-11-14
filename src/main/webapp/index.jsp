@@ -6,7 +6,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="refresh" content="60*5" />
     <title>HealthTrack</title>
     <link rel="stylesheet" href="resources/css/styles.css" />
     <link rel="stylesheet" href="resources/css/login.css" />
@@ -19,39 +18,39 @@
       </jsp:include>
     </header>
     <main>
-      <div class="container">
-        <div class="row align-items-center p-3">
-          <div class="col p-3"></div>
-          <div class="col p-3">
-            <!-- login -->
-            <div class="card p-3 bg-dark">
-              <h3 class="card-title text-muted">Login</h3>
-              <div class="card-body">
-                <form class="needs-validation" action="login" method="post" novalidate>
-                  <div class="has-validation mb-3">
-                    <label class="form-label text-white" for="email">Email</label>
-                    <input class="form-control" type="email" name="Email" id="email" placeholder="email@exemplo.com.br" required />
-                    <div class="invalid-feedback">Campo obrigatório</div>
-                  </div>
-                  <div class="has-validation mb-3">
-                    <label class="form-label text-white" for="password">Senha</label>
-                    <input class="form-control" type="text" name="password" id="password" placeholder="123DeOliveira4" required />
-                    <div class="invalid-feedback">Campo obrigatório</div>
-                  </div>
-                  <div class="d-grid gap-2">
-                    <button class="btn btn-warning" type="submit">Login</button>
-                    <a class="text-muted text-center" href="">Registrar</a>
-                  </div>
-                </form>
-              </div>
+      <div class="container p-3">
+        <!-- login -->
+        <div class="d-flex flex-row-reverse">
+          <div class="card p-3 bg-dark align-middle">
+            <h3 class="card-title text-muted text-center">Login</h3>
+            <div class="card-body">
+              <form class="needs-validation" action="login" method="post" novalidate>
+                <div class="has-validation mb-3">
+                  <label class="form-label text-white" for="email">Email</label>
+                  <input class="form-control" type="email" name="Email" id="email" placeholder="email@exemplo.com.br" required />
+                  <div class="invalid-feedback">Campo obrigatório</div>
+                </div>
+                <div class="has-validation mb-3">
+                  <label class="form-label text-white" for="password">Senha</label>
+                  <input class="form-control" type="text" name="password" id="password" placeholder="123DeOliveira4" required />
+                  <div class="invalid-feedback">Campo obrigatório</div>
+                </div>
+                <div class="d-grid gap-2">
+                  <button class="btn btn-danger" type="submit">Entrar</button>
+                  <a class="btn btn-warning" href="">Registrar</a>
+                </div>
+              </form>
             </div>
-            <!-- login -->
           </div>
         </div>
+
+        <!-- login -->
       </div>
     </main>
     <jsp:include page="/_includes/footer.jsp" />
 
     <script src="resources/js/form-validate.js"></script>
+    <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
   </body>
 </html>
