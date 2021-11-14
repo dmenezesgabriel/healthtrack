@@ -1,0 +1,54 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docker Compose Build",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Up",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["up", "-d"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Down with Volumes",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["down", "-v"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Build War Install Deps",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["build", "--no-cache", "tomcat-server"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Build War",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["build", "tomcat-server"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Stop Server",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["stop", "tomcat-server"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Deploy War",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["up", "-d", "tomcat-server"],
+      "problemMatcher": []
+    }
+  ]
+}
