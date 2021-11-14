@@ -17,7 +17,7 @@ public class UserDAOImplPostgres implements UserDAO {
     private Connection connection;
 
     @Override
-    public void register(User user) {
+    public boolean register(User user) {
         PreparedStatement stmt = null;
 
         try {
@@ -32,9 +32,10 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt.setString(4, user.getEmail());
             stmt.setString(5, user.getPassword());
             stmt.executeUpdate();
-
+            return true;
         } catch (SQLException error) {
             error.printStackTrace();
+            return false;
         } finally {
             try {
                 stmt.close();
@@ -46,7 +47,7 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public void update(User user) {
+    public boolean update(User user) {
         PreparedStatement stmt = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
@@ -62,9 +63,10 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt.setString(5, user.getPassword());
             stmt.setInt(6, user.getId());
             stmt.executeUpdate();
-
+            return true;
         } catch (SQLException error) {
             error.printStackTrace();
+            return false;
         } finally {
             try {
                 stmt.close();
@@ -148,7 +150,7 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         PreparedStatement stmt = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
@@ -156,8 +158,10 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
+            return true;
         } catch (SQLException error) {
             error.printStackTrace();
+            return false;
         }
     }
 }

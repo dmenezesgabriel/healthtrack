@@ -21,7 +21,7 @@
       <div class="container p-3">
         <!-- login -->
         <div class="d-flex flex-row-reverse">
-          <div class="card p-3 bg-dark align-middle">
+          <div class="card w-auto p-3 bg-dark align-middle">
             <h3 class="card-title text-muted text-center">Login</h3>
             <div class="card-body">
               <form class="needs-validation" action="login" method="post" novalidate>
@@ -43,7 +43,6 @@
             </div>
           </div>
         </div>
-
         <!-- login -->
       </div>
     </main>

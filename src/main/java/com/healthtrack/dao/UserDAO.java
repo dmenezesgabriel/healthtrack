@@ -9,13 +9,13 @@ import java.util.List;
 import com.healthtrack.entity.User;
 
 public interface UserDAO {
-    void register(User user);
+    boolean register(User user);
 
     List<User> getAll();
 
     User getOne(int id);
 
-    void update(User user);
+    boolean update(User user);
 
-    void delete(int id);
+    boolean delete(int id);
 }
