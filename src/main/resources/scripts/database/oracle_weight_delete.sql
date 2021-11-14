@@ -1,1 +1,0 @@
-DELETE FROM T_HT_PESO WHERE cd_peso = ?
