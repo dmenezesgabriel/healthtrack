@@ -11,10 +11,18 @@
     <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h1>Hello</h1>
+    <header>
+      <jsp:include page="/_includes/header.jsp">
+        <jsp:param name="title" value="This is the page title" />
+      </jsp:include>
+    </header>
+    <main class="flex-shrink-0">
+      <div class="container">
+        <h1 class="mt-5">Sticky footer</h1>
+        <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
+        <p>Use <a href="/docs/5.1/examples/sticky-footer-navbar/">the sticky footer with a fixed navbar</a> if need be, too.</p>
       </div>
-    </div>
+    </main>
+    <jsp:include page="/_includes/footer.jsp" />
   </body>
 </html>

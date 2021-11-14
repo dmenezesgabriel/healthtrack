@@ -49,6 +49,19 @@
       "command": "docker-compose",
       "args": ["up", "-d", "tomcat-server"],
       "problemMatcher": []
+    },
+    {
+      "label": "Reload War",
+      "type": "shell",
+      "command": "echo Restarting",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Docker Compose Stop Server", "Docker Compose Build War", "Docker Compose Deploy War"],
+      "presentation": {
+        "reveal": "silent",
+        "revealProblems": "onProblem",
+        "close": true
+      },
+      "problemMatcher": []
     }
   ]
 }
