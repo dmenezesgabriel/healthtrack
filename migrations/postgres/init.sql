@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS T_HT_USUARIO CASCADE;
 DROP TABLE IF EXISTS T_HT_PRESSAO CASCADE;
 DROP TABLE IF EXISTS T_HT_PESO CASCADE;
 DROP TABLE IF EXISTS T_HT_ALTURA CASCADE;
+DROP TABLE IF EXISTS T_HT_IMC CASCADE;
 DROP TABLE IF EXISTS T_HT_SESSAO_EXERCICIO CASCADE;
 DROP TABLE IF EXISTS T_HT_EXERCICIO CASCADE;
 DROP TABLE IF EXISTS T_HT_REFEICAO CASCADE;
@@ -69,6 +70,21 @@ CREATE TABLE T_HT_ALTURA (
 ALTER TABLE T_HT_ALTURA
 	ADD CONSTRAINT PK_HT_ALTURA PRIMARY KEY (cd_altura);
 -------------------------------------------------------------------------------
+-- IMC
+-------------------------------------------------------------------------------
+CREATE TABLE T_HT_IMC (
+	cd_imc SERIAL,
+	cd_usuario INT NOT NULL,
+	cd_peso INT NOT NULL,
+	cd_altura INT NOT NULL,
+	dt_imc DATE NOT NULL,
+	vl_imc INT NOT NULL,
+  dt_criacao TIMESTAMP DEFAULT CURRENT_DATE
+);
+
+ALTER TABLE T_HT_IMC
+	ADD CONSTRAINT PK_HT_IMC PRIMARY KEY (cd_imc);
+-------------------------------------------------------------------------------
 -- Sessao Treino
 -------------------------------------------------------------------------------
 CREATE TABLE T_HT_SESSAO_EXERCICIO (
@@ -127,30 +143,45 @@ ALTER TABLE T_HT_PRESSAO
 	ADD CONSTRAINT FK_HT_USUARIO_PRESSAO FOREIGN KEY (cd_usuario)
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
-
+-------------------------------------------------------------------------------
 ALTER TABLE T_HT_PESO
 	ADD CONSTRAINT FK_HT_USUARIO_PESO FOREIGN KEY (cd_usuario)
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
-
+-------------------------------------------------------------------------------
 ALTER TABLE T_HT_ALTURA
 	ADD CONSTRAINT FK_HT_USUARIO_ALTURA FOREIGN KEY (cd_usuario)
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
-
-ALTER TABLE T_HT_SESSAO_EXERCICIO
-	ADD CONSTRAINT FK_HT_USUARIO_EXERCICIO FOREIGN KEY (cd_usuario)
+-------------------------------------------------------------------------------
+ALTER TABLE T_HT_IMC
+	ADD CONSTRAINT FK_HT_USUARIO_IMC FOREIGN KEY (cd_usuario)
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
 
-ALTER TABLE T_HT_REFEICAO
-	ADD CONSTRAINT FK_HT_USUARIO_REFEICAO FOREIGN KEY (cd_usuario)
+ALTER TABLE T_HT_IMC
+	ADD CONSTRAINT FK_HT_PESO_IMC FOREIGN KEY (cd_peso)
+	REFERENCES T_HT_PESO (cd_peso)
+	ON DELETE SET NULL;
+
+ALTER TABLE T_HT_IMC
+	ADD CONSTRAINT FK_HT_ALTURA_IMC FOREIGN KEY (cd_altura)
+	REFERENCES T_HT_ALTURA (cd_altura)
+	ON DELETE SET NULL;
+-------------------------------------------------------------------------------
+ALTER TABLE T_HT_SESSAO_EXERCICIO
+	ADD CONSTRAINT FK_HT_USUARIO_SESSAO_EXERCICIO FOREIGN KEY (cd_usuario)
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
 
 ALTER TABLE T_HT_SESSAO_EXERCICIO
 	ADD CONSTRAINT FK_HT_EXERCICIO_SESSAO_EXERCICIO FOREIGN KEY (cd_exercicio)
 	REFERENCES T_HT_EXERCICIO (cd_exercicio)
+	ON DELETE SET NULL;
+-------------------------------------------------------------------------------
+ALTER TABLE T_HT_REFEICAO
+	ADD CONSTRAINT FK_HT_USUARIO_REFEICAO FOREIGN KEY (cd_usuario)
+	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
 
 ALTER TABLE T_HT_REFEICAO
