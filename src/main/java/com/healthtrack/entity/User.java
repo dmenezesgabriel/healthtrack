@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class User implements Serializable {
     protected static final long serialVersionUID = 1L;
+
     private int id;
     private String name;
     private LocalDate birthDate;
