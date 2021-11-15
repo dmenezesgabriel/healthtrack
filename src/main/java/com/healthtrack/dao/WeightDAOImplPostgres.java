@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 import com.healthtrack.entity.User;
 import com.healthtrack.entity.Weight;
-import com.healthtrack.factory.DAOFactory;
 import com.healthtrack.jdbc.ConnectionManager;
 import com.healthtrack.util.Query;
 

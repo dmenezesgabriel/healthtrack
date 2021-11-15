@@ -1,6 +1,7 @@
 package com.healthtrack.factory;
 
 import com.healthtrack.dao.UserDAO;
+import com.healthtrack.dao.WeightDAO;
 
 public abstract class DAOFactory {
     public static final int POSTGRES = 1;
@@ -21,5 +22,7 @@ public abstract class DAOFactory {
     }
 
     public abstract UserDAO getUserDAO();
+
+    public abstract WeightDAO getWeightDAO(UserDAO userDao);
 
 }

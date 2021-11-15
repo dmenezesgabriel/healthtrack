@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class UserTest {
     @Test
-    public void shouldAnswerWithTrue() {
+    public void shoudInstanceObject() {
         User user = new User();
         user.setName("Gabriel");
         user.setEmail("gabriel@example.com");
