@@ -73,11 +73,11 @@ public class WeightDAOTest {
         Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         Weight weight = weightDAO.getOne(weightRegisteredId);
-        String newName = "UpdateTest";
-        weight.setMeasureValue(71.5);
+        double newValue = 71.5;
+        weight.setMeasureValue(newValue);
         boolean weightUpdated = weightDAO.update(weight);
         assertTrue(weightUpdated);
-        assertTrue(weightDAO.getOne(weightRegisteredId).getMeasureValue() == 71.5);
+        assertTrue(weightDAO.getOne(weightRegisteredId).getMeasureValue() == newValue);
     }
 
     @Test
