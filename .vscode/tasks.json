@@ -31,10 +31,17 @@
       "problemMatcher": []
     },
     {
-      "label": "Recompile War",
+      "label": "Compile War",
       "type": "shell",
       "command": "docker-compose",
-      "args": ["run", "maven"],
+      "args": ["run", "--rm", "maven"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Run tests",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["run", "--rm", "maven-test"],
       "problemMatcher": []
     }
   ]
