@@ -8,6 +8,10 @@
 - OpenJDK 11
 - Tomcat 9.0.54
 
+### Data Modeling
+
+![img](./models/models.drawio.png)
+
 ## Requirements
 
 - Docker
