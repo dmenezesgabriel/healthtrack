@@ -7,9 +7,9 @@ DROP TABLE IF EXISTS T_HT_USUARIO CASCADE;
 DROP TABLE IF EXISTS T_HT_PRESSAO CASCADE;
 DROP TABLE IF EXISTS T_HT_PESO CASCADE;
 DROP TABLE IF EXISTS T_HT_ALTURA CASCADE;
-DROP TABLE IF EXISTS T_HT_SESSAO_TREINO CASCADE;
-DROP TABLE IF EXISTS T_HT_REFEICAO CASCADE;
+DROP TABLE IF EXISTS T_HT_SESSAO_EXERCICIO CASCADE;
 DROP TABLE IF EXISTS T_HT_EXERCICIO CASCADE;
+DROP TABLE IF EXISTS T_HT_REFEICAO CASCADE;
 DROP TABLE IF EXISTS T_HT_ALIMENTO CASCADE;
 -------------------------------------------------------------------------------
 -- Create tables and constraints
@@ -71,18 +71,18 @@ ALTER TABLE T_HT_ALTURA
 -------------------------------------------------------------------------------
 -- Sessao Treino
 -------------------------------------------------------------------------------
-CREATE TABLE T_HT_SESSAO_TREINO (
-	cd_sessao_treino SERIAL,
+CREATE TABLE T_HT_SESSAO_EXERCICIO (
+	cd_sessao_exercicio SERIAL,
 	cd_usuario INT NOT NULL,
 	cd_exercicio INT NOT NULL,
-	dt_sessao_treino DATE NOT NULL,
+	dt_sessao_exercicio DATE NOT NULL,
 	dt_duracao DATE NOT NULL,
 	vl_calorias INT,
   dt_criacao TIMESTAMP DEFAULT CURRENT_DATE
 );
 
-ALTER TABLE T_HT_SESSAO_TREINO
-	ADD CONSTRAINT PK_HT_SESSAO_TREINO PRIMARY KEY (cd_sessao_treino);
+ALTER TABLE T_HT_SESSAO_EXERCICIO
+	ADD CONSTRAINT PK_HT_SESSAO_EXERCICIO PRIMARY KEY (cd_sessao_exercicio);
 -------------------------------------------------------------------------------
 -- Refeicao
 -------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ ALTER TABLE T_HT_ALTURA
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
 
-ALTER TABLE T_HT_SESSAO_TREINO
+ALTER TABLE T_HT_SESSAO_EXERCICIO
 	ADD CONSTRAINT FK_HT_USUARIO_EXERCICIO FOREIGN KEY (cd_usuario)
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
@@ -148,8 +148,8 @@ ALTER TABLE T_HT_REFEICAO
 	REFERENCES T_HT_USUARIO (cd_usuario)
 	ON DELETE SET NULL;
 
-ALTER TABLE T_HT_SESSAO_TREINO
-	ADD CONSTRAINT FK_HT_EXERCICIO_SESSAO_TREINO FOREIGN KEY (cd_exercicio)
+ALTER TABLE T_HT_SESSAO_EXERCICIO
+	ADD CONSTRAINT FK_HT_EXERCICIO_SESSAO_EXERCICIO FOREIGN KEY (cd_exercicio)
 	REFERENCES T_HT_EXERCICIO (cd_exercicio)
 	ON DELETE SET NULL;
 
@@ -157,3 +157,20 @@ ALTER TABLE T_HT_REFEICAO
 	ADD CONSTRAINT FK_HT_ALIMENTO_REFEICAO FOREIGN KEY (cd_alimento)
 	REFERENCES T_HT_ALIMENTO(cd_alimento)
 	ON DELETE SET NULL;
+-------------------------------------------------------------------------------
+-- Insert Default options
+-------------------------------------------------------------------------------
+INSERT INTO T_HT_USUARIO (
+  nm_usuario,
+  dt_nascimento,
+  ds_genero,
+  ds_email,
+  ds_senha
+)
+VALUES (
+  ?,
+  ?,
+  ?,
+  ?,
+  ?
+  )
