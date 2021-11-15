@@ -160,17 +160,24 @@ ALTER TABLE T_HT_REFEICAO
 -------------------------------------------------------------------------------
 -- Insert Default options
 -------------------------------------------------------------------------------
-INSERT INTO T_HT_USUARIO (
-  nm_usuario,
-  dt_nascimento,
-  ds_genero,
-  ds_email,
-  ds_senha
-)
-VALUES (
-  ?,
-  ?,
-  ?,
-  ?,
-  ?
-  )
+-- Insert Exercices
+-------------------------------------------------------------------------------
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Bicicleta');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Corrida');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Caminhada');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Natação');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Funcional');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Crossfit');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Academia');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Boxe');
+INSERT INTO T_HT_EXERCICIO (nm_exercicio) VALUES ('Muay Thai');
+-------------------------------------------------------------------------------
+-- Insert Meals
+-------------------------------------------------------------------------------
+INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Arroz');
+INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Feijão');
+INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Batata doce');
+INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Filé de Frango');
+INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Contra Filé');
+INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Filé de tilápia');
+INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Macarrão');
