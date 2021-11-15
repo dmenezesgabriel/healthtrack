@@ -22,7 +22,7 @@
 - **Run**:
 
 ```sh
-docker-compose up
+docker-compose up && docker-compose run maven
 ```
 
 - **Bring down with volumes**:
@@ -34,9 +34,7 @@ docker-compose down -v
 - **Recompile war package and deploy to tomcat**:
 
 ```sh
-docker-compose stop tomcat-server &&\
-docker-compose build tomcat-server &&\
-docker-compose up -d tomcat-server
+docker-compose run maven
 ```
 
 ## Cover credits

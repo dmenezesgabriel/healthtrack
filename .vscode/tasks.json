@@ -3,96 +3,39 @@
   "tasks": [
     // Docker
     {
-      "label": "Docker Compose Build",
+      "label": "build",
       "type": "shell",
       "command": "docker-compose",
       "args": ["build"],
       "problemMatcher": []
     },
     {
-      "label": "Docker Compose Up",
+      "label": "build no cache",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": ["build", "--no-cache"],
+      "problemMatcher": []
+    },
+    {
+      "label": "run",
       "type": "shell",
       "command": "docker-compose",
       "args": ["up", "-d"],
       "problemMatcher": []
     },
     {
-      "label": "Docker Compose Down with Volumes",
+      "label": "down",
       "type": "shell",
       "command": "docker-compose",
       "args": ["down", "-v"],
       "problemMatcher": []
     },
     {
-      "label": "Docker Compose Build War Install Deps",
+      "label": "Recompile War",
       "type": "shell",
       "command": "docker-compose",
-      "args": ["build", "--no-cache", "tomcat-server"],
+      "args": ["run", "maven"],
       "problemMatcher": []
-    },
-    {
-      "label": "Docker Compose Build War",
-      "type": "shell",
-      "command": "docker-compose",
-      "args": ["build", "tomcat-server"],
-      "problemMatcher": []
-    },
-    {
-      "label": "Docker Compose Stop Server",
-      "type": "shell",
-      "command": "docker-compose",
-      "args": ["stop", "tomcat-server"],
-      "problemMatcher": []
-    },
-    {
-      "label": "Docker Compose Deploy War",
-      "type": "shell",
-      "command": "docker-compose",
-      "args": ["up", "-d", "tomcat-server"],
-      "problemMatcher": []
-    },
-    {
-      "label": "Reload War",
-      "type": "shell",
-      "command": "echo Restarting",
-      "dependsOrder": "sequence",
-      "dependsOn": ["Docker Compose Stop Server", "Docker Compose Build War", "Docker Compose Deploy War"],
-      "presentation": {
-        "reveal": "silent",
-        "revealProblems": "onProblem",
-        "close": true
-      },
-      "problemMatcher": []
-    },
-    // No Docker
-    {
-      "label": "CleanTarget",
-      "type": "shell",
-      "command": "rm",
-      "args": ["-rf", "target"],
-      "problemMatcher": []
-    },
-    {
-      "label": "Compile",
-      "type": "shell",
-      "command": "mvn",
-      //  "-DskipTests"
-      "args": ["clean", "package"],
-      "dependsOn": ["CleanTarget"],
-      "problemMatcher": []
-    },
-    {
-      "label": "RunWAR",
-      "command": "${input:runWar}",
-      "dependsOn": ["Compile"],
-      "problemMatcher": []
-    }
-  ],
-  "inputs": [
-    {
-      "id": "runWar",
-      "type": "command",
-      "command": "tomcat.war.run"
     }
   ]
 }
