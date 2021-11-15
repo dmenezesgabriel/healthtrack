@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.sql.ResultSet;
 
 import java.util.List;
@@ -89,6 +88,9 @@ public class UserDAOImplPostgres implements UserDAO {
         } catch (SQLException error) {
             error.printStackTrace();
             return false;
+        } catch (Exception error) {
+            error.printStackTrace();
+            return false;
         } finally {
             try {
                 stmt.close();
@@ -113,8 +115,7 @@ public class UserDAOImplPostgres implements UserDAO {
             while (result.next()) {
                 int id = result.getInt("cd_usuario");
                 String name = result.getString("nm_usuario");
-                DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/uuuu, HH:mm:ss");
-                LocalDate birthDate = result.getObject(1, LocalDate.class);
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");
@@ -123,6 +124,8 @@ public class UserDAOImplPostgres implements UserDAO {
                 userList.add(user);
             }
         } catch (SQLException error) {
+            error.printStackTrace();
+        } catch (Exception error) {
             error.printStackTrace();
         } finally {
             try {
@@ -150,7 +153,7 @@ public class UserDAOImplPostgres implements UserDAO {
             if (result.next()) {
                 int objectId = result.getInt("cd_usuario");
                 String name = result.getString("nm_usuario");
-                LocalDate birthDate = result.getObject(1, LocalDate.class);
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");
@@ -158,6 +161,8 @@ public class UserDAOImplPostgres implements UserDAO {
                 user = new User(objectId, name, birthDate, gender, email, password);
             }
         } catch (SQLException error) {
+            error.printStackTrace();
+        } catch (Exception error) {
             error.printStackTrace();
         } finally {
             try {
@@ -182,6 +187,9 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt.executeUpdate();
             return true;
         } catch (SQLException error) {
+            error.printStackTrace();
+            return false;
+        } catch (Exception error) {
             error.printStackTrace();
             return false;
         }

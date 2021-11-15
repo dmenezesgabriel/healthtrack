@@ -21,10 +21,10 @@ public class UserTest {
         LocalDate birthDate = LocalDate.parse(input, f);
         user.setBirthDate(birthDate);
         user.setPassword("123");
-        assertTrue(user.getName() == "Gabriel");
-        assertTrue(user.getEmail() == "gabriel@example.com");
-        assertTrue(user.getGender() == "Masculino");
-        assertTrue(user.getPassword() == "123");
-        assertTrue(user.getBirthDate() == birthDate);
+        assertTrue(user.getName().equals("Gabriel"));
+        assertTrue(user.getEmail().equals("gabriel@example.com"));
+        assertTrue(user.getGender().equals("Masculino"));
+        assertTrue(user.getPassword().equals("123"));
+        assertTrue(user.getBirthDate().equals(birthDate));
     }
 }
