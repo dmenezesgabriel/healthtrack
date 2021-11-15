@@ -49,7 +49,7 @@ CREATE TABLE T_HT_PESO (
 	cd_peso SERIAL,
 	cd_usuario INT NOT NULL,
 	dt_peso DATE NOT NULL,
-	vl_peso INT NOT NULL,
+	vl_peso NUMERIC NOT NULL,
   dt_criacao TIMESTAMP DEFAULT CURRENT_DATE
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE T_HT_ALTURA (
 	cd_altura SERIAL,
 	cd_usuario INT NOT NULL,
 	dt_altura DATE NOT NULL,
-	vl_altura INT NOT NULL,
+	vl_altura NUMERIC NOT NULL,
   dt_criacao TIMESTAMP DEFAULT CURRENT_DATE
 );
 
@@ -77,7 +77,7 @@ CREATE TABLE T_HT_SESSAO_EXERCICIO (
 	cd_exercicio INT NOT NULL,
 	dt_sessao_exercicio DATE NOT NULL,
 	dt_duracao DATE NOT NULL,
-	vl_calorias INT,
+	vl_calorias NUMERIC,
   dt_criacao TIMESTAMP DEFAULT CURRENT_DATE
 );
 
@@ -92,7 +92,7 @@ CREATE TABLE T_HT_REFEICAO (
 	cd_alimento INT NOT NULL,
 	dt_refeicao DATE NOT NULL,
 	qtd_alimento INT NOT NULL,
-	vl_calorias INT,
+	vl_calorias NUMERIC,
   dt_criacao TIMESTAMP DEFAULT CURRENT_DATE
 );
 
