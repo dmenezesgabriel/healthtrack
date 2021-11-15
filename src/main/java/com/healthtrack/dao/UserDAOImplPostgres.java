@@ -25,7 +25,7 @@ public class UserDAOImplPostgres implements UserDAO {
 
         try {
             connection = ConnectionManager.getInstance().getConnection();
-            String sql = Query.fileToString("user_register.sql");
+            String sql = Query.fileToString("/user_register.sql");
             stmt = (connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS));
             // Set values
             stmt.setString(1, user.getName());
@@ -50,6 +50,9 @@ public class UserDAOImplPostgres implements UserDAO {
         } catch (SQLException error) {
             error.printStackTrace();
             return 0;
+        } catch (Exception error) {
+            error.printStackTrace();
+            return 0;
         } finally {
             try {
                 stmt.close();
@@ -65,7 +68,7 @@ public class UserDAOImplPostgres implements UserDAO {
         PreparedStatement stmt = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
-            String sql = Query.fileToString("user_update.sql");
+            String sql = Query.fileToString("/user_update.sql");
             stmt = (connection.prepareStatement(sql));
 
             // Set values
@@ -97,7 +100,7 @@ public class UserDAOImplPostgres implements UserDAO {
         ResultSet result = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
-            String sql = Query.fileToString("user_get_all.sql");
+            String sql = Query.fileToString("/user_get_all.sql");
             stmt = connection.prepareStatement(sql);
             result = stmt.executeQuery();
             while (result.next()) {
@@ -132,7 +135,7 @@ public class UserDAOImplPostgres implements UserDAO {
         ResultSet result = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
-            String sql = Query.fileToString("user_get_one.sql");
+            String sql = Query.fileToString("/user_get_one.sql");
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, userId);
             result = stmt.executeQuery();

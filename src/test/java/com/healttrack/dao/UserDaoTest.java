@@ -1,15 +1,18 @@
-package com.healttrack.entity;
-
-import static org.junit.Assert.assertTrue;
+package com.healttrack.dao;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.healthtrack.dao.UserDAO;
 import com.healthtrack.entity.User;
+import com.healthtrack.factory.DAOFactory;
 
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
-public class UserTest {
+public class UserDaoTest {
+    UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
+
     @Test
     public void shouldAnswerWithTrue() {
         User user = new User();
@@ -22,9 +25,8 @@ public class UserTest {
         user.setBirthDate(birthDate);
         user.setPassword("123");
         assertTrue(user.getName() == "Gabriel");
-        assertTrue(user.getEmail() == "gabriel@example.com");
-        assertTrue(user.getGender() == "Masculino");
-        assertTrue(user.getPassword() == "123");
-        assertTrue(user.getBirthDate() == birthDate);
+
+        int userRegistered = userDAO.register(user);
+
     }
 }

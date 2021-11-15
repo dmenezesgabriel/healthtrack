@@ -25,10 +25,10 @@ public class DatabaseManager {
         }
 
         // Get each property value.
-        String dbDriverClass = props.getProperty("oracle.jdbc.driverClassName");
-        String dbConnUrl = props.getProperty("oracle.jdbc.url");
-        String dbUserName = props.getProperty("oracle.jdbc.username");
-        String dbPassword = props.getProperty("oracle.jdbc.password");
+        String dbDriverClass = props.getProperty("postgres.jdbc.driverClassName");
+        String dbConnUrl = props.getProperty("postgres.jdbc.url");
+        String dbUserName = props.getProperty("postgres.jdbc.username");
+        String dbPassword = props.getProperty("postgres.jdbc.password");
 
         Connection connection = null;
         try {
