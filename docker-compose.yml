@@ -1,16 +1,6 @@
 version: "3.9"
 
 services:
-  tomcat-server:
-    container_name: tomcat-server
-    build: .
-    ports:
-      - "8383:8080"
-    volumes:
-      - ./m2_data:/root/.m2/
-    depends_on:
-      - postgres
-
   postgres:
     container_name: postgres
     image: postgres:14.0-alpine
@@ -36,12 +26,20 @@ services:
     depends_on:
       - postgres
 
-  postgres-test:
-    container_name: postgres-test
-    image: postgres:14.0-alpine
+  maven:
+    build:
+      context: dockerfiles
+      dockerfile: Dockerfile-maven
     volumes:
-      - ./migrations/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./.m2:/root/.m2
+      - $PWD:/usr/src/mymaven
+    volumes_from:
+      - tomcat
+    network_mode: bridge
+
+  tomcat:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile-tomcat
     ports:
-      - 5430:5432
-    environment:
-      POSTGRES_PASSWORD: postgres
+      - "8383:8080"

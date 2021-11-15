@@ -1,0 +1,6 @@
+.m2/
+.gitignore
+README.md
+bak/
+.vscode/
+diagrams/

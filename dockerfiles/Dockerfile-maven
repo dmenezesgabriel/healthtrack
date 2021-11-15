@@ -1,0 +1,10 @@
+FROM maven:3.8.3-openjdk-11
+
+ARG USER_HOME_DIR="/root"
+
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+
+VOLUME "$USER_HOME_DIR/.m2"
+WORKDIR /usr/src/mymaven
+ENTRYPOINT ["/usr/src/mymaven/scripts/entrypoint.sh"]
