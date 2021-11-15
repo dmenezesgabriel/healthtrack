@@ -92,7 +92,7 @@ CREATE TABLE T_HT_SESSAO_EXERCICIO (
 	cd_usuario INT NOT NULL,
 	cd_exercicio INT NOT NULL,
 	dt_sessao_exercicio DATE NOT NULL,
-	dt_duracao DATE NOT NULL,
+	dt_duracao BIGINT,
 	vl_calorias NUMERIC,
   dt_criacao TIMESTAMP DEFAULT CURRENT_DATE
 );
