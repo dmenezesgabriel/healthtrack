@@ -139,8 +139,8 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public User getOne(int id) {
-        logger.info("Getting user id: " + id);
+    public User getOne(int objectId) {
+        logger.info("Getting user id: " + objectId);
         User user = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -148,17 +148,17 @@ public class UserDAOImplPostgres implements UserDAO {
             connection = ConnectionManager.getInstance().getConnection();
             String sql = Query.fileToString("/user_get_one.sql");
             stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setInt(1, objectId);
             result = stmt.executeQuery();
             if (result.next()) {
-                int objectId = result.getInt("cd_usuario");
+                int id = result.getInt("cd_usuario");
                 String name = result.getString("nm_usuario");
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");
 
-                user = new User(objectId, name, birthDate, gender, email, password);
+                user = new User(id, name, birthDate, gender, email, password);
             }
         } catch (SQLException error) {
             error.printStackTrace();
