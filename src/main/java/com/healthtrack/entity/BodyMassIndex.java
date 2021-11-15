@@ -104,6 +104,10 @@ public class BodyMassIndex implements Serializable {
         return this;
     }
 
+    public double calculateIndex() {
+        return this.weight.getMeasureValue() / (this.height.getMeasureValue() * this.weight.getMeasureValue());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
