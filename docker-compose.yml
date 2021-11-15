@@ -1,6 +1,9 @@
 version: "3.9"
 
 services:
+  # ---------------------------------------------------------------------------
+  # Database
+  # ---------------------------------------------------------------------------
   postgres:
     container_name: postgres
     image: postgres:14.0-alpine
@@ -25,21 +28,45 @@ services:
       PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
     depends_on:
       - postgres
-
+  # ---------------------------------------------------------------------------
+  # Maven
+  # ---------------------------------------------------------------------------
   maven:
     build:
-      context: dockerfiles
-      dockerfile: Dockerfile-maven
+      context: .
+      dockerfile: dockerfiles/Dockerfile-maven
     volumes:
       - ./.m2:/root/.m2
       - $PWD:/usr/src/mymaven
     volumes_from:
       - tomcat
     network_mode: bridge
-
+  # ---------------------------------------------------------------------------
+  # Tomcat
+  # ---------------------------------------------------------------------------
   tomcat:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile-tomcat
     ports:
       - "8383:8080"
+  # ---------------------------------------------------------------------------
+  # Tests
+  # ---------------------------------------------------------------------------
+  maven-test:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile-maven-test
+    volumes:
+      - ./.m2:/root/.m2
+      - $PWD:/usr/src/mymaven
+
+  postgres-test:
+    container_name: postgres-test
+    image: postgres:14.0-alpine
+    volumes:
+      - ./migrations/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5430:5432
+    environment:
+      POSTGRES_PASSWORD: postgres

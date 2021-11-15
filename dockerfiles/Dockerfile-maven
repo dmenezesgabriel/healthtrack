@@ -7,4 +7,6 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
 VOLUME "$USER_HOME_DIR/.m2"
 WORKDIR /usr/src/mymaven
+COPY scripts/entrypoint.sh /usr/src/mymaven/scripts/entrypoint.sh
+CMD ["chmod", "+x", "/usr/src/mymaven/scripts/entrypoint.sh"]
 ENTRYPOINT ["/usr/src/mymaven/scripts/entrypoint.sh"]
