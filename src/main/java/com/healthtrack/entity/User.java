@@ -1,9 +1,11 @@
 package com.healthtrack.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
+    protected static final long serialVersionUID = 1L;
     private int id;
     private String name;
     private LocalDate birthDate;

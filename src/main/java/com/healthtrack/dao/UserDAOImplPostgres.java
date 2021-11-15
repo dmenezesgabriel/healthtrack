@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.sql.ResultSet;
 
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 
 import com.healthtrack.entity.User;
@@ -17,10 +18,12 @@ import com.healthtrack.jdbc.ConnectionManager;
 import com.healthtrack.util.Query;
 
 public class UserDAOImplPostgres implements UserDAO {
+    Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
     private Connection connection;
 
     @Override
     public int register(User user) {
+        logger.info("Inserting User");
         PreparedStatement stmt = null;
 
         try {
@@ -42,6 +45,7 @@ public class UserDAOImplPostgres implements UserDAO {
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int insertedId = generatedKeys.getInt(1);
+                    logger.info("Inserted user id: " + insertedId);
                     return insertedId;
                 } else {
                     throw new SQLException("Creating user failed, no ID obtained.");
@@ -65,6 +69,7 @@ public class UserDAOImplPostgres implements UserDAO {
 
     @Override
     public boolean update(User user) {
+        logger.info("Updating user");
         PreparedStatement stmt = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
@@ -79,6 +84,7 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt.setString(5, user.getPassword());
             stmt.setInt(6, user.getId());
             stmt.executeUpdate();
+            logger.info("User updated id: " + user.getId());
             return true;
         } catch (SQLException error) {
             error.printStackTrace();
@@ -95,6 +101,7 @@ public class UserDAOImplPostgres implements UserDAO {
 
     @Override
     public List<User> getAll() {
+        logger.info("Getting all users");
         List<User> userList = new ArrayList<User>();
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -129,7 +136,8 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public User getOne(int userId) {
+    public User getOne(int id) {
+        logger.info("Getting user id: " + id);
         User user = null;
         PreparedStatement stmt = null;
         ResultSet result = null;
@@ -137,17 +145,17 @@ public class UserDAOImplPostgres implements UserDAO {
             connection = ConnectionManager.getInstance().getConnection();
             String sql = Query.fileToString("/user_get_one.sql");
             stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, userId);
+            stmt.setInt(1, id);
             result = stmt.executeQuery();
             if (result.next()) {
-                int id = result.getInt("cd_usuario");
+                int objectId = result.getInt("cd_usuario");
                 String name = result.getString("nm_usuario");
                 LocalDate birthDate = result.getObject(1, LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");
 
-                user = new User(id, name, birthDate, gender, email, password);
+                user = new User(objectId, name, birthDate, gender, email, password);
             }
         } catch (SQLException error) {
             error.printStackTrace();
@@ -164,6 +172,7 @@ public class UserDAOImplPostgres implements UserDAO {
 
     @Override
     public boolean delete(int id) {
+        logger.info("Deleting user id: " + id);
         PreparedStatement stmt = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();

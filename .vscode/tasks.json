@@ -1,6 +1,7 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // Docker
     {
       "label": "Docker Compose Build",
       "type": "shell",
@@ -62,6 +63,36 @@
         "close": true
       },
       "problemMatcher": []
+    },
+    // No Docker
+    {
+      "label": "CleanTarget",
+      "type": "shell",
+      "command": "rm",
+      "args": ["-rf", "target"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Compile",
+      "type": "shell",
+      "command": "mvn",
+      //  "-DskipTests"
+      "args": ["clean", "package"],
+      "dependsOn": ["CleanTarget"],
+      "problemMatcher": []
+    },
+    {
+      "label": "RunWAR",
+      "command": "${input:runWar}",
+      "dependsOn": ["Compile"],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "runWar",
+      "type": "command",
+      "command": "tomcat.war.run"
     }
   ]
 }

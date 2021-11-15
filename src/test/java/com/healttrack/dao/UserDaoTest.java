@@ -13,8 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class UserDaoTest {
     UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
 
-    @Test
-    public void shouldAnswerWithTrue() {
+    public User mockUser() {
         User user = new User();
         user.setName("Gabriel");
         user.setEmail("gabriel@example.com");
@@ -24,9 +23,13 @@ public class UserDaoTest {
         LocalDate birthDate = LocalDate.parse(input, f);
         user.setBirthDate(birthDate);
         user.setPassword("123");
-        assertTrue(user.getName() == "Gabriel");
+        return user;
+    }
 
+    @Test
+    public void shouldReturnInsertedId() {
+        User user = mockUser();
         int userRegistered = userDAO.register(user);
-
+        assertTrue(userRegistered > 0);
     }
 }
