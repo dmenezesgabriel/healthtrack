@@ -58,7 +58,16 @@ public class UserDaoTest {
         User user = userDAO.getOne(userRegisteredId);
         String newName = "UpdateTest";
         user.setName(newName);
-        userDAO.update(user);
+        boolean userUpdated = userDAO.update(user);
+        assertTrue(userUpdated);
         assertTrue(userDAO.getOne(userRegisteredId).getName().equals(newName));
+    }
+
+    @Test
+    public void shouldDelete() {
+        User userMock = mockUser();
+        int userRegisteredId = userDAO.register(userMock);
+        boolean userDeleted = userDAO.delete(userRegisteredId);
+        assertTrue(userDeleted);
     }
 }

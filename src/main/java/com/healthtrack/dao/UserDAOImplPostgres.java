@@ -181,7 +181,7 @@ public class UserDAOImplPostgres implements UserDAO {
         PreparedStatement stmt = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
-            String sql = Query.fileToString("user_delete.sql");
+            String sql = Query.fileToString("/user_delete.sql");
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
