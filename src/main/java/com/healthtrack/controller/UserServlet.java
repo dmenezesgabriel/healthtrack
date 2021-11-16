@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class AddressServlet
  */
-@WebServlet(name = "user", urlPatterns = { "/user", "/new-user", })
+@WebServlet(name = "user", urlPatterns = { "/user" })
 public class UserServlet extends HttpServlet {
     Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
 
@@ -27,12 +27,12 @@ public class UserServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getServletPath();
+        String action = request.getParameter("action");
         logger.info("Requesting: " + action);
 
         try {
             switch (action) {
-            case "/new-user":
+            case "new":
                 logger.info("new");
                 showNewForm(request, response);
                 break;

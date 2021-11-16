@@ -4,6 +4,8 @@
 <!-- <%@taglib prefix="t" tagdir="/WEB-INF/tags"%> -->
 <!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> -->
 <t:base>
+  <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
+
   <div class="bg">
     <div class="container p-3">
       <div class="d-flex flex-row-reverse">
@@ -23,7 +25,7 @@
               </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-danger" type="submit">Entrar</button>
-                <a class="btn btn-warning" href="/healthtrack/new-user">Registrar</a>
+                <a class="btn btn-warning" href="${baseUrl}/user?action=new">Registrar</a>
               </div>
             </form>
           </div>
