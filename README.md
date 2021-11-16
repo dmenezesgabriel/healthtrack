@@ -2,11 +2,21 @@
 
 ## Description
 
+Almost vanilla java servlets
+
 - No spring
 - Only maven
 - PostgreSQL
 - OpenJDK 11
-- Tomcat 9.0.54
+- Tomcat 9
+- Servlets
+- JSP
+- JSTL
+
+# Features
+
+- Template inheritance by custom tags at `src\main\webapp\WEB-INF\tags`
+- Works on any machine that have docker installed
 
 ### Data Modeling
 
@@ -23,6 +33,12 @@
 
 ```sh
 docker-compose up && docker-compose run maven
+```
+
+- **Run tests**:
+
+```sh
+docker-compose run maven-test
 ```
 
 - **Bring down with volumes**:
