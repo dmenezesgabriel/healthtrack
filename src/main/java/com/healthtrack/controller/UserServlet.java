@@ -1,77 +1,62 @@
 package com.healthtrack.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.RequestDispatcher;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.healthtrack.dao.UserDAO;
-import com.healthtrack.entity.User;
-import com.healthtrack.factory.DAOFactory;
+/**
+ * Servlet implementation class AddressServlet
+ */
+@WebServlet(name = "user", urlPatterns = { "/user" })
+public class UserServlet extends HttpServlet {
+    Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
 
-@WebServlet(name = "User", urlPatterns = { "/user" })
-public class UserServlet {
-    UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
+    private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
-    }
-
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getServletPath();
+        logger.info("Requesting: " + action);
+
         try {
             switch (action) {
             case "/new":
                 showNewForm(request, response);
                 break;
-            case "/insert":
-                insertUser(request, response);
-
+            default:
+                showNewForm(request, response);
+                break;
             }
-        } catch (SQLException error) {
-            throw new ServletException(error);
+        } catch (Exception error) {
+            error.printStackTrace();
         }
     }
 
-    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+     *      response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("user-form.jsp");
-        dispatcher.forward(request, response);
+        doGet(request, response);
+
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        String name = request.getParameter("name");
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-        LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
-        String gender = request.getParameter("gender");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        // Set user information
-        User user = new User();
-        user.setName(name);
-        user.setGender(gender);
-        user.setBirthDate(birthDate);
-        user.setEmail(email);
-        user.setPassword(password);
-        // Register to database
-        int registeredUserId = userDAO.register(user);
-        if (registeredUserId > 0) {
-            User registeredUser = userDAO.getOne(registeredUserId);
-            request.setAttribute("user", registeredUser);
-            HttpSession session = request.getSession();
-            session.setAttribute("user", registeredUser);
-        } else {
-            request.setAttribute("error", "Informação invalida");
-        }
-        // response.sendRedirect("user-home.jsp");
+    protected void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/new-user.jsp");
+        dispatcher.forward(request, response);
     }
 }
