@@ -7,7 +7,7 @@
   <c:set var="pageUrl" value="${pageContext.request.requestURL}" />
   <c:choose>
     <c:when test="${sessionScope.user.name != null}">
-      <a class="nav-link ${pageUrl.toString().endsWith('/user-home.jsp') ? 'active' : ''}" href="${baseUrl/user-home.jsp}">Perfil</a>
+      <a class="nav-link ${pageUrl.toString().endsWith('/user-home.jsp') ? 'active' : ''}" href="${baseUrl}/user-home.jsp">Perfil</a>
     </c:when>
     <c:otherwise>
       <a class="nav-link ${pageUrl.toString().endsWith('/') ? 'active' : ''}" href="${baseUrl}">Home</a>

@@ -55,9 +55,14 @@ public class UserServlet extends HttpServlet {
                 logger.info("insert");
                 insertUser(request, response);
                 break;
+            case "edit":
+                logger.info("edit");
+                showEditForm(request, response);
+                break;
             default:
                 logger.info("default");
-                showNewForm(request, response);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+                dispatcher.forward(request, response);
                 break;
             }
         } catch (Exception error) {
@@ -108,5 +113,13 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("error", "Informação invalida");
         }
         response.sendRedirect("user-home.jsp");
+    }
+
+    protected void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        logger.info("Edit Form");
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit-user.jsp");
+        dispatcher.forward(request, response);
     }
 }

@@ -4,8 +4,11 @@
 <!-- <%@taglib prefix="t" tagdir="/WEB-INF/tags"%> -->
 <!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> -->
 <t:base>
+  <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
+
   <div class="container w-50 p-3">
     <h2>Olá, <c:out value="${sessionScope.user.name }"></c:out></h2>
     <hr />
+    <a class="btn btn-secondary" href="${baseUrl}/user?action=edit">Editar</a>
   </div>
 </t:base>
