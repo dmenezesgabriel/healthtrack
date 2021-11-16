@@ -11,14 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HealthTrack</title>
     <link rel="stylesheet" href="resources/css/styles.css" />
-    <link rel="stylesheet" href="resources/css/login.css" />
     <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
   </head>
-  <body class="bg">
+  <body>
     <header>
       <jsp:include page="/_includes/header.jsp" />
     </header>
-    <main>
+
+    <div class="bg">
       <div class="container p-3">
         <!-- login -->
         <div class="d-flex flex-row-reverse">
@@ -46,7 +46,8 @@
         </div>
         <!-- login -->
       </div>
-    </main>
+    </div>
+
     <jsp:include page="/_includes/footer.jsp" />
 
     <script src="resources/js/form-validate.js"></script>
