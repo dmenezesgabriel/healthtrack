@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class AddressServlet
  */
-@WebServlet(name = "user", urlPatterns = { "/user" })
+@WebServlet(name = "user", urlPatterns = { "/user", "/user-new" })
 public class UserServlet extends HttpServlet {
     Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
 
@@ -32,7 +32,7 @@ public class UserServlet extends HttpServlet {
 
         try {
             switch (action) {
-            case "/new":
+            case "/user/new":
                 showNewForm(request, response);
                 break;
             default:

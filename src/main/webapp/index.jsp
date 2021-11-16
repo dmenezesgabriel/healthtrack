@@ -23,7 +23,7 @@
               </div>
               <div class="d-grid gap-2">
                 <button class="btn btn-danger" type="submit">Entrar</button>
-                <a class="btn btn-warning" href="/healthtrack/user/new">Registrar</a>
+                <a class="btn btn-warning" href="/healthtrack/user-new">Registrar</a>
               </div>
             </form>
           </div>
