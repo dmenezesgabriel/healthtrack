@@ -1,4 +1,4 @@
-<%@tag description="Simple Wrapper Tag" pageEncoding="UTF-8"%>
+<!-- <%@tag description="Simple Wrapper Tag" pageEncoding="UTF-8"%> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Health Track</a>
