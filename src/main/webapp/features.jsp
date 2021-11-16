@@ -6,6 +6,12 @@
 <t:base>
   <div class="container p-3">
     <h2>Features</h2>
-    <hr>
+    <hr />
+    <ul>
+      <li>Registro e acompanhamento de peso</li>
+      <li>Registro e acompanhamento de índice de massa corporal</li>
+      <li>Registro e acompanhamento de atividades fisicas</li>
+      <li>Registro e acompanhamento de hábitos alimentares</li>
+    </ul>
   </div>
 </t:base>
