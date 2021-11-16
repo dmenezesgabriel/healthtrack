@@ -4,6 +4,8 @@
 <!-- <%@taglib prefix="t" tagdir="/WEB-INF/tags" %> -->
 <t:top-nav>
   <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-  <a class="nav-link active" href="${baseUrl}" aria-disabled="true">Home</a>
-  <a class="nav-link" href="${baseUrl}/features.jsp" aria-disabled="true">Funcionalidades</a>
+  <c:set var="pageUrl" value="${pageContext.request.requestURL}" />
+
+  <a class="nav-link ${pageUrl.toString().endsWith('/') ? 'active' : ''}" href="${baseUrl}">Home</a>
+  <a class="nav-link ${pageUrl.toString().endsWith('/features.jsp') ? 'active' : ''}" href="${baseUrl}/features.jsp">Funcionalidades</a>
 </t:top-nav>

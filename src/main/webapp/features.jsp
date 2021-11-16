@@ -6,5 +6,6 @@
 <t:base>
   <div class="container p-3">
     <h2>Features</h2>
+    <hr>
   </div>
 </t:base>
