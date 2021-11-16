@@ -5,6 +5,7 @@
 <!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> -->
 <t:base>
   <div class="container w-50 p-3">
-    <h1>Olá, <c:out value="${sessionScope.user.name }"></c:out></h1>
+    <h2>Olá, <c:out value="${sessionScope.user.name }"></c:out></h2>
+    <hr />
   </div>
 </t:base>
