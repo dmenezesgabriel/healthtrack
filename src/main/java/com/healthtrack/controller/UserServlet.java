@@ -107,6 +107,6 @@ public class UserServlet extends HttpServlet {
         } else {
             request.setAttribute("error", "Informação invalida");
         }
-        // response.sendRedirect("user-home.jsp");
+        response.sendRedirect("user-home.jsp");
     }
 }
