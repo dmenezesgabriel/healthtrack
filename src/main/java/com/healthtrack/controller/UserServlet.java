@@ -2,6 +2,8 @@ package com.healthtrack.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +50,8 @@ public class UserServlet {
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         String name = request.getParameter("name");
-        String birthDate = request.getParameter("birthDate");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+        LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
         String gender = request.getParameter("gender");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -56,14 +59,16 @@ public class UserServlet {
         User user = new User();
         user.setName(name);
         user.setGender(gender);
+        user.setBirthDate(birthDate);
         user.setEmail(email);
         user.setPassword(password);
         // Register to database
-        if (userDAO.register(user) > 0) {
-            request.setAttribute("user", user);
+        int registeredUserId = userDAO.register(user);
+        if (registeredUserId > 0) {
+            User registeredUser = userDAO.getOne(registeredUserId);
+            request.setAttribute("user", registeredUser);
             HttpSession session = request.getSession();
-            // user = userDAO.getOne(userDAO.getLastId());
-            session.setAttribute("user", user);
+            session.setAttribute("user", registeredUser);
         } else {
             request.setAttribute("error", "Informação invalida");
         }

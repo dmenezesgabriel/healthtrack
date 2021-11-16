@@ -12,6 +12,7 @@ Almost vanilla java servlets
 - Servlets
 - JSP
 - JSTL
+- WebJars
 
 # Features
 
