@@ -1,7 +1,7 @@
 <!-- <%@tag description="Simple Wrapper Tag" pageEncoding="UTF-8"%> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/healthtrack">Health Track</a>
+    <span class="navbar-brand">Health Track</span>
     <button
       class="navbar-toggler"
       type="button"

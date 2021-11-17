@@ -26,6 +26,8 @@ import com.healthtrack.factory.DAOFactory;
 public class UserServlet extends HttpServlet {
     Logger logger = null;
     UserDAO userDAO = null;
+    HttpSession session = null;
+    RequestDispatcher dispatcher = null;
 
     @Override
     public void init() throws ServletException {
@@ -63,9 +65,13 @@ public class UserServlet extends HttpServlet {
                 logger.info("update");
                 updateUser(request, response);
                 break;
+            case "delete":
+                logger.info("delete");
+                userDelete(request, response);
+                break;
             default:
                 logger.info("default");
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+                dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);
                 break;
             }
@@ -93,11 +99,12 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("formClass", "needs-validation");
         request.setAttribute("controlClass", "has-validation");
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
+        dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    private void insertUser(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
         logger.info("Insert");
         String name = request.getParameter("name");
         DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
@@ -116,13 +123,14 @@ public class UserServlet extends HttpServlet {
         int registeredUserId = userDAO.register(user);
         if (registeredUserId > 0) {
             User userRegistered = userDAO.getOne(registeredUserId);
-            HttpSession session = request.getSession();
+            session = request.getSession();
             session.setAttribute("user", userRegistered);
             request.setAttribute("message", "Registro feito com sucesso");
         } else {
-            request.setAttribute("message", "Informação invalida");
+            request.setAttribute("error", "Informação invalida");
         }
-        response.sendRedirect("user-home.jsp");
+        request.getRequestDispatcher("user-home.jsp").forward(request, response);
+
     }
 
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response)
@@ -134,11 +142,12 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("formClass", "");
         request.setAttribute("controlClass", "");
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
+        dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
         dispatcher.forward(request, response);
     }
 
-    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+    private void updateUser(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
         logger.info("update");
         HttpSession session = request.getSession();
         String name = request.getParameter("name");
@@ -160,8 +169,18 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("message", "Atualização feita com sucesso");
 
         } else {
-            request.setAttribute("message", "Informação invalida");
+            request.setAttribute("error", "Informação invalida");
         }
-        response.sendRedirect("user-home.jsp");
+        request.getRequestDispatcher("user-home.jsp").forward(request, response);
+    }
+
+    protected void userDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        logger.info("delete");
+        session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        userDAO.delete(user.getId());
+        dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
     }
 }
