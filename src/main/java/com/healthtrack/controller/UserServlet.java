@@ -59,6 +59,10 @@ public class UserServlet extends HttpServlet {
                 logger.info("edit");
                 showEditForm(request, response);
                 break;
+            case "update":
+                logger.info("update");
+                updateUser(request, response);
+                break;
             default:
                 logger.info("default");
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
@@ -111,11 +115,12 @@ public class UserServlet extends HttpServlet {
         // Register to database
         int registeredUserId = userDAO.register(user);
         if (registeredUserId > 0) {
-            request.setAttribute("user", user);
+            User userRegistered = userDAO.getOne(registeredUserId);
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
+            session.setAttribute("user", userRegistered);
+            request.setAttribute("message", "Registro feito com sucesso");
         } else {
-            request.setAttribute("error", "Informação invalida");
+            request.setAttribute("message", "Informação invalida");
         }
         response.sendRedirect("user-home.jsp");
     }
@@ -131,5 +136,32 @@ public class UserServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
         dispatcher.forward(request, response);
+    }
+
+    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        logger.info("update");
+        HttpSession session = request.getSession();
+        String name = request.getParameter("name");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+        LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
+        String email = request.getParameter("email");
+        String gender = request.getParameter("gender");
+        String password = request.getParameter("password");
+        // Set user information
+        User user = (User) session.getAttribute("user");
+        user.setName(name);
+        user.setGender(gender);
+        user.setBirthDate(birthDate);
+        user.setEmail(email);
+        user.setPassword(password);
+        // Register to database
+        if (userDAO.update(user)) {
+            logger.info("Update Successfully");
+            request.setAttribute("message", "Atualização feita com sucesso");
+
+        } else {
+            request.setAttribute("message", "Informação invalida");
+        }
+        response.sendRedirect("user-home.jsp");
     }
 }
