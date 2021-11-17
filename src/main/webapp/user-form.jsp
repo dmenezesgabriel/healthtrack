@@ -5,7 +5,7 @@
 <!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> -->
 <t:base>
   <div class="container w-50 p-3">
-    <h2>Cadastro</h2>
+    <h2>${title}</h2>
     <hr />
     <form class="${formClass}" action="user?action=${action}" method="post" novalidate>
       <div class="${controlclass} mb-3">

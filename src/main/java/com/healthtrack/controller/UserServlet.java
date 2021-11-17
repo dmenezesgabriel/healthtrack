@@ -83,6 +83,7 @@ public class UserServlet extends HttpServlet {
     protected void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("New Form");
+        request.setAttribute("title", "Cadastro");
         request.setAttribute("action", "insert");
         request.setAttribute("button", "Cadastrar agora");
         request.setAttribute("formClass", "needs-validation");
@@ -122,6 +123,7 @@ public class UserServlet extends HttpServlet {
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Edit Form");
+        request.setAttribute("title", "Editar");
         request.setAttribute("action", "update");
         request.setAttribute("button", "Salvar");
         request.setAttribute("formClass", "");
