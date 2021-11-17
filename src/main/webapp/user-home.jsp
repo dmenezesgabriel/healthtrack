@@ -5,7 +5,6 @@
 <!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> -->
 <t:base>
   <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-  <jsp:include page="/_includes/sidenav.jsp" />
 
   <div class="container w-50 p-3">
     <c:choose>
