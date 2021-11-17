@@ -83,8 +83,12 @@ public class UserServlet extends HttpServlet {
     protected void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("New Form");
+        request.setAttribute("action", "insert");
+        request.setAttribute("button", "Cadastrar agora");
+        request.setAttribute("formClass", "needs-validation");
+        request.setAttribute("controlClass", "has-validation");
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/new-user.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -118,8 +122,12 @@ public class UserServlet extends HttpServlet {
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Edit Form");
+        request.setAttribute("action", "update");
+        request.setAttribute("button", "Salvar");
+        request.setAttribute("formClass", "");
+        request.setAttribute("controlClass", "");
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit-user.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
         dispatcher.forward(request, response);
     }
 }
