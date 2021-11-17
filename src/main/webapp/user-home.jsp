@@ -5,20 +5,32 @@
 <!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> -->
 <t:base>
   <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-
-  <div class="container w-50 p-3">
-    <c:choose>
-      <c:when test="${message != null}">
-        <div class="alert alert-info" role="alert">${message}</div>
-      </c:when>
-      <c:when test="${error != null}">
-        <div class="alert alert-danger" role="alert">${error}</div>
-      </c:when>
-      <c:otherwise> ${""} </c:otherwise>
-    </c:choose>
-    <h2>Olá, <c:out value="${sessionScope.user.name }"></c:out></h2>
-    <hr />
-    <a class="btn btn-warning" href="${baseUrl}/user?action=edit">Editar</a>
-    <a class="btn btn-secondary" href="${baseUrl}/user?action=delete">Deletar conta</a>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-lg-2">
+        <div class="mt-3">
+          <aside>
+            <jsp:include page="/_includes/sidenav.jsp" />
+          </aside>
+        </div>
+      </div>
+      <div class="col-md-7 col-lg-5">
+        <div class="p-3">
+          <c:choose>
+            <c:when test="${message != null}">
+              <div class="alert alert-info" role="alert">${message}</div>
+            </c:when>
+            <c:when test="${error != null}">
+              <div class="alert alert-danger" role="alert">${error}</div>
+            </c:when>
+            <c:otherwise> ${""} </c:otherwise>
+          </c:choose>
+          <h2>Olá, <c:out value="${sessionScope.user.name }"></c:out></h2>
+          <hr />
+          <a class="btn btn-warning" href="${baseUrl}/user?action=edit">Editar</a>
+          <a class="btn btn-secondary" href="${baseUrl}/user?action=delete">Deletar conta</a>
+        </div>
+      </div>
+    </div>
   </div>
 </t:base>

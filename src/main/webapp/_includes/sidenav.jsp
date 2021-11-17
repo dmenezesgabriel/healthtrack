@@ -1,4 +1,8 @@
-<div class="flex-shrink-0 p-3 bg-white" style="width: 280px">
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %> -->
+<!-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> -->
+<!-- <%@ page isELIgnored="false" %>  -->
+<!-- <%@taglib prefix="t" tagdir="/WEB-INF/tags" %> -->
+<div class="bg-white">
   <ul class="list-unstyled ps-0">
     <li class="mb-1">
       <button
@@ -32,7 +36,7 @@
         </ul>
       </div>
     </li>
-    <li class="border-top my-3"></li>
+    <hr />
     <li class="mb-1">
       <button
         class="btn btn-toggle align-items-center rounded collapsed"
