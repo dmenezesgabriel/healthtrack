@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.healthtrack.util.Cryptography;
+
 public class User implements Serializable {
     protected static final long serialVersionUID = 1L;
 
@@ -71,37 +73,11 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public User id(int id) {
-        setId(id);
-        return this;
-    }
-
-    public User name(String name) {
-        setName(name);
-        return this;
-    }
-
-    public User birthDate(LocalDate birthDate) {
-        setBirthDate(birthDate);
-        return this;
-    }
-
-    public User gender(String gender) {
-        setGender(gender);
-        return this;
-    }
-
-    public User email(String email) {
-        setEmail(email);
-        return this;
-    }
-
-    public User password(String password) {
-        setPassword(password);
-        return this;
+        try {
+            this.password = Cryptography.encrypt(password);
+        } catch (Exception error) {
+            error.printStackTrace();
+        }
     }
 
     @Override
