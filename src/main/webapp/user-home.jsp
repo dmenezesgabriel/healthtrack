@@ -29,4 +29,10 @@
                 </div>
               </div>
             </div>
+            <c:choose>
+              <c:when test="${sessionScope.user.name != null}"></c:when>
+              <c:otherwise>
+                <c:redirect url="/index.jsp" />
+              </c:otherwise>
+            </c:choose>
           </t:base>

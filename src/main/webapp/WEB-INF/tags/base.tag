@@ -12,15 +12,17 @@
   </head>
 
   <body>
-    <header>
-      <jsp:include page="/_includes/header.jsp" />
-    </header>
+    <jsp:include page="/_includes/header.jsp" />
 
     <jsp:doBody />
 
     <jsp:include page="/_includes/footer.jsp" />
     <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="webjars/feather-icons/4.28.0/feather.js"></script>
+    <script>
+      feather.replace();
+    </script>
   </body>
 
   </html>
