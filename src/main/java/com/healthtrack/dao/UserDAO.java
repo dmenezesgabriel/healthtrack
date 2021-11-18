@@ -19,6 +19,6 @@ public interface UserDAO {
 
     boolean delete(int id);
 
-    boolean validate(String email, String password);
+    // boolean validate(String email, String password);
 
 }

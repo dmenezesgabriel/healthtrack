@@ -10,15 +10,15 @@
               <li class="nav-item">
                 <a class="nav-link ${pageUrl.toString().endsWith('/user-home.jsp') ? 'active' : ''}"
                   href="${baseUrl}/user-home.jsp">
-                  <span data-feather="bar-chart-2"></span>
+                  <span data-feather="user"></span>
                   Perfil
                 </a>
               </li>
+              <li class="border-top my-3"></li>
               <li class="m-2 nav-item">
                 <button class="btn btn-toggle rounded collapsed" data-bs-toggle="collapse"
                   data-bs-target="#measures-collapse">
                   <span data-feather="chevron-down"></span>
-                  <span data-feather="layers"></span>
                   Medidas
                 </button>
                 <div class="collapse" id="measures-collapse">
@@ -33,7 +33,6 @@
                 <button class="btn btn-toggle rounded collapsed" data-bs-toggle="collapse"
                   data-bs-target="#routine-collapse">
                   <span data-feather="chevron-down"></span>
-                  <span data-feather="layers"></span>
                   Rotina
                 </button>
                 <div class="collapse" id="routine-collapse">
@@ -43,9 +42,10 @@
                   </ul>
                 </div>
               </li>
+              <li class="border-top my-3"></li>
               <li class="nav-item">
                 <a class="nav-link" href="${baseUrl}">
-                  <span data-feather="bar-chart-2"></span>
+                  <span data-feather="log-out"></span>
                   Sair
                 </a>
               </li>
