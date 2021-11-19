@@ -3,16 +3,17 @@ package com.healthtrack.jdbc;
 import java.sql.Connection;
 
 public class ConnectionManager {
-    private static ConnectionManager instance;
+    private static ConnectionManager connectionManager;
 
     private ConnectionManager() {
     }
 
     public static ConnectionManager getInstance() {
-        if (instance == null) {
-            instance = new ConnectionManager();
+        // Singleton
+        if (connectionManager == null) {
+            connectionManager = new ConnectionManager();
         }
-        return instance;
+        return connectionManager;
     }
 
     public Connection getConnection() {
