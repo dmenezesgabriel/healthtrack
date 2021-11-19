@@ -88,9 +88,6 @@ public class WeightDAOImplPostgres implements WeightDAO {
         } catch (SQLException error) {
             error.printStackTrace();
             throw new DBException("Error updating weight");
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
         } finally {
             try {
                 stmt.close();
@@ -114,9 +111,13 @@ public class WeightDAOImplPostgres implements WeightDAO {
             return true;
         } catch (SQLException error) {
             throw new DBException("Error deleting weight");
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
+        } finally {
+            try {
+                stmt.close();
+                connection.close();
+            } catch (SQLException error) {
+                error.printStackTrace();
+            }
         }
     }
 
