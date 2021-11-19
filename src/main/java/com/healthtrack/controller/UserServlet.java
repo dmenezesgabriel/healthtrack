@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.RequestDispatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.healthtrack.dao.UserDAO;
 import com.healthtrack.entity.User;
+import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
 /**
@@ -24,10 +24,11 @@ import com.healthtrack.factory.DAOFactory;
  */
 @WebServlet(name = "user", urlPatterns = { "/user" })
 public class UserServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
     Logger logger = null;
     UserDAO userDAO = null;
     HttpSession session = null;
-    RequestDispatcher dispatcher = null;
 
     @Override
     public void init() throws ServletException {
@@ -35,8 +36,6 @@ public class UserServlet extends HttpServlet {
         logger = java.util.logging.Logger.getLogger(this.getClass().getName());
         userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
     }
-
-    private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -71,8 +70,7 @@ public class UserServlet extends HttpServlet {
                 break;
             default:
                 logger.info("default");
-                dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-                dispatcher.forward(request, response);
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
                 break;
             }
         } catch (Exception error) {
@@ -99,36 +97,40 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("formClass", "needs-validation");
         request.setAttribute("controlClass", "has-validation");
 
-        dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("/user-form.jsp").forward(request, response);
     }
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         logger.info("Insert");
-        String name = request.getParameter("name");
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-        LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        String password = request.getParameter("password");
-        // Set user information
-        User user = new User();
-        user.setName(name);
-        user.setGender(gender);
-        user.setBirthDate(birthDate);
-        user.setEmail(email);
-        user.setPassword(password);
-        // Register to database
-        int registeredUserId = userDAO.register(user);
-        if (registeredUserId > 0) {
+        try {
+            String name = request.getParameter("name");
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+            LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
+            String email = request.getParameter("email");
+            String gender = request.getParameter("gender");
+            String password = request.getParameter("password");
+            // Set user information
+            User user = new User();
+            user.setName(name);
+            user.setGender(gender);
+            user.setBirthDate(birthDate);
+            user.setEmail(email);
+            user.setPassword(password);
+            // Register to database
+            int registeredUserId = userDAO.register(user);
             User userRegistered = userDAO.getOne(registeredUserId);
             session = request.getSession();
             session.setAttribute("user", userRegistered);
             request.setAttribute("message", "Registro feito com sucesso");
-        } else {
-            request.setAttribute("error", "Informação invalida");
+        } catch (DBException db) {
+            db.printStackTrace();
+            request.setAttribute("error", "Erro ao cadastrar");
+        } catch (Exception error) {
+            error.printStackTrace();
+            request.setAttribute("error", "Erro, por favor valide os dados");
         }
+
         request.getRequestDispatcher("user-home.jsp").forward(request, response);
 
     }
@@ -141,35 +143,37 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("button", "Salvar");
         request.setAttribute("formClass", "");
         request.setAttribute("controlClass", "");
-
-        dispatcher = getServletContext().getRequestDispatcher("/user-form.jsp");
-        dispatcher.forward(request, response);
+        request.getRequestDispatcher("/user-form.jsp").forward(request, response);
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         logger.info("update");
-        HttpSession session = request.getSession();
-        String name = request.getParameter("name");
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
-        LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
-        String email = request.getParameter("email");
-        String gender = request.getParameter("gender");
-        String password = request.getParameter("password");
-        // Set user information
-        User user = (User) session.getAttribute("user");
-        user.setName(name);
-        user.setGender(gender);
-        user.setBirthDate(birthDate);
-        user.setEmail(email);
-        user.setPassword(password);
-        // Register to database
-        if (userDAO.update(user)) {
+        try {
+            HttpSession session = request.getSession();
+            String name = request.getParameter("name");
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+            LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
+            String email = request.getParameter("email");
+            String gender = request.getParameter("gender");
+            String password = request.getParameter("password");
+            // Set user information
+            User user = (User) session.getAttribute("user");
+            user.setName(name);
+            user.setGender(gender);
+            user.setBirthDate(birthDate);
+            user.setEmail(email);
+            user.setPassword(password);
+            // Register to database
+            userDAO.update(user);
             logger.info("Update Successfully");
             request.setAttribute("message", "Atualização feita com sucesso");
-
-        } else {
-            request.setAttribute("error", "Informação invalida");
+        } catch (DBException db) {
+            db.printStackTrace();
+            request.setAttribute("error", "Erro ao editar");
+        } catch (Exception error) {
+            error.printStackTrace();
+            request.setAttribute("error", "Erro, por favor valide os dados");
         }
         request.getRequestDispatcher("user-home.jsp").forward(request, response);
     }
@@ -177,10 +181,17 @@ public class UserServlet extends HttpServlet {
     protected void userDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("delete");
-        session = request.getSession();
-        User user = (User) session.getAttribute("user");
-        userDAO.delete(user.getId());
-        dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);
+        try {
+            session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            userDAO.delete(user.getId());
+        } catch (DBException db) {
+            db.printStackTrace();
+            request.setAttribute("error", "Erro ao editar");
+        } catch (Exception error) {
+            error.printStackTrace();
+            request.setAttribute("error", "Erro, por favor valide os dados");
+        }
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

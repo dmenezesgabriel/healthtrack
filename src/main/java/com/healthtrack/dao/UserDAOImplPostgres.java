@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import java.util.ArrayList;
 
 import com.healthtrack.entity.User;
+import com.healthtrack.exception.DBException;
 import com.healthtrack.jdbc.ConnectionManager;
 import com.healthtrack.util.Query;
 
@@ -21,7 +22,7 @@ public class UserDAOImplPostgres implements UserDAO {
     private Connection connection;
 
     @Override
-    public int register(User user) {
+    public int register(User user) throws DBException {
         logger.info("Inserting User");
         PreparedStatement stmt = null;
 
@@ -38,7 +39,7 @@ public class UserDAOImplPostgres implements UserDAO {
             // Insert values
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Creating user failed, no rows affected.");
+                throw new DBException("Creating user failed, no rows affected.");
             }
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
@@ -47,15 +48,12 @@ public class UserDAOImplPostgres implements UserDAO {
                     logger.info("Inserted user id: " + insertedId);
                     return insertedId;
                 } else {
-                    throw new SQLException("Creating user failed, no ID obtained.");
+                    throw new DBException("Creating user failed, no ID obtained.");
                 }
             }
         } catch (SQLException error) {
             error.printStackTrace();
-            return 0;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return 0;
+            throw new DBException("Error registering user");
         } finally {
             try {
                 stmt.close();
@@ -67,7 +65,7 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public boolean update(User user) {
+    public boolean update(User user) throws DBException {
         logger.info("Updating user");
         PreparedStatement stmt = null;
         try {
@@ -87,10 +85,7 @@ public class UserDAOImplPostgres implements UserDAO {
             return true;
         } catch (SQLException error) {
             error.printStackTrace();
-            return false;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
+            throw new DBException("Error updating user");
         } finally {
             try {
                 stmt.close();
@@ -98,6 +93,23 @@ public class UserDAOImplPostgres implements UserDAO {
             } catch (SQLException error) {
                 error.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public boolean delete(int id) throws DBException {
+        logger.info("Deleting user id: " + id);
+        PreparedStatement stmt = null;
+        try {
+            connection = ConnectionManager.getInstance().getConnection();
+            String sql = Query.fileToString("/user_delete.sql");
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            error.printStackTrace();
+            throw new DBException("Error deleting user");
         }
     }
 
@@ -124,8 +136,6 @@ public class UserDAOImplPostgres implements UserDAO {
                 userList.add(user);
             }
         } catch (SQLException error) {
-            error.printStackTrace();
-        } catch (Exception error) {
             error.printStackTrace();
         } finally {
             try {
@@ -162,8 +172,6 @@ public class UserDAOImplPostgres implements UserDAO {
             }
         } catch (SQLException error) {
             error.printStackTrace();
-        } catch (Exception error) {
-            error.printStackTrace();
         } finally {
             try {
                 stmt.close();
@@ -175,23 +183,4 @@ public class UserDAOImplPostgres implements UserDAO {
         return user;
     }
 
-    @Override
-    public boolean delete(int id) {
-        logger.info("Deleting user id: " + id);
-        PreparedStatement stmt = null;
-        try {
-            connection = ConnectionManager.getInstance().getConnection();
-            String sql = Query.fileToString("/user_delete.sql");
-            stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException error) {
-            error.printStackTrace();
-            return false;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
-        }
-    }
 }

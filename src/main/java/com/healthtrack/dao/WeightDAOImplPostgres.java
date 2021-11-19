@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import com.healthtrack.entity.User;
 import com.healthtrack.entity.Weight;
+import com.healthtrack.exception.DBException;
 import com.healthtrack.jdbc.ConnectionManager;
 import com.healthtrack.util.Query;
 
@@ -28,7 +29,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
     }
 
     @Override
-    public int register(Weight weight) {
+    public int register(Weight weight) throws DBException {
         logger.info("Inserting Weight");
         PreparedStatement stmt = null;
 
@@ -43,7 +44,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
             // Insert values
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Creating weight failed, no rows affected.");
+                throw new DBException("Creating weight failed, no rows affected.");
             }
 
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
@@ -52,15 +53,12 @@ public class WeightDAOImplPostgres implements WeightDAO {
                     logger.info("Inserted weight id: " + insertedId);
                     return insertedId;
                 } else {
-                    throw new SQLException("Creating weight failed, no ID obtained.");
+                    throw new DBException("Creating weight failed, no ID obtained.");
                 }
             }
         } catch (SQLException error) {
             error.printStackTrace();
-            return 0;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return 0;
+            throw new DBException("Error registering weight");
         } finally {
             try {
                 stmt.close();
@@ -72,7 +70,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
     }
 
     @Override
-    public boolean update(Weight weight) {
+    public boolean update(Weight weight) throws DBException {
         logger.info("Updating weight");
         PreparedStatement stmt = null;
         try {
@@ -89,7 +87,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
             return true;
         } catch (SQLException error) {
             error.printStackTrace();
-            return false;
+            throw new DBException("Error updating weight");
         } catch (Exception error) {
             error.printStackTrace();
             return false;
@@ -100,6 +98,25 @@ public class WeightDAOImplPostgres implements WeightDAO {
             } catch (SQLException error) {
                 error.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public boolean delete(int id) throws DBException {
+        logger.info("Deleting weight id: " + id);
+        PreparedStatement stmt = null;
+        try {
+            connection = ConnectionManager.getInstance().getConnection();
+            String sql = Query.fileToString("/weight_delete.sql");
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException error) {
+            throw new DBException("Error deleting weight");
+        } catch (Exception error) {
+            error.printStackTrace();
+            return false;
         }
     }
 
@@ -174,23 +191,4 @@ public class WeightDAOImplPostgres implements WeightDAO {
         return weight;
     }
 
-    @Override
-    public boolean delete(int id) {
-        logger.info("Deleting weight id: " + id);
-        PreparedStatement stmt = null;
-        try {
-            connection = ConnectionManager.getInstance().getConnection();
-            String sql = Query.fileToString("/weight_delete.sql");
-            stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException error) {
-            error.printStackTrace();
-            return false;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
-        }
-    }
 }

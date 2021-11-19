@@ -7,17 +7,18 @@ package com.healthtrack.dao;
 */
 import java.util.List;
 import com.healthtrack.entity.User;
+import com.healthtrack.exception.DBException;
 
 public interface UserDAO {
-    int register(User user);
+    int register(User user) throws DBException;
+
+    boolean update(User user) throws DBException;
+
+    boolean delete(int id) throws DBException;
 
     List<User> getAll();
 
     User getOne(int id);
-
-    boolean update(User user);
-
-    boolean delete(int id);
 
     // boolean validate(String email, String password);
 

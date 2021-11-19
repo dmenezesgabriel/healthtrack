@@ -7,15 +7,17 @@ package com.healthtrack.dao;
 */
 import java.util.List;
 import com.healthtrack.entity.Weight;
+import com.healthtrack.exception.DBException;
 
 public interface WeightDAO {
-    int register(Weight weight);
+    int register(Weight weight) throws DBException;
+
+    boolean update(Weight weight) throws DBException;
+
+    boolean delete(int id) throws DBException;
 
     List<Weight> getAll();
 
     Weight getOne(int id);
 
-    boolean update(Weight weight);
-
-    boolean delete(int id);
 }

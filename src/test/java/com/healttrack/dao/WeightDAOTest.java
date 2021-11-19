@@ -8,6 +8,7 @@ import com.healthtrack.dao.UserDAO;
 import com.healthtrack.dao.WeightDAO;
 import com.healthtrack.entity.User;
 import com.healthtrack.entity.Weight;
+import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class WeightDAOTest {
     UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
     WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO(userDAO));
 
-    public User mockUser() {
+    public User mockUser() throws DBException {
         User user = new User();
         user.setName("Gabriel");
         user.setEmail("gabriel@example.com");
@@ -32,7 +33,7 @@ public class WeightDAOTest {
         return user;
     }
 
-    public Weight mockWeight() {
+    public Weight mockWeight() throws DBException {
         User user = mockUser();
         Weight weight = new Weight();
         String input = "1991-01-01";
@@ -45,14 +46,14 @@ public class WeightDAOTest {
     }
 
     @Test
-    public void shouldInsertObject() {
+    public void shouldInsertObject() throws DBException {
         Weight weight = mockWeight();
         int weightRegisteredId = weightDAO.register(weight);
         assertTrue(weightRegisteredId > 0);
     }
 
     @Test
-    public void shouldGetOne() {
+    public void shouldGetOne() throws DBException {
         Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         Weight weight = weightDAO.getOne(weightRegisteredId);
@@ -60,7 +61,7 @@ public class WeightDAOTest {
     }
 
     @Test
-    public void shouldGetAll() {
+    public void shouldGetAll() throws DBException {
         Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         List<Weight> weightList = weightDAO.getAll();
@@ -69,7 +70,7 @@ public class WeightDAOTest {
     }
 
     @Test
-    public void shouldUpdate() {
+    public void shouldUpdate() throws DBException {
         Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         Weight weight = weightDAO.getOne(weightRegisteredId);
@@ -81,7 +82,7 @@ public class WeightDAOTest {
     }
 
     @Test
-    public void shouldDelete() {
+    public void shouldDelete() throws DBException {
         Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         boolean weightDeleted = weightDAO.delete(weightRegisteredId);

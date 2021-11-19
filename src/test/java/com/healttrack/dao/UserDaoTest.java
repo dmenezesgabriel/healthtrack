@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.healthtrack.dao.UserDAO;
 import com.healthtrack.entity.User;
+import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
 import org.junit.Test;
@@ -28,14 +29,14 @@ public class UserDaoTest {
     }
 
     @Test
-    public void shouldInsertObject() {
+    public void shouldInsertObject() throws DBException {
         User user = mockUser();
         int userRegisteredId = userDAO.register(user);
         assertTrue(userRegisteredId > 0);
     }
 
     @Test
-    public void shouldGetOne() {
+    public void shouldGetOne() throws DBException {
         User userMock = mockUser();
         int userRegisteredId = userDAO.register(userMock);
         User user = userDAO.getOne(userRegisteredId);
@@ -43,7 +44,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void shouldGetAll() {
+    public void shouldGetAll() throws DBException {
         User userMock = mockUser();
         int userRegisteredId = userDAO.register(userMock);
         List<User> userList = userDAO.getAll();
@@ -52,7 +53,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void shouldUpdate() {
+    public void shouldUpdate() throws DBException {
         User userMock = mockUser();
         int userRegisteredId = userDAO.register(userMock);
         User user = userDAO.getOne(userRegisteredId);
@@ -64,7 +65,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void shouldDelete() {
+    public void shouldDelete() throws DBException {
         User userMock = mockUser();
         int userRegisteredId = userDAO.register(userMock);
         boolean userDeleted = userDAO.delete(userRegisteredId);
