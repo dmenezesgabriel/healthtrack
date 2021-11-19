@@ -6,9 +6,6 @@ import java.util.Properties;
 
 import com.healthtrack.util.Resources;
 
-import java.io.FileReader;
-import java.io.IOException;
-
 public class DatabaseManager {
     public static Connection getConnection() {
         Properties props = Resources.readProperties("/db.properties");
