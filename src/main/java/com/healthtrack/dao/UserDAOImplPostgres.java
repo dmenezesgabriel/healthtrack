@@ -144,6 +144,8 @@ public class UserDAOImplPostgres implements UserDAO {
             }
         } catch (SQLException error) {
             error.printStackTrace();
+        } catch (Exception error) {
+            error.printStackTrace();
         } finally {
             try {
                 stmt.close();
@@ -178,6 +180,8 @@ public class UserDAOImplPostgres implements UserDAO {
                 user = new User(id, name, birthDate, gender, email, password);
             }
         } catch (SQLException error) {
+            error.printStackTrace();
+        } catch (Exception error) {
             error.printStackTrace();
         } finally {
             try {
