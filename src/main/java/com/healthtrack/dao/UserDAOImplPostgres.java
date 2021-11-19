@@ -86,6 +86,9 @@ public class UserDAOImplPostgres implements UserDAO {
         } catch (SQLException error) {
             error.printStackTrace();
             throw new DBException("Error updating user");
+        } catch (Exception error) {
+            error.printStackTrace();
+            return false;
         } finally {
             try {
                 stmt.close();
@@ -110,6 +113,9 @@ public class UserDAOImplPostgres implements UserDAO {
         } catch (SQLException error) {
             error.printStackTrace();
             throw new DBException("Error deleting user");
+        } catch (Exception error) {
+            error.printStackTrace();
+            return false;
         }
     }
 
