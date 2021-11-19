@@ -11,14 +11,7 @@ import java.io.IOException;
 
 public class DatabaseManager {
     public static Connection getConnection() {
-        Properties props = null;
-        try {
-            FileReader dbProperties = Resources.readFile("/db.properties");
-            props = new Properties();
-            props.load(dbProperties);
-        } catch (IOException error) {
-            error.printStackTrace();
-        }
+        Properties props = Resources.readProperties("/db.properties");
 
         // Get each property value.
         String dbDriverClass = props.getProperty("postgres.jdbc.driverClassName");
