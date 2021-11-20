@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -64,6 +65,10 @@ public class UserServlet extends HttpServlet {
             case "update":
                 logger.info("update");
                 updateUser(request, response);
+                break;
+            case "list":
+                logger.info("list");
+                list(request, response);
                 break;
             case "delete":
                 logger.info("delete");
@@ -194,5 +199,14 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("error", "Erro, por favor valide os dados");
         }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
+    }
+
+    protected void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        logger.info("List");
+        List<User> list = userDAO.getAll();
+        logger.info("USERS: " + list);
+        request.setAttribute("users", list);
+
+        request.getRequestDispatcher("/user-list.jsp").forward(request, response);
     }
 }

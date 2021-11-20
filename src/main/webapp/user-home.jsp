@@ -49,7 +49,7 @@
                       <c:when test="${not empty error}">
                         <div class="alert alert-danger" role="alert">${error}</div>
                       </c:when>
-                      <c:otherwise> ${""} </c:otherwise>
+                      <c:otherwise></c:otherwise>
                     </c:choose>
                   </div>
                 </div>
