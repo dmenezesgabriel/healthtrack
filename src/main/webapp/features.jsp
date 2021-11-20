@@ -9,7 +9,7 @@
   </jsp:attribute>
   <jsp:body>
     <div class="container p-3">
-      <h2>Features</h2>
+      <h2>Funcionalidades</h2>
       <hr />
       <ul>
         <li>Registro e acompanhamento de peso</li>

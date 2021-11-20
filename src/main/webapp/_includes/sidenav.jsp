@@ -24,7 +24,6 @@
                 <div class="collapse" id="measures-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li><a href="#" class="nav-link text-dark">Peso</a></li>
-                    <li><a href="#" class="nav-link text-dark">Altura</a></li>
                     <li><a href="#" class="nav-link text-dark">Índice de massa corporal</a></li>
                   </ul>
                 </div>
