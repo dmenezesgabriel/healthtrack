@@ -7,7 +7,14 @@
         <header>
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-              <span class="navbar-brand">Health Track</span>
+              <c:choose>
+                <c:when test="${sessionScope.user.name != null}">
+                  <a class="navbar-brand" href="${baseUrl}/user-home.jsp">Health Track</a>
+                </c:when>
+                <c:otherwise>
+                  <a class="navbar-brand" href="${baseUrl}">Health Track</a>
+                </c:otherwise>
+              </c:choose>
               <c:choose>
                 <c:when test="${sessionScope.user.name != null}">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -30,8 +37,6 @@
                     <c:when test="${sessionScope.user.name != null}">
                     </c:when>
                     <c:otherwise>
-                      <a class="nav-link ${pageUrl.toString().endsWith('/') ? 'active' : ''}"
-                        href="${baseUrl}">Home</a>
                       <a class="nav-link ${pageUrl.toString().endsWith('/features.jsp') ? 'active' : ''}"
                         href="${baseUrl}/features.jsp">Funcionalidades</a>
                     </c:otherwise>

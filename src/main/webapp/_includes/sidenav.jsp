@@ -42,6 +42,20 @@
                   </ul>
                 </div>
               </li>
+              <li class="m-2 nav-item">
+                <button class="btn btn-toggle rounded collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#account-collapse">
+                  <span data-feather="chevron-down"></span>
+                  Conta
+                </button>
+                <div class="collapse" id="account-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="${baseUrl}/user?action=delete"
+                        class="nav-link text-muted">Deletar</a></li>
+                  </ul>
+                </div>
+
+              </li>
               <li class="border-top my-3"></li>
               <li class="nav-item">
                 <a class="nav-link text-muted" href="${baseUrl}">
