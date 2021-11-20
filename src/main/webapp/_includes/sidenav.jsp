@@ -8,7 +8,7 @@
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link ${pageUrl.toString().endsWith('/user-home.jsp') ? 'active' : ''}"
+                <a class="nav-link text-dark ${pageUrl.toString().endsWith('/user-home.jsp') ? 'active' : ''}"
                   href="${baseUrl}/user-home.jsp">
                   <span data-feather="user"></span>
                   Perfil
@@ -23,9 +23,9 @@
                 </button>
                 <div class="collapse" id="measures-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="nav-link">Peso</a></li>
-                    <li><a href="#" class="nav-link">Altura</a></li>
-                    <li><a href="#" class="nav-link">Índice de massa corporal</a></li>
+                    <li><a href="#" class="nav-link text-dark">Peso</a></li>
+                    <li><a href="#" class="nav-link text-dark">Altura</a></li>
+                    <li><a href="#" class="nav-link text-dark">Índice de massa corporal</a></li>
                   </ul>
                 </div>
               </li>
@@ -37,14 +37,14 @@
                 </button>
                 <div class="collapse" id="routine-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="nav-link">Atividades Físicas</a></li>
-                    <li><a href="#" class="nav-link">Alimentação</a></li>
+                    <li><a href="#" class="nav-link text-dark">Atividades Físicas</a></li>
+                    <li><a href="#" class="nav-link text-dark">Alimentação</a></li>
                   </ul>
                 </div>
               </li>
               <li class="border-top my-3"></li>
               <li class="nav-item">
-                <a class="nav-link" href="${baseUrl}">
+                <a class="nav-link text-muted" href="${baseUrl}">
                   <span data-feather="log-out"></span>
                   Sair
                 </a>

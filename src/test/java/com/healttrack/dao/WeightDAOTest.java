@@ -11,6 +11,7 @@ import com.healthtrack.entity.Weight;
 import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -18,10 +19,12 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class WeightDAOTest {
-    UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
-    WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO(userDAO));
+    public static UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
+    public static WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO(userDAO));
+    public static User userMock = null;
+    public static Weight weightMock = null;
 
-    public User mockUser() throws DBException {
+    public static void mockUser() throws DBException {
         User user = new User();
         user.setName("Gabriel");
         user.setEmail("gabriel@example.com");
@@ -33,24 +36,28 @@ public class WeightDAOTest {
         user.setPassword("123");
         int userRegisteredId = userDAO.register(user);
         user = userDAO.getOne(userRegisteredId);
-        return user;
+        userMock = user;
     }
 
-    public Weight mockWeight() throws DBException {
-        User user = mockUser();
+    public static void mockWeight() throws DBException {
         Weight weight = new Weight();
         String input = "1991-01-01";
         DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         LocalDate measureDate = LocalDate.parse(input, f);
-        weight.setUser(user);
+        weight.setUser(userMock);
         weight.setMeasureDate(measureDate);
         weight.setMeasureValue(70.02);
-        return weight;
+        weightMock = weight;
+    }
+
+    @BeforeClass
+    public static void setUp() throws DBException {
+        mockUser();
+        mockWeight();
     }
 
     @Test
     public void shouldInsertObject() throws DBException {
-        Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         assertTrue(weightRegisteredId > 0);
         Weight weight = weightDAO.getOne(weightRegisteredId);
@@ -60,7 +67,6 @@ public class WeightDAOTest {
 
     @Test
     public void shouldGetOne() throws DBException {
-        Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         Weight weight = weightDAO.getOne(weightRegisteredId);
         assertEquals(weight.getMeasureValue(), weightMock.getMeasureValue(), 0.8);
@@ -69,7 +75,6 @@ public class WeightDAOTest {
 
     @Test
     public void shouldGetAll() throws DBException {
-        Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         List<Weight> weightList = weightDAO.getAll();
         Weight weight = weightDAO.getOne(weightRegisteredId);
@@ -78,7 +83,6 @@ public class WeightDAOTest {
 
     @Test
     public void shouldUpdate() throws DBException {
-        Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         Weight weight = weightDAO.getOne(weightRegisteredId);
         double newValue = 71.5;
@@ -90,7 +94,6 @@ public class WeightDAOTest {
 
     @Test
     public void shouldDelete() throws DBException {
-        Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         weightDAO.delete(weightRegisteredId);
         assertNull(weightDAO.getOne(weightRegisteredId));
