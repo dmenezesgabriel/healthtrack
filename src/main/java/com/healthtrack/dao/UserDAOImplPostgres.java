@@ -65,7 +65,7 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public boolean update(User user) throws DBException {
+    public void update(User user) throws DBException {
         logger.info("Updating user");
         PreparedStatement stmt = null;
         try {
@@ -82,7 +82,6 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt.setInt(6, user.getId());
             stmt.executeUpdate();
             logger.info("User updated id: " + user.getId());
-            return true;
         } catch (SQLException error) {
             error.printStackTrace();
             throw new DBException("Error updating user");
@@ -97,7 +96,7 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public boolean delete(int id) throws DBException {
+    public void delete(int id) throws DBException {
         logger.info("Deleting user id: " + id);
         PreparedStatement stmt = null;
         try {
@@ -106,7 +105,6 @@ public class UserDAOImplPostgres implements UserDAO {
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            return true;
         } catch (SQLException error) {
             error.printStackTrace();
             throw new DBException("Error deleting user");

@@ -12,6 +12,9 @@ import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class WeightDAOTest {
@@ -47,9 +50,12 @@ public class WeightDAOTest {
 
     @Test
     public void shouldInsertObject() throws DBException {
-        Weight weight = mockWeight();
-        int weightRegisteredId = weightDAO.register(weight);
+        Weight weightMock = mockWeight();
+        int weightRegisteredId = weightDAO.register(weightMock);
         assertTrue(weightRegisteredId > 0);
+        Weight weight = weightDAO.getOne(weightRegisteredId);
+        assertEquals(weight.getMeasureValue(), weightMock.getMeasureValue(), 0.8);
+
     }
 
     @Test
@@ -57,7 +63,8 @@ public class WeightDAOTest {
         Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
         Weight weight = weightDAO.getOne(weightRegisteredId);
-        assertTrue(weight.getMeasureValue() == weightMock.getMeasureValue());
+        assertEquals(weight.getMeasureValue(), weightMock.getMeasureValue(), 0.8);
+
     }
 
     @Test
@@ -66,7 +73,7 @@ public class WeightDAOTest {
         int weightRegisteredId = weightDAO.register(weightMock);
         List<Weight> weightList = weightDAO.getAll();
         Weight weight = weightDAO.getOne(weightRegisteredId);
-        assertTrue(weightList.get(weightList.size() - 1).equals(weight));
+        assertEquals(weightList.get(weightList.size() - 1), weight);
     }
 
     @Test
@@ -76,16 +83,16 @@ public class WeightDAOTest {
         Weight weight = weightDAO.getOne(weightRegisteredId);
         double newValue = 71.5;
         weight.setMeasureValue(newValue);
-        boolean weightUpdated = weightDAO.update(weight);
-        assertTrue(weightUpdated);
-        assertTrue(weightDAO.getOne(weightRegisteredId).getMeasureValue() == newValue);
+        weightDAO.update(weight);
+        assertEquals(weightDAO.getOne(weightRegisteredId).getMeasureValue(), newValue, 0.8);
+
     }
 
     @Test
     public void shouldDelete() throws DBException {
         Weight weightMock = mockWeight();
         int weightRegisteredId = weightDAO.register(weightMock);
-        boolean weightDeleted = weightDAO.delete(weightRegisteredId);
-        assertTrue(weightDeleted);
+        weightDAO.delete(weightRegisteredId);
+        assertNull(weightDAO.getOne(weightRegisteredId));
     }
 }

@@ -12,9 +12,9 @@ import com.healthtrack.exception.DBException;
 public interface WeightDAO {
     int register(Weight weight) throws DBException;
 
-    boolean update(Weight weight) throws DBException;
+    void update(Weight weight) throws DBException;
 
-    boolean delete(int id) throws DBException;
+    void delete(int id) throws DBException;
 
     List<Weight> getAll();
 

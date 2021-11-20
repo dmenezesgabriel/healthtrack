@@ -12,9 +12,9 @@ import com.healthtrack.exception.DBException;
 public interface UserDAO {
     int register(User user) throws DBException;
 
-    boolean update(User user) throws DBException;
+    void update(User user) throws DBException;
 
-    boolean delete(int id) throws DBException;
+    void delete(int id) throws DBException;
 
     List<User> getAll();
 

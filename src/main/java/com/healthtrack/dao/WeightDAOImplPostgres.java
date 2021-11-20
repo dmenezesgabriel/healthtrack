@@ -70,7 +70,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
     }
 
     @Override
-    public boolean update(Weight weight) throws DBException {
+    public void update(Weight weight) throws DBException {
         logger.info("Updating weight");
         PreparedStatement stmt = null;
         try {
@@ -84,7 +84,6 @@ public class WeightDAOImplPostgres implements WeightDAO {
             stmt.setInt(3, weight.getId());
             stmt.executeUpdate();
             logger.info("Weight updated id: " + weight.getId());
-            return true;
         } catch (SQLException error) {
             error.printStackTrace();
             throw new DBException("Error updating weight");
@@ -99,7 +98,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
     }
 
     @Override
-    public boolean delete(int id) throws DBException {
+    public void delete(int id) throws DBException {
         logger.info("Deleting weight id: " + id);
         PreparedStatement stmt = null;
         try {
@@ -108,7 +107,6 @@ public class WeightDAOImplPostgres implements WeightDAO {
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
-            return true;
         } catch (SQLException error) {
             throw new DBException("Error deleting weight");
         } finally {

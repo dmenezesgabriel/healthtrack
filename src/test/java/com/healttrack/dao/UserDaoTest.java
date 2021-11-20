@@ -10,6 +10,9 @@ import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class UserDaoTest {
@@ -30,9 +33,12 @@ public class UserDaoTest {
 
     @Test
     public void shouldInsertObject() throws DBException {
-        User user = mockUser();
-        int userRegisteredId = userDAO.register(user);
+        User userMock = mockUser();
+        int userRegisteredId = userDAO.register(userMock);
         assertTrue(userRegisteredId > 0);
+        User user = userDAO.getOne(userRegisteredId);
+        assertEquals(user.getName(), userMock.getName());
+
     }
 
     @Test
@@ -40,7 +46,7 @@ public class UserDaoTest {
         User userMock = mockUser();
         int userRegisteredId = userDAO.register(userMock);
         User user = userDAO.getOne(userRegisteredId);
-        assertTrue(user.getName().equals(userMock.getName()));
+        assertEquals(user.getName(), userMock.getName());
     }
 
     @Test
@@ -49,7 +55,7 @@ public class UserDaoTest {
         int userRegisteredId = userDAO.register(userMock);
         List<User> userList = userDAO.getAll();
         User user = userDAO.getOne(userRegisteredId);
-        assertTrue(userList.get(userList.size() - 1).equals(user));
+        assertEquals(userList.get(userList.size() - 1), user);
     }
 
     @Test
@@ -59,16 +65,15 @@ public class UserDaoTest {
         User user = userDAO.getOne(userRegisteredId);
         String newName = "UpdateTest";
         user.setName(newName);
-        boolean userUpdated = userDAO.update(user);
-        assertTrue(userUpdated);
-        assertTrue(userDAO.getOne(userRegisteredId).getName().equals(newName));
+        userDAO.update(user);
+        assertEquals(userDAO.getOne(userRegisteredId).getName(), newName);
     }
 
     @Test
     public void shouldDelete() throws DBException {
         User userMock = mockUser();
         int userRegisteredId = userDAO.register(userMock);
-        boolean userDeleted = userDAO.delete(userRegisteredId);
-        assertTrue(userDeleted);
+        userDAO.delete(userRegisteredId);
+        assertNull(userDAO.getOne(userRegisteredId));
     }
 }
