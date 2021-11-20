@@ -4,11 +4,31 @@
       <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
         <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
           <t:base>
-            <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-            <div class="container-fluid">
-              <div class="row">
-                <jsp:include page="/_includes/sidenav.jsp" />
-                <div class="col-md-8 col-lg-8">
+            <jsp:attribute name="title">
+              <title>Health Track - Perfil
+              </title>
+            </jsp:attribute>
+            <jsp:body>
+              <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
+              <c:choose>
+                <c:when test="${not empty sessionScope.user.name}"></c:when>
+                <c:otherwise>
+                  <c:redirect url="${baseUrl}/index.jsp" />
+                </c:otherwise>
+              </c:choose>
+              <div class="container-fluid">
+                <c:choose>
+                  <c:when test="${not empty sessionScope.user.name}">
+                    <div class="row">
+                  </c:when>
+                  <c:otherwise>
+                    <div class="row sessionScope.user.name">
+                  </c:otherwise>
+                </c:choose>
+                <c:if test="${sessionScope.user.name != null}">
+                  <jsp:include page="/_includes/sidenav.jsp" />
+                </c:if>
+                <div class="col-md-8 col-lg-8 mb-3">
                   <!-- Align with sidenav -->
                   <div class="p-1">
                     <div
@@ -23,10 +43,10 @@
                       </div>
                     </div>
                     <c:choose>
-                      <c:when test="${message != null}">
+                      <c:when test="${not empty message}">
                         <div class="alert alert-info" role="alert">${message}</div>
                       </c:when>
-                      <c:when test="${error != null}">
+                      <c:when test="${not empty error}">
                         <div class="alert alert-danger" role="alert">${error}</div>
                       </c:when>
                       <c:otherwise> ${""} </c:otherwise>
@@ -34,11 +54,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-            <c:choose>
-              <c:when test="${sessionScope.user.name != null}"></c:when>
-              <c:otherwise>
-                <c:redirect url="/index.jsp" />
-              </c:otherwise>
-            </c:choose>
+              </div>
+            </jsp:body>
           </t:base>

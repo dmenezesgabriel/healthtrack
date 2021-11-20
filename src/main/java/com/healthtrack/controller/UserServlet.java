@@ -20,10 +20,11 @@ import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
 /**
- * Servlet implementation class AddressServlet
+ * Servlet for User class
  */
 @WebServlet(name = "user", urlPatterns = { "/user" })
 public class UserServlet extends HttpServlet {
+
     private static final long serialVersionUID = 1L;
 
     Logger logger = null;
