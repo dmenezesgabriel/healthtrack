@@ -14,6 +14,8 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: postgres
+    networks:
+      - prod
 
   pgadmin:
     container_name: pgadmin
@@ -28,6 +30,9 @@ services:
       PGADMIN_CONFIG_CONSOLE_LOG_LEVEL: 10
     depends_on:
       - postgres
+    networks:
+      - prod
+
   # ---------------------------------------------------------------------------
   # Maven
   # ---------------------------------------------------------------------------
@@ -40,7 +45,8 @@ services:
       - $PWD:/usr/src/mymaven
     volumes_from:
       - tomcat
-    network_mode: bridge
+    networks:
+      - prod
   # ---------------------------------------------------------------------------
   # Tomcat
   # ---------------------------------------------------------------------------
@@ -50,6 +56,11 @@ services:
       dockerfile: dockerfiles/Dockerfile-tomcat
     ports:
       - "8383:8080"
+    depends_on:
+      - postgres
+    networks:
+      - prod
+
   # ---------------------------------------------------------------------------
   # Tests
   # ---------------------------------------------------------------------------
@@ -61,6 +72,10 @@ services:
     volumes:
       - ./.m2:/root/.m2
       - $PWD/src:/app/src
+    depends_on:
+      - postgres-test
+    networks:
+      - test
 
   postgres-test:
     container_name: postgres-test
@@ -68,6 +83,12 @@ services:
     volumes:
       - ./migrations/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 5430:5432
+      - "5433:5432"
     environment:
       POSTGRES_PASSWORD: postgres
+    networks:
+      - test
+
+networks:
+  prod:
+  test:
