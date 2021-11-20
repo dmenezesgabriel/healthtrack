@@ -11,16 +11,6 @@
                 <div class="col-md-8 col-lg-8">
                   <!-- Align with sidenav -->
                   <div class="p-1">
-                    <c:choose>
-                      <c:when test="${message != null}">
-                        <div class="alert alert-info" role="alert">${message}</div>
-                      </c:when>
-                      <c:when test="${error != null}">
-                        <div class="alert alert-danger" role="alert">${error}</div>
-                      </c:when>
-                      <c:otherwise> ${""} </c:otherwise>
-                    </c:choose>
-
                     <div
                       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                       <h2>Olá, <c:out value="${sessionScope.user.name }"></c:out>
@@ -32,7 +22,15 @@
                         </div>
                       </div>
                     </div>
-                    </h2>
+                    <c:choose>
+                      <c:when test="${message != null}">
+                        <div class="alert alert-info" role="alert">${message}</div>
+                      </c:when>
+                      <c:when test="${error != null}">
+                        <div class="alert alert-danger" role="alert">${error}</div>
+                      </c:when>
+                      <c:otherwise> ${""} </c:otherwise>
+                    </c:choose>
                   </div>
                 </div>
               </div>
