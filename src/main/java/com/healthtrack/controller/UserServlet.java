@@ -162,6 +162,7 @@ public class UserServlet extends HttpServlet {
             // Register to database
             userDAO.update(user);
             logger.info("Update Successfully");
+            request.setAttribute("user", user);
             request.setAttribute("message", "Atualização feita com sucesso");
         } catch (DBException db) {
             db.printStackTrace();

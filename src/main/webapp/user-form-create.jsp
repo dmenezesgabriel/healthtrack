@@ -16,8 +16,8 @@
                     <h2>Cadastro</h2>
                   </div>
                   <jsp:include page="/_includes/alert.jsp" />
-                  <form class="needs-validation" action="user?action=create" method="post"
-                    novalidate>
+                  <form class="needs-validation" action="user" method="post" novalidate>
+                    <input type="hidden" value="create" name="action">
                     <div class="has-validation mb-3">
                       <label class="form-label" for="name">Nome Completo</label>
                       <input class="form-control" type="text" name="name" id="name"

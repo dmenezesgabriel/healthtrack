@@ -20,7 +20,9 @@
                         <h2>Editar</h2>
                       </div>
                       <jsp:include page="/_includes/alert.jsp" />
-                      <form action="user?action=update" method="post" novalidate>
+                      <form action="user" method="post" novalidate>
+                        <input type="hidden" value="update" name="action">
+                        <input type="hidden" value="${user.id}" name="id">
                         <div class="mb-3">
                           <label class="form-label" for="name">Nome Completo</label>
                           <input class="form-control" type="text" name="name" id="name"

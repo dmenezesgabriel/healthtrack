@@ -39,7 +39,7 @@
                               <c:param name="action" value="edit" />
                               <c:param name="id" value="${user.id}" />
                             </c:url>
-                            <a href="${link}">Edit</a>
+                            <a class="btn btn-primary" href="${link}">Edit</a>
                           </td>
                         </tr>
                       </c:forEach>
