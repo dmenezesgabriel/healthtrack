@@ -54,9 +54,9 @@ public class UserServlet extends HttpServlet {
                 logger.info("new");
                 showNewForm(request, response);
                 break;
-            case "insert":
-                logger.info("insert");
-                insertUser(request, response);
+            case "create":
+                logger.info("create");
+                createUser(request, response);
                 break;
             case "edit":
                 logger.info("edit");
@@ -98,7 +98,7 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         logger.info("New Form");
         request.setAttribute("title", "Cadastro");
-        request.setAttribute("action", "insert");
+        request.setAttribute("action", "create");
         request.setAttribute("button", "Cadastrar agora");
         request.setAttribute("formClass", "needs-validation");
         request.setAttribute("controlClass", "has-validation");
@@ -106,9 +106,9 @@ public class UserServlet extends HttpServlet {
         request.getRequestDispatcher("/user-form.jsp").forward(request, response);
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response)
+    private void createUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        logger.info("Insert");
+        logger.info("Create");
         try {
             String name = request.getParameter("name");
             DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
@@ -144,6 +144,9 @@ public class UserServlet extends HttpServlet {
     protected void showEditForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("Edit Form");
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = userDAO.getOne(id);
+        request.setAttribute("user", user);
         request.setAttribute("title", "Editar");
         request.setAttribute("action", "update");
         request.setAttribute("button", "Salvar");
@@ -187,10 +190,9 @@ public class UserServlet extends HttpServlet {
     protected void userDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("delete");
+        int id = Integer.parseInt(request.getParameter("id"));
         try {
-            session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            userDAO.delete(user.getId());
+            userDAO.delete(id);
         } catch (DBException db) {
             db.printStackTrace();
             request.setAttribute("error", "Erro ao editar");
