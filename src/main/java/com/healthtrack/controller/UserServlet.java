@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.healthtrack.dao.UserDAO;
 import com.healthtrack.entity.User;
@@ -30,7 +29,6 @@ public class UserServlet extends HttpServlet {
 
     Logger logger = null;
     UserDAO userDAO = null;
-    HttpSession session = null;
 
     @Override
     public void init() throws ServletException {
@@ -97,13 +95,7 @@ public class UserServlet extends HttpServlet {
     protected void showNewForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         logger.info("New Form");
-        request.setAttribute("title", "Cadastro");
-        request.setAttribute("action", "create");
-        request.setAttribute("button", "Cadastrar agora");
-        request.setAttribute("formClass", "needs-validation");
-        request.setAttribute("controlClass", "has-validation");
-
-        request.getRequestDispatcher("/user-form.jsp").forward(request, response);
+        request.getRequestDispatcher("/user-form-create.jsp").forward(request, response);
     }
 
     private void createUser(HttpServletRequest request, HttpServletResponse response)
@@ -126,8 +118,7 @@ public class UserServlet extends HttpServlet {
             // Register to database
             int registeredUserId = userDAO.register(user);
             User userRegistered = userDAO.getOne(registeredUserId);
-            session = request.getSession();
-            session.setAttribute("user", userRegistered);
+            request.setAttribute("user", userRegistered);
             request.setAttribute("message", "Registro feito com sucesso");
         } catch (DBException db) {
             db.printStackTrace();
@@ -147,19 +138,13 @@ public class UserServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userDAO.getOne(id);
         request.setAttribute("user", user);
-        request.setAttribute("title", "Editar");
-        request.setAttribute("action", "update");
-        request.setAttribute("button", "Salvar");
-        request.setAttribute("formClass", "");
-        request.setAttribute("controlClass", "");
-        request.getRequestDispatcher("/user-form.jsp").forward(request, response);
+        request.getRequestDispatcher("/user-form-update.jsp").forward(request, response);
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         logger.info("update");
         try {
-            HttpSession session = request.getSession();
             String name = request.getParameter("name");
             DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
             LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"), f);
@@ -167,7 +152,8 @@ public class UserServlet extends HttpServlet {
             String gender = request.getParameter("gender");
             String password = request.getParameter("password");
             // Set user information
-            User user = (User) session.getAttribute("user");
+            int id = Integer.parseInt(request.getParameter("id"));
+            User user = userDAO.getOne(id);
             user.setName(name);
             user.setGender(gender);
             user.setBirthDate(birthDate);

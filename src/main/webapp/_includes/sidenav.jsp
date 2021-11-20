@@ -3,13 +3,11 @@
     <%@ page isELIgnored="false" %>
       <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
         <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-        <c:set var="pageUrl" value="${pageContext.request.requestURL}" />
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link text-dark ${pageUrl.toString().endsWith('/user-home.jsp') ? 'active' : ''}"
-                  href="${baseUrl}/user-home.jsp">
+                <a class="nav-link text-dark" href="${baseUrl}/user-home.jsp">
                   <span data-feather="user"></span>
                   Perfil
                 </a>
