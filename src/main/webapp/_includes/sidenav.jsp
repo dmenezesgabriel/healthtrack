@@ -47,12 +47,7 @@
                 </button>
                 <div class="collapse" id="account-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li>
-                      <button type="button" class="nav-link btn btn-link btn-sm text-muted"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Excluir
-                      </button>
-                    </li>
+                    <li><a href="#" class="nav-link text-dark">Configurações</a></li>
                   </ul>
                 </div>
 
@@ -67,24 +62,3 @@
             </ul>
           </div>
         </nav>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Confirmar exclusão de conta</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                  aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                Você realmente gostaria de excluir a sua conta?
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Não</button>
-                <a href="${baseUrl}/user?action=delete" class="btn btn-secondary">
-                  Sim</a>
-              </div>
-            </div>
-          </div>
-        </div>

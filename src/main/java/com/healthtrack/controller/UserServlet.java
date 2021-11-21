@@ -52,30 +52,15 @@ public class UserServlet extends HttpServlet {
                 logger.info("new");
                 showNewForm(request, response);
                 break;
-            case "create":
-                logger.info("create");
-                createUser(request, response);
-                break;
             case "edit":
                 logger.info("edit");
                 showEditForm(request, response);
-                break;
-            case "update":
-                logger.info("update");
-                updateUser(request, response);
                 break;
             case "list":
                 logger.info("list");
                 list(request, response);
                 break;
-            case "delete":
-                logger.info("delete");
-                userDelete(request, response);
-                break;
-            default:
-                logger.info("default");
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
-                break;
+
             }
         } catch (Exception error) {
             error.printStackTrace();
@@ -88,7 +73,27 @@ public class UserServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+        String action = request.getParameter("action");
+        logger.info("Requesting user action: " + action);
+
+        try {
+            switch (action) {
+            case "create":
+                logger.info("create");
+                createUser(request, response);
+                break;
+            case "update":
+                logger.info("update");
+                updateUser(request, response);
+                break;
+            case "delete":
+                logger.info("delete");
+                userDelete(request, response);
+                break;
+            }
+        } catch (Exception error) {
+            error.printStackTrace();
+        }
 
     }
 
