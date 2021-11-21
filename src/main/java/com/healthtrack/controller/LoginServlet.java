@@ -47,10 +47,12 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+
+        // TODO
+        // FIND THE RIGHT PLACE FOR CRYPTO
         try {
             hashedPassword = Cryptography.encrypt(password);
         } catch (Exception error) {
-            // TODO Auto-generated catch block
             error.printStackTrace();
         }
 
@@ -70,10 +72,10 @@ public class LoginServlet extends HttpServlet {
             try {
                 logger.info("Sending email");
                 System.out.println("pass");
-                // bo.sendEmail(email, "Login Realizado", message);
-            } catch (Exception e) {
+                bo.sendEmail(email, "Login Realizado", message);
+            } catch (EmailException error) {
                 logger.info("Error sending email");
-                e.printStackTrace();
+                error.printStackTrace();
             }
         } else {
             logger.info("Error validating email");

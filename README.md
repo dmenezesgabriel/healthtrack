@@ -67,6 +67,10 @@ docker-compose run maven
 
 Checkout the tasks.json at .vscode
 
+## TODO
+
+- Improve Cryptography
+
 ## Cover credits
 
 - Man doing exercise - photo by <a href="https://unsplash.com/@lollish?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Lorenzo Fattò Offidani</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>

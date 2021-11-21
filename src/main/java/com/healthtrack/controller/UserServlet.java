@@ -118,6 +118,9 @@ public class UserServlet extends HttpServlet {
             String email = request.getParameter("email");
             String gender = request.getParameter("gender");
             String password = request.getParameter("password");
+
+            // TODO
+            // FIND THE RIGHT PLACE FOR CRYPTO
             String hashedPassword = Cryptography.encrypt(password);
             // Set user information
             User user = new User();
@@ -173,6 +176,9 @@ public class UserServlet extends HttpServlet {
             user.setGender(gender);
             user.setBirthDate(birthDate);
             user.setEmail(email);
+
+            // TODO
+            // FIND THE RIGHT PLACE FOR CRYPTO
             if (password != null) {
                 String hashedPassword = Cryptography.encrypt(password);
                 user.setPassword(hashedPassword);

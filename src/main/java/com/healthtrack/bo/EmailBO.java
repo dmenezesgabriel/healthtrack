@@ -1,6 +1,8 @@
 package com.healthtrack.bo;
 
 import java.util.Properties;
+import java.util.logging.Logger;
+
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -12,10 +14,15 @@ import javax.mail.internet.MimeMessage;
 import com.healthtrack.exception.EmailException;
 
 public class EmailBO {
+    Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
 
     public void sendEmail(String recipient, String subject, String message) throws EmailException {
         final String username = System.getenv("SMTP_EMAIL");
         final String password = System.getenv("SMTP_PASSWORD");
+
+        logger.info("Sending email from: " + username);
+        logger.info("Sending email to: " + recipient);
+        logger.info("Sending email with subject: " + message);
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

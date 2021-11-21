@@ -232,7 +232,7 @@ VALUES (
   'Masculino',
   'teste@teste.com.br',
   -- teste
-  'teste'
+  '698dc19d489c4e4db73e28a713eab07b'
   );
 -------------------------------------------------------------------------------
 -- TEST weight information!

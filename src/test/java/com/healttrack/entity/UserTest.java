@@ -24,11 +24,11 @@ public class UserTest {
         DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         LocalDate birthDate = LocalDate.parse(input, f);
         user.setBirthDate(birthDate);
-        user.setPassword("123");
+        user.setPassword(Cryptography.encrypt("123"));
         assertTrue(user.getName().equals("Gabriel"));
         assertTrue(user.getEmail().equals("gabriel@example.com"));
         assertTrue(user.getGender().equals("Masculino"));
-        assertTrue(user.getPassword().equals("123"));
+        assertTrue(user.getPassword().equals(Cryptography.encrypt("123")));
         assertTrue(user.getBirthDate().equals(birthDate));
     }
 
