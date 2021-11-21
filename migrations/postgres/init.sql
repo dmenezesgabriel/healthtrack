@@ -219,4 +219,20 @@ INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Macarrão');
 -------------------------------------------------------------------------------
 -- TEST user information!
 -------------------------------------------------------------------------------
--- TODO
+INSERT INTO T_HT_USUARIO (
+  nm_usuario,
+  dt_nascimento,
+  ds_genero,
+  ds_email,
+  ds_senha
+)
+VALUES (
+  'teste',
+  '2021-11-21',
+  'Masculino',
+  'examplo@exemplo.com.br',
+  'teste'
+  );
+-------------------------------------------------------------------------------
+-- TEST weight information!
+-------------------------------------------------------------------------------
