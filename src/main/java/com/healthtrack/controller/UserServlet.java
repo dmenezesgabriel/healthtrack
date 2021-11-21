@@ -57,15 +57,15 @@ public class UserServlet extends HttpServlet {
                 logger.info("edit");
                 showEditForm(request, response);
                 break;
-            case "list":
-                logger.info("list");
-                list(request, response);
-                break;
+
             case "get":
                 logger.info("get");
                 getUser(request, response);
                 break;
-
+            // case "list":
+            // logger.info("list");
+            // list(request, response);
+            // break;
             }
         } catch (Exception error) {
             error.printStackTrace();
