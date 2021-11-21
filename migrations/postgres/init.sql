@@ -212,3 +212,11 @@ INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Filé de Frango');
 INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Contra Filé');
 INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Filé de tilápia');
 INSERT INTO T_HT_ALIMENTO (nm_alimento) VALUES ('Macarrão');
+-------------------------------------------------------------------------------
+-- TEST user information!
+-------------------------------------------------------------------------------
+-- TEST user information!
+-------------------------------------------------------------------------------
+-- TEST user information!
+-------------------------------------------------------------------------------
+-- TODO
