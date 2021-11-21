@@ -19,7 +19,7 @@
                   <table class="table table-striped">
                     <thead>
                       <tr>
-                        <th scope="col">id</th>
+                        <th scope="col">Id</th>
                         <th scope="col">Nome</th>
                         <th scope="col">Data de Nascimento</th>
                         <th scope="col">Gênero</th>
@@ -41,6 +41,13 @@
                             </c:url>
                             <a class="btn btn-primary" href="${link}">Edit</a>
                           </td>
+                          <td>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                              data-bs-target="#excludeModal"
+                              onclick="exclusionId.value = ${user.id}">
+                              Excluir
+                            </button>
+                          </td>
                         </tr>
                       </c:forEach>
                     </tbody>
@@ -48,6 +55,31 @@
                 </div>
               </div>
             </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="excludeModal" tabindex="-1"
+              aria-labelledby="excludeModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="excludeModalLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                      aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Deseja realmente excluir o usuário?
+                  </div>
+                  <div class="modal-footer">
+                    <form action="user" method="post">
+                      <input type="hidden" name="action" value="delete">
+                      <input type="hidden" name="id" id="exclusionId">
+                      <button type="button" class="btn btn-primary"
+                        data-bs-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-secondary">Excluir</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
           </jsp:body>
         </t:base>

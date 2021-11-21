@@ -28,10 +28,7 @@
                       </div>
                       <div class="d-grid gap-2">
                         <button class="btn btn-danger" type="submit">Entrar</button>
-                        <c:url value="user" var="link">
-                          <c:param name="action" value="new" />
-                        </c:url>
-                        <a class="btn btn-warning" href="${link}">Registrar</a>
+                        <a class="btn btn-warning" href="${baseUrl}/user?action=new">Registrar</a>
                       </div>
                     </form>
                   </div>
