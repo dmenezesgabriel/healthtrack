@@ -60,6 +60,10 @@ public class UserServlet extends HttpServlet {
                 logger.info("list");
                 list(request, response);
                 break;
+            case "get":
+                logger.info("get");
+                getUser(request, response);
+                break;
 
             }
         } catch (Exception error) {
@@ -156,14 +160,20 @@ public class UserServlet extends HttpServlet {
             String email = request.getParameter("email");
             String gender = request.getParameter("gender");
             String password = request.getParameter("password");
+            logger.info("FORM PASSWORD " + password);
+
             // Set user information
             int id = Integer.parseInt(request.getParameter("id"));
             User user = userDAO.getOne(id);
+            logger.info("USER PASSWORD " + user.getPassword());
+
             user.setName(name);
             user.setGender(gender);
             user.setBirthDate(birthDate);
             user.setEmail(email);
-            user.setPassword(password);
+            if (password != null) {
+                user.setPassword(password);
+            }
             // Register to database
             userDAO.update(user);
             logger.info("Update Successfully");
@@ -198,9 +208,22 @@ public class UserServlet extends HttpServlet {
     protected void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("List");
         List<User> list = userDAO.getAll();
-        logger.info("USERS: " + list);
         request.setAttribute("users", list);
 
         request.getRequestDispatcher("/user-list.jsp").forward(request, response);
+    }
+
+    protected void getUser(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        logger.info("Read one");
+        int id = Integer.parseInt(request.getParameter("id"));
+        try {
+            User user = userDAO.getOne(id);
+            request.setAttribute("user", user);
+        } catch (Exception error) {
+            error.printStackTrace();
+            request.setAttribute("error", "Erro, por favor valide os dados");
+        }
+        request.getRequestDispatcher("/user-home.jsp").forward(request, response);
     }
 }

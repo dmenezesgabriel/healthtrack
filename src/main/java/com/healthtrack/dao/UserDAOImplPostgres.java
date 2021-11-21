@@ -175,7 +175,6 @@ public class UserDAOImplPostgres implements UserDAO {
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");
-
                 user = new User(id, name, birthDate, gender, email, password);
             }
         } catch (SQLException error) {
@@ -195,18 +194,22 @@ public class UserDAOImplPostgres implements UserDAO {
     }
 
     @Override
-    public boolean validateUser(User user) {
+    public int validateUser(User user) {
+        logger.info("Validating login: " + user.getEmail());
+        logger.info("Validating pass: " + user.getPassword());
+
         PreparedStatement stmt = null;
         ResultSet result = null;
         try {
             connection = ConnectionManager.getInstance().getConnection();
-            stmt = connection.prepareStatement(
-                    "SELECT ds_email, ds_senha FROM T_HT_USUARIO WHERE ds_email = ? AND ds_Senha = ?");
+            stmt = connection.prepareStatement("SELECT * FROM T_HT_USUARIO WHERE ds_email = ? AND ds_senha = ?");
             stmt.setString(1, user.getEmail());
-            stmt.setString(1, user.getPassword());
+            stmt.setString(2, user.getPassword());
             result = stmt.executeQuery();
             if (result.next()) {
-                return true;
+                int id = result.getInt("cd_usuario");
+                logger.info("found user: " + id);
+                return id;
             }
         } catch (SQLException error) {
             error.printStackTrace();
@@ -219,7 +222,7 @@ public class UserDAOImplPostgres implements UserDAO {
                 error.printStackTrace();
             }
         }
-        return false;
+        return 0;
     }
 
 }

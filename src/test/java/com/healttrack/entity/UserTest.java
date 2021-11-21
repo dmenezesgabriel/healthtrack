@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 import com.healthtrack.entity.User;
 import com.healthtrack.util.Cryptography;
@@ -11,6 +12,8 @@ import com.healthtrack.util.Cryptography;
 import org.junit.Test;
 
 public class UserTest {
+    Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
+
     @Test
     public void shoudInstanceObject() throws Exception {
         User user = new User();
@@ -25,7 +28,8 @@ public class UserTest {
         assertTrue(user.getName().equals("Gabriel"));
         assertTrue(user.getEmail().equals("gabriel@example.com"));
         assertTrue(user.getGender().equals("Masculino"));
-        assertTrue(user.getPassword().equals(Cryptography.encrypt("123")));
+        assertTrue(user.getPassword().equals("123"));
         assertTrue(user.getBirthDate().equals(birthDate));
     }
+
 }

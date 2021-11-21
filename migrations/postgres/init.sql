@@ -228,9 +228,10 @@ INSERT INTO T_HT_USUARIO (
 )
 VALUES (
   'teste',
-  '2021-11-21',
+  '1990-11-21',
   'Masculino',
-  'examplo@exemplo.com.br',
+  'teste@teste.com.br',
+  -- teste
   'teste'
   );
 -------------------------------------------------------------------------------

@@ -73,11 +73,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        try {
-            this.password = Cryptography.encrypt(password);
-        } catch (Exception error) {
-            error.printStackTrace();
-        }
+        this.password = password;
     }
 
     @Override

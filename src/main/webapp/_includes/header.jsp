@@ -8,15 +8,19 @@
           <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
               <c:choose>
-                <c:when test="${sessionScope.user.name != null}">
-                  <a class="navbar-brand" href="${baseUrl}/user-home.jsp">Health Track</a>
+                <c:when test="${sessionScope.user != null}">
+                  <c:url value="user" var="link">
+                    <c:param name="action" value="get" />
+                    <c:param name="id" value="${user.id}" />
+                  </c:url>
+                  <a class="navbar-brand" href="${link}">Health Track</a>
                 </c:when>
                 <c:otherwise>
                   <a class="navbar-brand" href="${baseUrl}">Health Track</a>
                 </c:otherwise>
               </c:choose>
               <c:choose>
-                <c:when test="${sessionScope.user.name != null}">
+                <c:when test="${sessionScope.user != null}">
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -34,7 +38,7 @@
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                   <c:choose>
-                    <c:when test="${sessionScope.user.name != null}">
+                    <c:when test="${sessionScope.user != null}">
                     </c:when>
                     <c:otherwise>
                       <a class="nav-link ${pageUrl.toString().endsWith('/features.jsp') ? 'active' : ''}"

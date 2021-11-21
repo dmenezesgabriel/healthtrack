@@ -61,18 +61,6 @@
                           </select>
                           <div class="invalid-feedback">Campo obrigatório</div>
                         </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="password">Senha</label>
-                          <input class="form-control" type="password" name="password" id="password"
-                            placeholder="Senha" value="${user.password}" />
-                          <div class="invalid-feedback">Campo obrigatório</div>
-                        </div>
-                        <div class="mb-3">
-                          <input class="form-check-input" type="checkbox" value=""
-                            id="flexCheckChecked" onclick="showPassword()" />
-                          <label class="form-check-label" for="flexCheckChecked">Mostrar
-                            senha</label>
-                        </div>
                         <button class="btn btn-danger rounded-pill" type="submit">Salvar</button>
                       </form>
                     </div>
@@ -81,6 +69,5 @@
               </div>
               </div>
               <script src="resources/js/form-validate.js"></script>
-              <script src="resources/js/form-password.js"></script>
             </jsp:body>
           </t:base>

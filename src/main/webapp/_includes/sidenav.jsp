@@ -7,7 +7,11 @@
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link text-dark" href="${baseUrl}/user-home.jsp">
+                <c:url value="user" var="link">
+                  <c:param name="action" value="get" />
+                  <c:param name="id" value="${user.id}" />
+                </c:url>
+                <a class="nav-link text-dark" href="${link}">
                   <span data-feather="user"></span>
                   Perfil
                 </a>
@@ -54,7 +58,7 @@
               </li>
               <li class="border-top my-3"></li>
               <li class="nav-item">
-                <a class="nav-link text-muted" href="${baseUrl}">
+                <a class="nav-link text-muted" href="${baseUrl}/login">
                   <span data-feather="log-out"></span>
                   Sair
                 </a>

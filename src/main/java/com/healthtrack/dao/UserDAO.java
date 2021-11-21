@@ -20,6 +20,6 @@ public interface UserDAO {
 
     User getOne(int id);
 
-    boolean validateUser(User user);
+    int validateUser(User user);
 
 }
