@@ -2,7 +2,9 @@
 
 ## Description
 
-Almost vanilla java servlets
+Almost vanilla java & Servlets.
+
+### Stack
 
 - No spring
 - Only maven
@@ -14,14 +16,21 @@ Almost vanilla java servlets
 - JSTL
 - WebJars
 
-# Features
+### Design Patterns
+
+- Factory
+- Singleton
+- Data Access Object
+- Model View Controller
+
+### Features
 
 - Template inheritance by custom tags at `src\main\webapp\WEB-INF\tags`
 - Works on any machine that have docker installed
 
 ### Data Modeling
 
-![img](./models/models.drawio.png)
+![img](./diagrams/models.drawio.png)
 
 ## Requirements
 
@@ -53,6 +62,10 @@ docker-compose down -v
 ```sh
 docker-compose run maven
 ```
+
+### If using Visual Studio Code as IDE
+
+Checkout the tasks.json at .vscode
 
 ## Cover credits
 

@@ -81,7 +81,8 @@ public class WeightDAOImplPostgres implements WeightDAO {
             // Set values
             stmt.setObject(1, weight.getMeasureDate());
             stmt.setDouble(2, weight.getMeasureValue());
-            stmt.setInt(3, weight.getId());
+            stmt.setInt(3, weight.getUser().getId());
+            stmt.setInt(4, weight.getId());
             stmt.executeUpdate();
             logger.info("Weight updated id: " + weight.getId());
         } catch (SQLException error) {
