@@ -15,8 +15,7 @@ import com.healthtrack.dao.UserDAO;
 import com.healthtrack.entity.User;
 import com.healthtrack.exception.EmailException;
 import com.healthtrack.factory.DAOFactory;
-
-import oracle.jdbc.logging.annotations.Logging;
+import com.healthtrack.util.Cryptography;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -43,16 +42,21 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String hashedPassword = null;
         logger.info("Log In");
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        logger.info("User id: " + email);
-        logger.info("User id: " + password);
+        try {
+            hashedPassword = Cryptography.encrypt(password);
+        } catch (Exception error) {
+            // TODO Auto-generated catch block
+            error.printStackTrace();
+        }
 
         User user = new User();
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(hashedPassword);
         int id = userDao.validateUser(user);
         user = userDao.getOne(id);
         if (id > 0) {

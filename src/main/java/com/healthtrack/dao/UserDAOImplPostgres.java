@@ -175,6 +175,7 @@ public class UserDAOImplPostgres implements UserDAO {
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
                 String password = result.getString("ds_senha");
+                logger.info("Getting user pass: " + password);
                 user = new User(id, name, birthDate, gender, email, password);
             }
         } catch (SQLException error) {
@@ -196,7 +197,6 @@ public class UserDAOImplPostgres implements UserDAO {
     @Override
     public int validateUser(User user) {
         logger.info("Validating login: " + user.getEmail());
-        logger.info("Validating pass: " + user.getPassword());
 
         PreparedStatement stmt = null;
         ResultSet result = null;

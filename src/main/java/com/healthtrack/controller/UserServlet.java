@@ -18,6 +18,7 @@ import com.healthtrack.dao.UserDAO;
 import com.healthtrack.entity.User;
 import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
+import com.healthtrack.util.Cryptography;
 
 /**
  * Servlet for User class
@@ -117,13 +118,14 @@ public class UserServlet extends HttpServlet {
             String email = request.getParameter("email");
             String gender = request.getParameter("gender");
             String password = request.getParameter("password");
+            String hashedPassword = Cryptography.encrypt(password);
             // Set user information
             User user = new User();
             user.setName(name);
             user.setGender(gender);
             user.setBirthDate(birthDate);
             user.setEmail(email);
-            user.setPassword(password);
+            user.setPassword(hashedPassword);
             // Register to database
             int registeredUserId = userDAO.register(user);
             User userRegistered = userDAO.getOne(registeredUserId);
@@ -172,7 +174,8 @@ public class UserServlet extends HttpServlet {
             user.setBirthDate(birthDate);
             user.setEmail(email);
             if (password != null) {
-                user.setPassword(password);
+                String hashedPassword = Cryptography.encrypt(password);
+                user.setPassword(hashedPassword);
             }
             // Register to database
             userDAO.update(user);
