@@ -148,6 +148,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
         } finally {
             try {
                 stmt.close();
+                result.close();
                 connection.close();
             } catch (SQLException error) {
                 error.printStackTrace();
@@ -183,6 +184,7 @@ public class WeightDAOImplPostgres implements WeightDAO {
         } finally {
             try {
                 stmt.close();
+                result.close();
                 connection.close();
             } catch (SQLException error) {
                 error.printStackTrace();

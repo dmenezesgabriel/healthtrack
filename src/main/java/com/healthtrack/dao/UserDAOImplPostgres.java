@@ -147,6 +147,7 @@ public class UserDAOImplPostgres implements UserDAO {
         } finally {
             try {
                 stmt.close();
+                result.close();
                 connection.close();
             } catch (SQLException error) {
                 error.printStackTrace();
@@ -184,12 +185,41 @@ public class UserDAOImplPostgres implements UserDAO {
         } finally {
             try {
                 stmt.close();
+                result.close();
                 connection.close();
             } catch (SQLException error) {
                 error.printStackTrace();
             }
         }
         return user;
+    }
+
+    @Override
+    public boolean validateUser(User user) {
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        try {
+            connection = ConnectionManager.getInstance().getConnection();
+            stmt = connection.prepareStatement(
+                    "SELECT ds_email, ds_senha FROM T_HT_USUARIO WHERE ds_email = ? AND ds_Senha = ?");
+            stmt.setString(1, user.getEmail());
+            stmt.setString(1, user.getPassword());
+            result = stmt.executeQuery();
+            if (result.next()) {
+                return true;
+            }
+        } catch (SQLException error) {
+            error.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                result.close();
+                connection.close();
+            } catch (SQLException error) {
+                error.printStackTrace();
+            }
+        }
+        return false;
     }
 
 }

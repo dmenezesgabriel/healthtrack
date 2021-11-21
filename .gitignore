@@ -2,3 +2,4 @@ target/
 oracle_database/
 m2_data/
 .m2
+.env

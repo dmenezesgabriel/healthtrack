@@ -27,8 +27,10 @@
                         <div class="invalid-feedback">Campo obrigatório</div>
                       </div>
                       <div class="d-grid gap-2">
-                        <button class="btn btn-danger" type="submit">Entrar</button>
-                        <a class="btn btn-warning" href="${baseUrl}/user?action=new">Registrar</a>
+                        <button class="btn btn-danger rounded-pill"
+                          href="${baseUrl}/user?action=login" type="submit">Entrar</button>
+                        <a class="btn btn-warning rounded-pill"
+                          href="${baseUrl}/user?action=new">Registrar</a>
                       </div>
                     </form>
                   </div>

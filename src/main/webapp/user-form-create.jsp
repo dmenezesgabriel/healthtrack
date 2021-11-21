@@ -56,7 +56,8 @@
                       <label class="form-check-label" for="flexCheckChecked">Mostrar
                         senha</label>
                     </div>
-                    <button class="btn btn-danger" type="submit">Cadastrar agora</button>
+                    <button class="btn btn-danger rounded-pill" type="submit">Cadastrar
+                      agora</button>
                   </form>
                 </div>
               </div>

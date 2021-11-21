@@ -20,6 +20,6 @@ public interface UserDAO {
 
     User getOne(int id);
 
-    // boolean validate(String email, String password);
+    boolean validateUser(User user);
 
 }

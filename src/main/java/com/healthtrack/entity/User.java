@@ -25,7 +25,7 @@ public class User implements Serializable {
         this.birthDate = birthDate;
         this.gender = gender;
         this.email = email;
-        this.password = password;
+        setPassword(password);
     }
 
     public int getId() {

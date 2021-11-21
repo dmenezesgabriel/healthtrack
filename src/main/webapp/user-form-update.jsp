@@ -73,7 +73,7 @@
                           <label class="form-check-label" for="flexCheckChecked">Mostrar
                             senha</label>
                         </div>
-                        <button class="btn btn-danger" type="submit">Salvar</button>
+                        <button class="btn btn-danger rounded-pill" type="submit">Salvar</button>
                       </form>
                     </div>
                   </div>
