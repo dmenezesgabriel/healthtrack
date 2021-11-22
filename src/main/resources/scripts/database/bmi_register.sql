@@ -1,4 +1,4 @@
-INSERT INTO T_HT_ALTURA (
+INSERT INTO T_HT_IMC (
 	cd_usuario,
 	cd_peso,
 	cd_altura,

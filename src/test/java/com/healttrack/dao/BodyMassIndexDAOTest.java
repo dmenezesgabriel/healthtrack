@@ -3,6 +3,7 @@ package com.healttrack.dao;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.healthtrack.dao.UserDAO;
 import com.healthtrack.dao.BodyMassIndexDAO;
@@ -25,6 +26,8 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class BodyMassIndexDAOTest {
+    private Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
+
     public static UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
     public static HeightDAO heightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getHeightDAO(userDAO));
     public static WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO(userDAO));
@@ -87,6 +90,8 @@ public class BodyMassIndexDAOTest {
         LocalDate measureDate = LocalDate.parse(input, f);
         bmi.setMeasureDate(measureDate);
         bmi.setMeasureValue(bmi.calculateIndex());
+        bodyMassIndexMock = bmi;
+
     }
 
     @BeforeClass
@@ -99,64 +104,58 @@ public class BodyMassIndexDAOTest {
 
     @Test
     public void shouldInsertObject() throws DBException {
-        System.out.println("TESTEEEEEEEEE" + bodyMassIndexMock.toString());
-        // int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
-        // assertTrue(bodyMassIndexRegisteredId > 0);
-        // BodyMassIndex bodyMassIndex =
-        // bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
-        // assertEquals(bodyMassIndex.getMeasureValue(),
-        // bodyMassIndexMock.getMeasureValue(), 0.8);
+
+        logger.info("OBJ: " + userMock.toString());
+        logger.info("OBJ: " + heightMock.toString());
+        logger.info("OBJ: " + weightMock.toString());
+        logger.info("OBJ: " + bodyMassIndexMock.toString());
+
+        int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
+        assertTrue(bodyMassIndexRegisteredId > 0);
+        BodyMassIndex bodyMassIndex = bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
+        assertEquals(bodyMassIndex.getMeasureValue(), bodyMassIndexMock.getMeasureValue(), 0.8);
 
     }
 
-    // @Test
-    // public void shouldGetOne() throws DBException {
-    // int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
-    // BodyMassIndex bodyMassIndex =
-    // bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
-    // assertEquals(bodyMassIndex.getMeasureValue(),
-    // bodyMassIndexMock.getMeasureValue(), 0.8);
+    @Test
+    public void shouldGetOne() throws DBException {
+        int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
+        BodyMassIndex bodyMassIndex = bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
+        assertEquals(bodyMassIndex.getMeasureValue(), bodyMassIndexMock.getMeasureValue(), 0.8);
 
-    // }
+    }
 
-    // @Test
-    // public void shouldGetAll() throws DBException {
-    // int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
-    // List<BodyMassIndex> bodyMassIndexList = bodyMassIndexDAO.getAll();
-    // BodyMassIndex bodyMassIndex =
-    // bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
-    // assertEquals(bodyMassIndexList.get(bodyMassIndexList.size() - 1),
-    // bodyMassIndex);
-    // }
+    @Test
+    public void shouldGetAll() throws DBException {
+        int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
+        List<BodyMassIndex> bodyMassIndexList = bodyMassIndexDAO.getAll();
+        BodyMassIndex bodyMassIndex = bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
+        assertEquals(bodyMassIndexList.get(bodyMassIndexList.size() - 1), bodyMassIndex);
+    }
 
-    // @Test
-    // public void shouldGetByUser() throws DBException {
-    // int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
-    // List<BodyMassIndex> bodyMassIndexList =
-    // bodyMassIndexDAO.getByUser(userMock.getId());
-    // BodyMassIndex bodyMassIndex =
-    // bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
-    // assertEquals(bodyMassIndexList.get(bodyMassIndexList.size() - 1),
-    // bodyMassIndex);
-    // }
+    @Test
+    public void shouldGetByUser() throws DBException {
+        int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
+        List<BodyMassIndex> bodyMassIndexList = bodyMassIndexDAO.getByUser(userMock.getId());
+        BodyMassIndex bodyMassIndex = bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
+        assertEquals(bodyMassIndexList.get(bodyMassIndexList.size() - 1), bodyMassIndex);
+    }
 
-    // @Test
-    // public void shouldUpdate() throws DBException {
-    // int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
-    // BodyMassIndex bodyMassIndex =
-    // bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
-    // double newValue = 22.75;
-    // bodyMassIndex.setMeasureValue(newValue);
-    // bodyMassIndexDAO.update(bodyMassIndex);
-    // assertEquals(bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId).getMeasureValue(),
-    // newValue, 0.8);
+    @Test
+    public void shouldUpdate() throws DBException {
+        int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
+        BodyMassIndex bodyMassIndex = bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
+        double newValue = 22.75;
+        bodyMassIndex.setMeasureValue(newValue);
+        bodyMassIndexDAO.update(bodyMassIndex);
+        assertEquals(bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId).getMeasureValue(), newValue, 0.8);
 
-    // }
+    }
 
-    // @Test
-    // public void shouldDelete() throws DBException {
-    // int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
-    // bodyMassIndexDAO.delete(bodyMassIndexRegisteredId);
-    // assertNull(bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId));
-    // }
+    @Test
+    public void shouldDelete() throws DBException {
+        int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
+        bodyMassIndexDAO.delete(bodyMassIndexRegisteredId);
+        assertNull(bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId));
+    }
 }

@@ -70,6 +70,7 @@ services:
     build:
       context: .
       dockerfile: dockerfiles/Dockerfile-maven-test
+      #  -Dtest=BodyMassIndexDAOTest#shouldInsertObject
     command: /bin/bash -c 'mvn clean test'
     volumes:
       - ./.m2:/root/.m2
