@@ -22,11 +22,17 @@ public class LoginFilter implements Filter {
         HttpSession session = req.getSession();
         String url = req.getRequestURI();
         String action = req.getParameter("action");
-
-        if (session.getAttribute("user") == null && !url.endsWith("healthtrack") && !url.endsWith("features.jsp")
-                && !url.endsWith("min.js") && !url.endsWith("min.css") && !url.contains("resources")
-                && !url.contains("resources") && !(url.endsWith("user") && action.contains("new"))
-                && !url.endsWith("404.jsp") && !url.endsWith("erro.jsp")) {
+        // user
+        if (session.getAttribute("user") == null && url.endsWith("user")) {
+            if (action.equals("edit")) {
+                request.setAttribute("erro", "Entre com o usuário e senha!");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            } else {
+                chain.doFilter(request, response);
+            }
+            // General;
+        } else if (session.getAttribute("user") == null && !url.endsWith("healthtrack") && !url.endsWith("features.jsp")
+                && !url.endsWith("min.js") && !url.endsWith("min.css") && !url.contains("resources")) {
             request.setAttribute("erro", "Entre com o usuário e senha!");
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
