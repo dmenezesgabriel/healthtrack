@@ -137,6 +137,8 @@ public class BodyMassIndexServlet extends HttpServlet {
             bmi.setMeasureValue(bmi.calculateIndex());
             // Register to database
             int registeredBMI = bodyMassIndexDAO.register(bmi);
+            List<BodyMassIndex> list = bodyMassIndexDAO.getByUser(userId);
+            request.setAttribute("bmis", list);
             request.setAttribute("message", "Registro feito com sucesso");
         } catch (DBException db) {
             db.printStackTrace();
