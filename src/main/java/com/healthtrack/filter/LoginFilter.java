@@ -22,6 +22,7 @@ public class LoginFilter implements Filter {
         HttpSession session = req.getSession();
         String url = req.getRequestURI();
         String action = req.getParameter("action");
+
         // user
         if (session.getAttribute("user") == null && url.endsWith("user")) {
             if (action.equals("edit")) {
@@ -30,6 +31,9 @@ public class LoginFilter implements Filter {
             } else {
                 chain.doFilter(request, response);
             }
+            // login
+        } else if (session.getAttribute("user") == null && url.endsWith("login")) {
+            chain.doFilter(request, response);
             // General;
         } else if (session.getAttribute("user") == null && !url.endsWith("healthtrack") && !url.endsWith("features.jsp")
                 && !url.endsWith("min.js") && !url.endsWith("min.css") && !url.contains("resources")) {
