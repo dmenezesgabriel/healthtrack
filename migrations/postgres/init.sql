@@ -235,5 +235,231 @@ VALUES (
   '698dc19d489c4e4db73e28a713eab07b'
   );
 -------------------------------------------------------------------------------
--- TEST weight information!
+-- TEST Height information!
+-------------------------------------------------------------------------------
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-01',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-02',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-03',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-04',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-05',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-06',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-07',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-08',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-09',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-10',
+	1.75
+);
+INSERT INTO T_HT_ALTURA (
+	cd_usuario,
+	dt_altura,
+	vl_altura
+)
+VALUES (
+	1,
+	'2021-01-11',
+	1.75
+);
+-------------------------------------------------------------------------------
+-- TEST Weight information!
+-------------------------------------------------------------------------------
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-01',
+	68.2
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-02',
+	69.2
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-03',
+	70.5
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-04',
+	71.3
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-05',
+	69.4
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-06',
+	71.2
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-07',
+	72.3
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-08',
+	73.9
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-09',
+	75.2
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-10',
+	74.1
+);
+INSERT INTO T_HT_PESO (
+	cd_usuario,
+	dt_peso,
+	vl_peso
+)
+VALUES (
+	1,
+	'2021-01-11',
+	74.5
+);
+-------------------------------------------------------------------------------
+-- TEST information!
 -------------------------------------------------------------------------------
