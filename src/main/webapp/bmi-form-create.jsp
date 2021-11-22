@@ -21,14 +21,16 @@
 
                     <div class="has-validation mb-3">
                       <label for="height">Altura</label>
-                      <input class="form-control" type="number" name="height" step="0.01"
-                        id="height" required />
+                      <input class="form-control" type="number" name="height"
+                        onchange="(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)"
+                        step="0.01" id="height" placeholder="0.00" required />
                       <div class="invalid-feedback">Campo obrigatório</div>
                     </div>
                     <div class="has-validation mb-3">
                       <label for="weight">Peso</label>
-                      <input class="form-control" type="number" name="weight" step="0.01"
-                        id="weight" required />
+                      <input class="form-control" type="number" name="weight"
+                        onchange="(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)"
+                        step="0.01" id="weight" placeholder="0.00" required />
                       <div class="invalid-feedback">Campo obrigatório</div>
                     </div>
                     <div class="has-validation mb-3">
@@ -44,6 +46,9 @@
               </div>
             </div>
             </div>
+            <script>
+              document.getElementById('measureDate').valueAsDate = new Date()
+            </script>
             <script src="resources/js/form-validate.js"></script>
             <script src="resources/js/form-password.js"></script>
           </jsp:body>
