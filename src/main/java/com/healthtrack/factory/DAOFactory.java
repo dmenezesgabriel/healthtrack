@@ -1,5 +1,6 @@
 package com.healthtrack.factory;
 
+import com.healthtrack.dao.HeightDAO;
 import com.healthtrack.dao.UserDAO;
 import com.healthtrack.dao.WeightDAO;
 
@@ -24,5 +25,7 @@ public abstract class DAOFactory {
     public abstract UserDAO getUserDAO();
 
     public abstract WeightDAO getWeightDAO(UserDAO userDao);
+
+    public abstract HeightDAO getHeightDAO(UserDAO userDao);
 
 }
