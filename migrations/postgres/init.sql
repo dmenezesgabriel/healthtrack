@@ -78,7 +78,7 @@ CREATE TABLE T_HT_IMC (
 	cd_peso INT NOT NULL,
 	cd_altura INT NOT NULL,
 	dt_imc DATE NOT NULL,
-	vl_imc INT NOT NULL,
+	vl_imc NUMERIC NOT NULL,
   dt_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

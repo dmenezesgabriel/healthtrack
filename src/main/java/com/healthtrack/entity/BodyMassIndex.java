@@ -105,7 +105,8 @@ public class BodyMassIndex implements Serializable {
     }
 
     public double calculateIndex() {
-        return this.weight.getMeasureValue() / (this.height.getMeasureValue() * this.weight.getMeasureValue());
+        double bmi = this.weight.getMeasureValue() / (this.height.getMeasureValue() * this.weight.getMeasureValue());
+        return bmi;
     }
 
     @Override
