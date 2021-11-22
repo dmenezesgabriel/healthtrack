@@ -38,5 +38,8 @@
               </div>
             </div>
             <script src="resources/js/render-chart.js"></script>
+            <script>
+              renderChart();
+            </script>
           </jsp:body>
         </t:base>

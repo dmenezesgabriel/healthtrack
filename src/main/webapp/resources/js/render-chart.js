@@ -32,14 +32,13 @@ function renderChart() {
         console.log(element.measureValue);
         data["datasets"][0]["data"].push(element.measureValue * 100);
         console.log(data["labels"]);
+        chart.update();
       });
     });
   // render
   console.log(data);
-  const myChart = new Chart(document.querySelector("#bmiChart"), {
+  let chart = new Chart(document.querySelector("#bmiChart"), {
     type: "line",
     data: data,
   });
 }
-
-renderChart();
