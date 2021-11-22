@@ -4,6 +4,8 @@ import com.healthtrack.dao.BodyMassIndexDAO;
 import com.healthtrack.dao.BodyMassIndexDAOImplPostgres;
 import com.healthtrack.dao.HeightDAO;
 import com.healthtrack.dao.HeightDAOImplPostgres;
+import com.healthtrack.dao.PressureDAO;
+import com.healthtrack.dao.PressureDAOImplPostgres;
 import com.healthtrack.dao.UserDAO;
 import com.healthtrack.dao.UserDAOImplPostgres;
 import com.healthtrack.dao.WeightDAO;
@@ -29,5 +31,10 @@ public class DAOFactoryPostgres extends DAOFactory {
     @Override
     public BodyMassIndexDAO getBodyMassIndexDAO() {
         return new BodyMassIndexDAOImplPostgres();
+    }
+
+    @Override
+    public PressureDAO getPressureDAO() {
+        return new PressureDAOImplPostgres();
     }
 }

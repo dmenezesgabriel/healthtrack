@@ -1,0 +1,2 @@
+DELETE FROM T_HT_PRESSAO
+  WHERE cd_pressao = ?
