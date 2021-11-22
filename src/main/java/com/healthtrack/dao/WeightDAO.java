@@ -20,4 +20,6 @@ public interface WeightDAO {
 
     Weight getOne(int id);
 
+    List<Weight> getByUser(int id);
+
 }

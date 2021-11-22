@@ -158,6 +158,44 @@ public class WeightDAOImplPostgres implements WeightDAO {
     }
 
     @Override
+    public List<Weight> getByUser(int objectId) {
+        logger.info("Getting all weights");
+
+        List<Weight> weightList = new ArrayList<Weight>();
+        PreparedStatement stmt = null;
+        ResultSet result = null;
+        try {
+            connection = ConnectionManager.getInstance().getConnection();
+            String sql = Query.fileToString("/weight_get_all_by_user.sql");
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, objectId);
+            result = stmt.executeQuery();
+            while (result.next()) {
+                int id = result.getInt("cd_peso");
+                User user = userDAO.getOne(result.getInt("cd_usuario"));
+                LocalDate measureDate = result.getObject("dt_peso", LocalDate.class);
+                double measureValue = result.getDouble("vl_peso");
+
+                Weight weight = new Weight(id, user, measureDate, measureValue);
+                weightList.add(weight);
+            }
+        } catch (SQLException error) {
+            error.printStackTrace();
+        } catch (Exception error) {
+            error.printStackTrace();
+        } finally {
+            try {
+                stmt.close();
+                result.close();
+                connection.close();
+            } catch (SQLException error) {
+                error.printStackTrace();
+            }
+        }
+        return weightList;
+    }
+
+    @Override
     public Weight getOne(int objectId) {
         logger.info("Getting weight id: " + objectId);
         Weight weight = null;

@@ -82,6 +82,14 @@ public class WeightDAOTest {
     }
 
     @Test
+    public void shouldGetByUser() throws DBException {
+        int weightRegisteredId = weightDAO.register(weightMock);
+        List<Weight> weightList = weightDAO.getByUser(userMock.getId());
+        Weight weight = weightDAO.getOne(weightRegisteredId);
+        assertEquals(weightList.get(weightList.size() - 1), weight);
+    }
+
+    @Test
     public void shouldUpdate() throws DBException {
         int weightRegisteredId = weightDAO.register(weightMock);
         Weight weight = weightDAO.getOne(weightRegisteredId);
