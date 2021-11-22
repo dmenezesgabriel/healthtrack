@@ -30,9 +30,49 @@
                       </div>
                     </div>
                     <jsp:include page="/_includes/alert.jsp" />
+                    <div class="container">
+                      <canvas id="bmiChart"></canvas>
+
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+              function renderChart() {
+                let data = [];
+                data['labels'] = [];
+                data['datasets'] = [];
+                data['datasets'].push({label: 'Bmi', data: []})
+
+                // Fetching data
+                console.log("Fetching")
+                fetch('bmi?action=overtime', {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  }
+                })
+                  .then(function (response) {
+                    return response.json();
+                  }).then(function (resData) {
+                    resData.forEach(element => {
+                      data['labels'].push(`${element.measureDate['year']}-${element.measureDate['month']}-${element.measureDate['day']}`);
+                      data['datasets'][0]['data'].push(element.measureValue)
+                    });
+                  });
+                // render
+                console.log(data);
+                const myChart = new Chart(
+                  document.querySelector('#bmiChart'),
+                  {
+                    type: 'line',
+                    data: data,
+                  }
+                );
+              }
+              renderChart();
+            </script>
           </jsp:body>
         </t:base>
