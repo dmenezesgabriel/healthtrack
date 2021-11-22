@@ -36,7 +36,7 @@
                     <div class="has-validation mb-3">
                       <label class="form-label" for="measureDate">Data da medida</label>
                       <input class="form-control" type="date" name="measureDate" id="measureDate"
-                        value="${pressure.measureValue}" required />
+                        value="${pressure.measureDate}" required />
                       <div class="invalid-feedback">Campo obrigatório</div>
                     </div>
                     <button class="btn btn-danger rounded-pill" type="submit">Salvar</button>
