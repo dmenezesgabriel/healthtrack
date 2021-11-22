@@ -80,7 +80,7 @@
                       Deseja realmente excluir a medida?
                     </div>
                     <div class="modal-footer">
-                      <form action="user" method="post">
+                      <form action="bmi" method="post">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" id="exclusionId">
                         <button type="button" class="btn btn-primary"
