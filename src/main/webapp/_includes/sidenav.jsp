@@ -25,8 +25,10 @@
                 </button>
                 <div class="collapse" id="measures-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="nav-link text-dark">Peso</a></li>
-                    <li><a href="#" class="nav-link text-dark">Índice de massa corporal</a></li>
+                    <c:url value="bmi" var="link">
+                      <c:param name="action" value="list" />
+                    </c:url>
+                    <li><a href=${link} class="nav-link text-dark">Medidas</a></li>
                   </ul>
                 </div>
               </li>
