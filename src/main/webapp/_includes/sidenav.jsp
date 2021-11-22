@@ -25,11 +25,15 @@
                 </button>
                 <div class="collapse" id="measures-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <c:url value="bmi" var="link">
+                    <c:url value="bmi" var="linkBMI">
                       <c:param name="action" value="list" />
                     </c:url>
-                    <li><a href=${link} class="nav-link text-dark">Índice de massa corporal</a></li>
-                    <li><a href=${link} class="nav-link text-dark">Pressão</a></li>
+                    <li><a href=${linkBMI} class="nav-link text-dark">Índice de massa corporal</a>
+                    </li>
+                    <c:url value="pressure" var="linkPressure">
+                      <c:param name="action" value="list" />
+                    </c:url>
+                    <li><a href=${linkPressure} class="nav-link text-dark">Pressão</a></li>
                   </ul>
                 </div>
               </li>
@@ -41,8 +45,8 @@
                 </button>
                 <div class="collapse" id="routine-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="nav-link text-dark">Atividades Físicas</a></li>
-                    <li><a href="#" class="nav-link text-dark">Alimentação</a></li>
+                    <li><a href="#" class="nav-link text-dark disabled">Atividades Físicas</a></li>
+                    <li><a href="#" class="nav-link text-dark disabled">Alimentação</a></li>
                   </ul>
                 </div>
               </li>
@@ -54,7 +58,7 @@
                 </button>
                 <div class="collapse" id="account-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="nav-link text-dark">Configurações</a></li>
+                    <li><a href="#" class="nav-link text-dark disabled">Configurações</a></li>
                   </ul>
                 </div>
 
