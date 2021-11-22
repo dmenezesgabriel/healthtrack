@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 public class HeightDAOTest {
     public static UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
-    public static HeightDAO heightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getHeightDAO(userDAO));
+    public static HeightDAO heightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getHeightDAO());
     public static User userMock = null;
     public static Height heightMock = null;
 

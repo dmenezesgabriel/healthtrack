@@ -21,12 +21,6 @@ import com.healthtrack.util.Query;
 public class HeightDAOImplPostgres implements HeightDAO {
     private Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
     private Connection connection;
-    // Dependency injection
-    private UserDAO userDAO = null;
-
-    public HeightDAOImplPostgres(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
 
     @Override
     public int register(Height height) throws DBException {
@@ -134,9 +128,17 @@ public class HeightDAOImplPostgres implements HeightDAO {
             result = stmt.executeQuery();
             while (result.next()) {
                 int id = result.getInt("cd_altura");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
                 LocalDate measureDate = result.getObject("dt_altura", LocalDate.class);
                 double measureValue = result.getDouble("vl_altura");
+
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
 
                 Height height = new Height(id, user, measureDate, measureValue);
                 heightList.add(height);
@@ -172,10 +174,17 @@ public class HeightDAOImplPostgres implements HeightDAO {
             result = stmt.executeQuery();
             while (result.next()) {
                 int id = result.getInt("cd_altura");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
                 LocalDate measureDate = result.getObject("dt_altura", LocalDate.class);
                 double measureValue = result.getDouble("vl_altura");
 
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
                 Height height = new Height(id, user, measureDate, measureValue);
                 heightList.add(height);
             }
@@ -209,10 +218,17 @@ public class HeightDAOImplPostgres implements HeightDAO {
             result = stmt.executeQuery();
             if (result.next()) {
                 int id = result.getInt("cd_altura");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
                 LocalDate measureDate = result.getObject("dt_altura", LocalDate.class);
                 double measureValue = result.getDouble("vl_altura");
 
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
                 height = new Height(id, user, measureDate, measureValue);
             }
         } catch (SQLException error) {

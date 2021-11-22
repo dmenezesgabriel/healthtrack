@@ -21,14 +21,14 @@
 
                     <div class="has-validation mb-3">
                       <label for="height">Altura</label>
-                      <input class="form-control" type="number" name="height" id="height"
-                        required />
+                      <input class="form-control" type="number" name="height" step="0.01"
+                        id="height" required />
                       <div class="invalid-feedback">Campo obrigatório</div>
                     </div>
                     <div class="has-validation mb-3">
                       <label for="weight">Peso</label>
-                      <input class="form-control" type="number" name="weight" id="weight"
-                        required />
+                      <input class="form-control" type="number" name="weight" step="0.01"
+                        id="weight" required />
                       <div class="invalid-feedback">Campo obrigatório</div>
                     </div>
                     <div class="has-validation mb-3">

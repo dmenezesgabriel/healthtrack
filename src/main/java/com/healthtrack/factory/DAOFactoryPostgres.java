@@ -17,17 +17,17 @@ public class DAOFactoryPostgres extends DAOFactory {
     }
 
     @Override
-    public WeightDAO getWeightDAO(UserDAO userDao) {
-        return new WeightDAOImplPostgres(userDao);
+    public WeightDAO getWeightDAO() {
+        return new WeightDAOImplPostgres();
     }
 
     @Override
-    public HeightDAO getHeightDAO(UserDAO userDao) {
-        return new HeightDAOImplPostgres(userDao);
+    public HeightDAO getHeightDAO() {
+        return new HeightDAOImplPostgres();
     }
 
     @Override
-    public BodyMassIndexDAO getBodyMassIndexDAO(UserDAO userDAO, HeightDAO heightDAO, WeightDAO weightDAO) {
-        return new BodyMassIndexDAOImplPostgres(userDAO, heightDAO, weightDAO);
+    public BodyMassIndexDAO getBodyMassIndexDAO() {
+        return new BodyMassIndexDAOImplPostgres();
     }
 }

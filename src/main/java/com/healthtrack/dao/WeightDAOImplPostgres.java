@@ -21,12 +21,6 @@ import com.healthtrack.util.Query;
 public class WeightDAOImplPostgres implements WeightDAO {
     private Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
     private Connection connection;
-    // Dependency injection
-    private UserDAO userDAO = null;
-
-    public WeightDAOImplPostgres(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
 
     @Override
     public int register(Weight weight) throws DBException {
@@ -134,10 +128,17 @@ public class WeightDAOImplPostgres implements WeightDAO {
             result = stmt.executeQuery();
             while (result.next()) {
                 int id = result.getInt("cd_peso");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
                 LocalDate measureDate = result.getObject("dt_peso", LocalDate.class);
                 double measureValue = result.getDouble("vl_peso");
 
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
                 Weight weight = new Weight(id, user, measureDate, measureValue);
                 weightList.add(weight);
             }
@@ -172,10 +173,17 @@ public class WeightDAOImplPostgres implements WeightDAO {
             result = stmt.executeQuery();
             while (result.next()) {
                 int id = result.getInt("cd_peso");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
                 LocalDate measureDate = result.getObject("dt_peso", LocalDate.class);
                 double measureValue = result.getDouble("vl_peso");
 
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
                 Weight weight = new Weight(id, user, measureDate, measureValue);
                 weightList.add(weight);
             }
@@ -209,10 +217,17 @@ public class WeightDAOImplPostgres implements WeightDAO {
             result = stmt.executeQuery();
             if (result.next()) {
                 int id = result.getInt("cd_peso");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
                 LocalDate measureDate = result.getObject("dt_peso", LocalDate.class);
                 double measureValue = result.getDouble("vl_peso");
 
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
                 weight = new Weight(id, user, measureDate, measureValue);
             }
         } catch (SQLException error) {

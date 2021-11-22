@@ -23,17 +23,6 @@ import com.healthtrack.util.Query;
 public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
     private Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
     private Connection connection;
-    // Dependency injection
-    private UserDAO userDAO = null;
-    private HeightDAO heightDAO = null;
-    private WeightDAO weightDAO = null;
-
-    public BodyMassIndexDAOImplPostgres(UserDAO userDAO, HeightDAO heightDAO, WeightDAO weightDAO) {
-        this.userDAO = userDAO;
-        this.heightDAO = heightDAO;
-        this.weightDAO = weightDAO;
-
-    }
 
     @Override
     public int register(BodyMassIndex bodyMassIndex) throws DBException {
@@ -145,11 +134,27 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
             result = stmt.executeQuery();
             while (result.next()) {
                 int id = result.getInt("cd_imc");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
-                Height height = heightDAO.getOne(result.getInt("cd_altura"));
-                Weight weight = weightDAO.getOne(result.getInt("cd_peso"));
                 LocalDate measureDate = result.getObject("dt_imc", LocalDate.class);
                 double measureValue = result.getDouble("vl_imc");
+
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                int heightId = result.getInt("cd_altura");
+                LocalDate heightDate = result.getObject("dt_altura", LocalDate.class);
+                double heightValue = result.getDouble("vl_altura");
+
+                int weightId = result.getInt("cd_peso");
+                LocalDate weightDate = result.getObject("dt_peso", LocalDate.class);
+                double weightValue = result.getDouble("vl_peso");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
+                Height height = new Height(heightId, user, heightDate, heightValue);
+                Weight weight = new Weight(weightId, user, weightDate, weightValue);
 
                 BodyMassIndex BodyMassIndex = new BodyMassIndex();
                 BodyMassIndex.setId(id);
@@ -191,12 +196,27 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
             result = stmt.executeQuery();
             while (result.next()) {
                 int id = result.getInt("cd_imc");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
-                Height height = heightDAO.getOne(result.getInt("cd_altura"));
-                Weight weight = weightDAO.getOne(result.getInt("cd_peso"));
                 LocalDate measureDate = result.getObject("dt_imc", LocalDate.class);
                 double measureValue = result.getDouble("vl_imc");
 
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                int heightId = result.getInt("cd_altura");
+                LocalDate heightDate = result.getObject("dt_altura", LocalDate.class);
+                double heightValue = result.getDouble("vl_altura");
+
+                int weightId = result.getInt("cd_peso");
+                LocalDate weightDate = result.getObject("dt_peso", LocalDate.class);
+                double weightValue = result.getDouble("vl_peso");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
+                Height height = new Height(heightId, user, heightDate, heightValue);
+                Weight weight = new Weight(weightId, user, weightDate, weightValue);
                 BodyMassIndex BodyMassIndex = new BodyMassIndex();
                 BodyMassIndex.setId(id);
                 BodyMassIndex.setHeight(height);
@@ -236,12 +256,27 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
             result = stmt.executeQuery();
             if (result.next()) {
                 int id = result.getInt("cd_imc");
-                User user = userDAO.getOne(result.getInt("cd_usuario"));
-                Height height = heightDAO.getOne(result.getInt("cd_altura"));
-                Weight weight = weightDAO.getOne(result.getInt("cd_peso"));
                 LocalDate measureDate = result.getObject("dt_imc", LocalDate.class);
                 double measureValue = result.getDouble("vl_imc");
 
+                int userId = result.getInt("cd_usuario");
+                String name = result.getString("nm_usuario");
+                LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
+                String gender = result.getString("ds_genero");
+                String email = result.getString("ds_email");
+                String password = result.getString("ds_senha");
+
+                int heightId = result.getInt("cd_altura");
+                LocalDate heightDate = result.getObject("dt_altura", LocalDate.class);
+                double heightValue = result.getDouble("vl_altura");
+
+                int weightId = result.getInt("cd_peso");
+                LocalDate weightDate = result.getObject("dt_peso", LocalDate.class);
+                double weightValue = result.getDouble("vl_peso");
+
+                User user = new User(userId, name, birthDate, gender, email, password);
+                Height height = new Height(heightId, user, heightDate, heightValue);
+                Weight weight = new Weight(weightId, user, weightDate, weightValue);
                 BodyMassIndex = new BodyMassIndex();
                 BodyMassIndex.setId(id);
                 BodyMassIndex.setHeight(height);

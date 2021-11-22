@@ -29,10 +29,10 @@ public class BodyMassIndexDAOTest {
     private Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
 
     public static UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
-    public static HeightDAO heightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getHeightDAO(userDAO));
-    public static WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO(userDAO));
+    public static HeightDAO heightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getHeightDAO());
+    public static WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO());
     public static BodyMassIndexDAO bodyMassIndexDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES)
-            .getBodyMassIndexDAO(userDAO, heightDAO, weightDAO));
+            .getBodyMassIndexDAO());
 
     public static User userMock = null;
     public static Height heightMock = null;

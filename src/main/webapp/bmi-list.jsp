@@ -34,12 +34,12 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${users}" var="user">
+                      <c:forEach items="${bmis}" var="bmi">
                         <tr>
-                          <td>${bmi.id}</td>
-                          <td>${bmi.id}</td>
-                          <td>${bmi.id}</td>
-                          <td>${bmi.id}</td>
+                          <td>${bmi.height.measureValue}</td>
+                          <td>${bmi.weight.measureValue}</td>
+                          <td>${bmi.measureDate}</td>
+                          <td>${bmi.measureValue}</td>
                           <td>
                             <c:url value="bmi" var="link">
                               <c:param name="action" value="edit" />

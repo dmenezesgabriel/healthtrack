@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 public class WeightDAOTest {
     public static UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
-    public static WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO(userDAO));
+    public static WeightDAO weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO());
     public static User userMock = null;
     public static Weight weightMock = null;
 

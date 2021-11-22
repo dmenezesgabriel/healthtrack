@@ -25,10 +25,10 @@ public abstract class DAOFactory {
 
     public abstract UserDAO getUserDAO();
 
-    public abstract WeightDAO getWeightDAO(UserDAO userDao);
+    public abstract WeightDAO getWeightDAO();
 
-    public abstract HeightDAO getHeightDAO(UserDAO userDao);
+    public abstract HeightDAO getHeightDAO();
 
-    public abstract BodyMassIndexDAO getBodyMassIndexDAO(UserDAO userDAO, HeightDAO heightDAO, WeightDAO weightDAO);
+    public abstract BodyMassIndexDAO getBodyMassIndexDAO();
 
 }
