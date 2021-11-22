@@ -1,0 +1,2 @@
+DELETE FROM T_HT_IMC
+  WHERE cd_imc = ?
