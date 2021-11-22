@@ -46,7 +46,7 @@ public class HeightDAOTest {
         LocalDate measureDate = LocalDate.parse(input, f);
         height.setUser(userMock);
         height.setMeasureDate(measureDate);
-        height.setMeasureValue(70.02);
+        height.setMeasureValue(1.74);
         heightMock = height;
     }
 
@@ -93,7 +93,7 @@ public class HeightDAOTest {
     public void shouldUpdate() throws DBException {
         int heightRegisteredId = heightDAO.register(heightMock);
         Height height = heightDAO.getOne(heightRegisteredId);
-        double newValue = 71.5;
+        double newValue = 1.75;
         height.setMeasureValue(newValue);
         heightDAO.update(height);
         assertEquals(heightDAO.getOne(heightRegisteredId).getMeasureValue(), newValue, 0.8);
