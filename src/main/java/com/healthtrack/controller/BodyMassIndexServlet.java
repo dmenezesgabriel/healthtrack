@@ -61,6 +61,10 @@ public class BodyMassIndexServlet extends HttpServlet {
                 logger.info("new");
                 showNewForm(request, response);
                 break;
+            case "edit":
+                logger.info("edit");
+                showEditForm(request, response);
+                break;
             case "list":
                 logger.info("list");
                 list(request, response);
@@ -85,6 +89,10 @@ public class BodyMassIndexServlet extends HttpServlet {
             case "create":
                 logger.info("create");
                 createBMI(request, response);
+                break;
+            case "delete":
+                logger.info("delete");
+                bmiDelete(request, response);
                 break;
             }
         } catch (Exception error) {
@@ -149,6 +157,39 @@ public class BodyMassIndexServlet extends HttpServlet {
         }
         request.getRequestDispatcher("/bmi-list.jsp").forward(request, response);
 
+    }
+
+    protected void showEditForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        logger.info("Edit Form");
+        int id = Integer.parseInt(request.getParameter("id"));
+        BodyMassIndex bmi = bodyMassIndexDAO.getOne(id);
+        request.setAttribute("bmi", bmi);
+        request.getRequestDispatcher("/bmi-form-update.jsp").forward(request, response);
+    }
+
+    protected void bmiDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        logger.info("delete");
+        HttpSession session = request.getSession();
+        int userId = 0;
+        if (session != null) {
+            userId = (int) session.getAttribute("user");
+
+        }
+        int id = Integer.parseInt(request.getParameter("id"));
+        try {
+            bodyMassIndexDAO.delete(id);
+            List<BodyMassIndex> list = bodyMassIndexDAO.getByUser(userId);
+            request.setAttribute("bmis", list);
+        } catch (DBException db) {
+            db.printStackTrace();
+            request.setAttribute("error", "Erro ao deletar");
+        } catch (Exception error) {
+            error.printStackTrace();
+            request.setAttribute("error", "Erro, por favor valide os dados");
+        }
+        request.getRequestDispatcher("/bmi-list.jsp").forward(request, response);
     }
 
     protected void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

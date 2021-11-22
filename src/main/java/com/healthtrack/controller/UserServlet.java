@@ -57,7 +57,6 @@ public class UserServlet extends HttpServlet {
                 logger.info("edit");
                 showEditForm(request, response);
                 break;
-
             case "get":
                 logger.info("get");
                 getUser(request, response);
@@ -206,7 +205,7 @@ public class UserServlet extends HttpServlet {
             userDAO.delete(id);
         } catch (DBException db) {
             db.printStackTrace();
-            request.setAttribute("error", "Erro ao editar");
+            request.setAttribute("error", "Erro ao deletar");
         } catch (Exception error) {
             error.printStackTrace();
             request.setAttribute("error", "Erro, por favor valide os dados");
