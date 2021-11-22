@@ -3,7 +3,6 @@ package com.healttrack.dao;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.logging.Logger;
 
 import com.healthtrack.dao.UserDAO;
 import com.healthtrack.dao.BodyMassIndexDAO;
@@ -26,7 +25,6 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class BodyMassIndexDAOTest {
-    private Logger logger = java.util.logging.Logger.getLogger(this.getClass().getName());
 
     public static UserDAO userDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getUserDAO());
     public static HeightDAO heightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getHeightDAO());
@@ -104,12 +102,6 @@ public class BodyMassIndexDAOTest {
 
     @Test
     public void shouldInsertObject() throws DBException {
-
-        logger.info("OBJ: " + userMock.toString());
-        logger.info("OBJ: " + heightMock.toString());
-        logger.info("OBJ: " + weightMock.toString());
-        logger.info("OBJ: " + bodyMassIndexMock.toString());
-
         int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
         assertTrue(bodyMassIndexRegisteredId > 0);
         BodyMassIndex bodyMassIndex = bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
@@ -138,7 +130,8 @@ public class BodyMassIndexDAOTest {
         int bodyMassIndexRegisteredId = bodyMassIndexDAO.register(bodyMassIndexMock);
         List<BodyMassIndex> bodyMassIndexList = bodyMassIndexDAO.getByUser(userMock.getId());
         BodyMassIndex bodyMassIndex = bodyMassIndexDAO.getOne(bodyMassIndexRegisteredId);
-        assertEquals(bodyMassIndexList.get(bodyMassIndexList.size() - 1), bodyMassIndex);
+        assertEquals(bodyMassIndexList.get(bodyMassIndexList.size() - 1).getMeasureValue(),
+                bodyMassIndex.getMeasureValue(), 0.8);
     }
 
     @Test
