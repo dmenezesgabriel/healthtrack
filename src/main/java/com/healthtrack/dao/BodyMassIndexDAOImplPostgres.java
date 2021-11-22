@@ -142,7 +142,6 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
                 int heightId = result.getInt("cd_altura");
                 LocalDate heightDate = result.getObject("dt_altura", LocalDate.class);
@@ -152,7 +151,12 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
                 LocalDate weightDate = result.getObject("dt_peso", LocalDate.class);
                 double weightValue = result.getDouble("vl_peso");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
                 Height height = new Height(heightId, user, heightDate, heightValue);
                 Weight weight = new Weight(weightId, user, weightDate, weightValue);
 
@@ -204,7 +208,6 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
                 int heightId = result.getInt("cd_altura");
                 LocalDate heightDate = result.getObject("dt_altura", LocalDate.class);
@@ -214,7 +217,12 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
                 LocalDate weightDate = result.getObject("dt_peso", LocalDate.class);
                 double weightValue = result.getDouble("vl_peso");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
                 Height height = new Height(heightId, user, heightDate, heightValue);
                 Weight weight = new Weight(weightId, user, weightDate, weightValue);
                 BodyMassIndex BodyMassIndex = new BodyMassIndex();
@@ -264,7 +272,6 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
                 int heightId = result.getInt("cd_altura");
                 LocalDate heightDate = result.getObject("dt_altura", LocalDate.class);
@@ -274,7 +281,12 @@ public class BodyMassIndexDAOImplPostgres implements BodyMassIndexDAO {
                 LocalDate weightDate = result.getObject("dt_peso", LocalDate.class);
                 double weightValue = result.getDouble("vl_peso");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
                 Height height = new Height(heightId, user, heightDate, heightValue);
                 Weight weight = new Weight(weightId, user, weightDate, weightValue);
                 BodyMassIndex = new BodyMassIndex();

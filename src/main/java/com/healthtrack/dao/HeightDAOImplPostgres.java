@@ -136,9 +136,13 @@ public class HeightDAOImplPostgres implements HeightDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
 
                 Height height = new Height(id, user, measureDate, measureValue);
                 heightList.add(height);
@@ -182,9 +186,14 @@ public class HeightDAOImplPostgres implements HeightDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
+
                 Height height = new Height(id, user, measureDate, measureValue);
                 heightList.add(height);
             }
@@ -226,9 +235,14 @@ public class HeightDAOImplPostgres implements HeightDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
+
                 height = new Height(id, user, measureDate, measureValue);
             }
         } catch (SQLException error) {

@@ -136,9 +136,13 @@ public class WeightDAOImplPostgres implements WeightDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
                 Weight weight = new Weight(id, user, measureDate, measureValue);
                 weightList.add(weight);
             }
@@ -181,9 +185,13 @@ public class WeightDAOImplPostgres implements WeightDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
                 Weight weight = new Weight(id, user, measureDate, measureValue);
                 weightList.add(weight);
             }
@@ -225,9 +233,13 @@ public class WeightDAOImplPostgres implements WeightDAO {
                 LocalDate birthDate = result.getObject("dt_nascimento", LocalDate.class);
                 String gender = result.getString("ds_genero");
                 String email = result.getString("ds_email");
-                String password = result.getString("ds_senha");
 
-                User user = new User(userId, name, birthDate, gender, email, password);
+                User user = new User();
+                user.setId(userId);
+                user.setName(name);
+                user.setBirthDate(birthDate);
+                user.setGender(gender);
+                user.setEmail(email);
                 weight = new Weight(id, user, measureDate, measureValue);
             }
         } catch (SQLException error) {

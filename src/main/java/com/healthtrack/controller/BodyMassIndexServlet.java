@@ -1,6 +1,7 @@
 package com.healthtrack.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.healthtrack.dao.BodyMassIndexDAO;
 import com.healthtrack.dao.HeightDAO;
 import com.healthtrack.dao.UserDAO;
@@ -29,6 +31,7 @@ import com.healthtrack.factory.DAOFactory;
 @WebServlet(name = "bmi", urlPatterns = { "/bmi" })
 public class BodyMassIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private Gson gson = null;
 
     Logger logger = null;
     UserDAO userDAO = null;
@@ -44,6 +47,7 @@ public class BodyMassIndexServlet extends HttpServlet {
         heightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getHeightDAO());
         weightDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getWeightDAO());
         bodyMassIndexDAO = (DAOFactory.getDAOFactory(DAOFactory.POSTGRES).getBodyMassIndexDAO());
+        gson = new Gson();
     }
 
     /**
@@ -68,6 +72,10 @@ public class BodyMassIndexServlet extends HttpServlet {
             case "list":
                 logger.info("list");
                 list(request, response);
+                break;
+            case "overtime":
+                logger.info("overtime");
+                overTime(request, response);
                 break;
             }
         } catch (Exception error) {
@@ -257,6 +265,25 @@ public class BodyMassIndexServlet extends HttpServlet {
         request.setAttribute("bmis", list);
 
         request.getRequestDispatcher("/bmi-list.jsp").forward(request, response);
+    }
+
+    protected void overTime(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        logger.info("overTime");
+        HttpSession session = request.getSession();
+        int userId = 0;
+        if (session != null) {
+            userId = (int) session.getAttribute("user");
+
+        }
+        List<BodyMassIndex> list = bodyMassIndexDAO.getByUser(userId);
+        String bodyMassJsonString = this.gson.toJson(list);
+
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.print(bodyMassJsonString);
+        out.flush();
     }
 
 }
