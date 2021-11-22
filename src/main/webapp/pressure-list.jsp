@@ -17,7 +17,7 @@
                       <h2>Pressão</h2>
                       <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                          <c:url value="bmi" var="link">
+                          <c:url value="pressure" var="link">
                             <c:param name="action" value="new" />
                           </c:url>
                           <a class="btn btn-sm btn-outline-secondary" href="${link}">Criar</a>
