@@ -90,6 +90,10 @@ public class BodyMassIndexServlet extends HttpServlet {
                 logger.info("create");
                 createBMI(request, response);
                 break;
+            case "update":
+                logger.info("update");
+                updateBMI(request, response);
+                break;
             case "delete":
                 logger.info("delete");
                 bmiDelete(request, response);
@@ -166,6 +170,55 @@ public class BodyMassIndexServlet extends HttpServlet {
         BodyMassIndex bmi = bodyMassIndexDAO.getOne(id);
         request.setAttribute("bmi", bmi);
         request.getRequestDispatcher("/bmi-form-update.jsp").forward(request, response);
+    }
+
+    private void updateBMI(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        logger.info("update");
+        HttpSession session = request.getSession();
+        int userId = 0;
+        if (session != null) {
+            userId = (int) session.getAttribute("user");
+
+        }
+        try {
+            double heightValue = Double.parseDouble(request.getParameter("height"));
+            double weightValue = Double.parseDouble(request.getParameter("weight"));
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+            LocalDate measureDate = LocalDate.parse(request.getParameter("measureDate"), f);
+
+            int id = Integer.parseInt(request.getParameter("id"));
+            BodyMassIndex bmi = bodyMassIndexDAO.getOne(id);
+
+            Height height = heightDAO.getOne(bmi.getHeight().getId());
+            Weight weight = weightDAO.getOne(bmi.getWeight().getId());
+            height.setMeasureDate(measureDate);
+            height.setMeasureValue(heightValue);
+            heightDAO.update(height);
+            weight.setMeasureDate(measureDate);
+            weight.setMeasureValue(weightValue);
+            weightDAO.update(weight);
+            // Retrieve registered objects
+
+            bmi.setHeight(height);
+            bmi.setWeight(weight);
+            bmi.setMeasureDate(measureDate);
+            bmi.setMeasureValue(bmi.calculateIndex());
+
+            // Register to database
+            bodyMassIndexDAO.update(bmi);
+            logger.info("Update Successfully");
+            List<BodyMassIndex> list = bodyMassIndexDAO.getByUser(userId);
+            request.setAttribute("bmis", list);
+            request.setAttribute("message", "Atualização feita com sucesso");
+        } catch (DBException db) {
+            db.printStackTrace();
+            request.setAttribute("error", "Erro ao editar");
+        } catch (Exception error) {
+            error.printStackTrace();
+            request.setAttribute("error", "Erro, por favor valide os dados");
+        }
+        request.getRequestDispatcher("bmi-list.jsp").forward(request, response);
     }
 
     protected void bmiDelete(HttpServletRequest request, HttpServletResponse response)

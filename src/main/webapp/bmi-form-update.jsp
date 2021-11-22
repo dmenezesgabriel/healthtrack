@@ -42,8 +42,7 @@
                         value="${bmi.measureDate}" required />
                       <div class="invalid-feedback">Campo obrigatório</div>
                     </div>
-                    <button class="btn btn-danger rounded-pill" type="submit">Cadastrar
-                      agora</button>
+                    <button class="btn btn-danger rounded-pill" type="submit">Salvar</button>
                   </form>
                 </div>
               </div>

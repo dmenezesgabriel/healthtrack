@@ -164,12 +164,10 @@ public class UserServlet extends HttpServlet {
             String email = request.getParameter("email");
             String gender = request.getParameter("gender");
             String password = request.getParameter("password");
-            logger.info("FORM PASSWORD " + password);
 
             // Set user information
             int id = Integer.parseInt(request.getParameter("id"));
             User user = userDAO.getOne(id);
-            logger.info("USER PASSWORD " + user.getPassword());
 
             user.setName(name);
             user.setGender(gender);
