@@ -64,31 +64,6 @@ public class Pressure implements Serializable {
         this.diastolicPressureValue = diastolicPressureValue;
     }
 
-    public Pressure id(int id) {
-        setId(id);
-        return this;
-    }
-
-    public Pressure user(User user) {
-        setUser(user);
-        return this;
-    }
-
-    public Pressure measureDate(LocalDate measureDate) {
-        setMeasureDate(measureDate);
-        return this;
-    }
-
-    public Pressure systolicPressureValue(int systolicPressureValue) {
-        setSystolicPressureValue(systolicPressureValue);
-        return this;
-    }
-
-    public Pressure diastolicPressureValue(int diastolicPressureValue) {
-        setDiastolicPressureValue(diastolicPressureValue);
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == this)

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.healthtrack.util.Cryptography;
-
 public class User implements Serializable {
     protected static final long serialVersionUID = 1L;
 

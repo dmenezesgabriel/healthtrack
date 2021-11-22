@@ -28,11 +28,8 @@ function renderChart() {
     .then(function (resData) {
       resData.forEach((element) => {
         let labelDate = `${element.measureDate.day}/${element.measureDate.month}/${element.measureDate.year}`;
-        console.log(labelDate);
         data["labels"].push(labelDate);
-        console.log(element.measureValue);
         data["datasets"][0]["data"].push(element.measureValue * 100);
-        console.log(data["labels"]);
         chart.update();
       });
     });
