@@ -2,6 +2,7 @@
 // Refactor
 // This
 // Ugly code
+// viz breaks if more than one register per date (label)
 function renderChart() {
   let data = [];
   data["labels"] = [];
