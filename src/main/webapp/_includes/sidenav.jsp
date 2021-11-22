@@ -28,7 +28,7 @@
                     <c:url value="bmi" var="link">
                       <c:param name="action" value="list" />
                     </c:url>
-                    <li><a href=${link} class="nav-link text-dark">índice de massa muscular</a></li>
+                    <li><a href=${link} class="nav-link text-dark">Índice de massa corporal</a></li>
                     <li><a href=${link} class="nav-link text-dark">Pressão</a></li>
                   </ul>
                 </div>
