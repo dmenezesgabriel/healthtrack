@@ -34,22 +34,22 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <c:forEach items="${bmis}" var="bmi">
+                        <c:forEach items="${pressures}" var="pressure">
                           <tr>
                             <td>${pressure.systolicPressureValue}</td>
                             <td>${pressure.diastolicPressureValue}</td>
                             <td>${pressure.measureDate}</td>
                             <td>
-                              <c:url value="bmi" var="link">
+                              <c:url value="pressure" var="link">
                                 <c:param name="action" value="edit" />
-                                <c:param name="id" value="${bmi.id}" />
+                                <c:param name="id" value="${pressure.id}" />
                               </c:url>
                               <a class="btn btn-primary rounded-pill" href="${link}">Editar</a>
                             </td>
                             <td>
                               <button type="button" class="btn btn-danger rounded-pill"
                                 data-bs-toggle="modal" data-bs-target="#excludeModal"
-                                onclick="exclusionId.value = ${bmi.id}">
+                                onclick="exclusionId.value = ${pressure.id}">
                                 Excluir
                               </button>
                             </td>
@@ -75,7 +75,7 @@
                       Deseja realmente excluir a medida?
                     </div>
                     <div class="modal-footer">
-                      <form action="bmi" method="post">
+                      <form action="pressure" method="post">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="id" id="exclusionId">
                         <button type="button" class="btn btn-primary"

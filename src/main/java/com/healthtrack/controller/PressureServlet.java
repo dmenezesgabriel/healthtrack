@@ -18,13 +18,9 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.healthtrack.dao.PressureDAO;
-import com.healthtrack.dao.HeightDAO;
 import com.healthtrack.dao.UserDAO;
-import com.healthtrack.dao.WeightDAO;
 import com.healthtrack.entity.Pressure;
-import com.healthtrack.entity.Height;
 import com.healthtrack.entity.User;
-import com.healthtrack.entity.Weight;
 import com.healthtrack.exception.DBException;
 import com.healthtrack.factory.DAOFactory;
 
