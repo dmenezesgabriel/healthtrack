@@ -11,7 +11,7 @@
                 <c:when test="${sessionScope.user != null}">
                   <c:url value="user" var="link">
                     <c:param name="action" value="get" />
-                    <c:param name="id" value="${user.id}" />
+                    <c:param name="id" value="${sessionScope.user}" />
                   </c:url>
                   <a class="navbar-brand" href="${link}">Health Track</a>
                 </c:when>
