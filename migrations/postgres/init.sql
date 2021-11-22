@@ -461,5 +461,27 @@ VALUES (
 	74.5
 );
 -------------------------------------------------------------------------------
+-- TEST imc information!
+-------------------------------------------------------------------------------
+INSERT INTO T_HT_IMC (
+	cd_usuario,
+	cd_peso,
+	cd_altura,
+	dt_imc,
+	vl_imc
+)
+(
+  select
+	T_HT_ALTURA.cd_usuario,
+	T_HT_PESO.cd_peso,
+	T_HT_ALTURA.cd_altura,
+	T_HT_ALTURA.dt_altura as dt_imc,
+	T_HT_PESO.vl_peso / (T_HT_PESO.vl_peso * T_HT_ALTURA.vl_altura) as vl_imc
+  FROM T_HT_ALTURA
+  LEFT JOIN T_HT_PESO
+  ON T_HT_ALTURA.dt_altura = T_HT_PESO.dt_peso
+  and T_HT_ALTURA.cd_usuario = T_HT_PESO.cd_usuario
+);
+-------------------------------------------------------------------------------
 -- TEST information!
 -------------------------------------------------------------------------------
