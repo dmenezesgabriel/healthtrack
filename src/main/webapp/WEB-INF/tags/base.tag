@@ -13,6 +13,7 @@
 
       <link rel="stylesheet" href="resources/css/styles.css" />
       <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
+      <script src="resources/lib/chart.min.js"></script>
 
     </head>
 
@@ -28,6 +29,8 @@
       <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
       <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
       <script src="resources/lib/feather.min.js"></script>
+
+
       <script>
         feather.replace();
       </script>
