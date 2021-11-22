@@ -1,5 +1,7 @@
 package com.healthtrack.factory;
 
+import com.healthtrack.dao.BodyMassIndexDAO;
+import com.healthtrack.dao.BodyMassIndexDAOImplPostgres;
 import com.healthtrack.dao.HeightDAO;
 import com.healthtrack.dao.HeightDAOImplPostgres;
 import com.healthtrack.dao.UserDAO;
@@ -22,5 +24,10 @@ public class DAOFactoryPostgres extends DAOFactory {
     @Override
     public HeightDAO getHeightDAO(UserDAO userDao) {
         return new HeightDAOImplPostgres(userDao);
+    }
+
+    @Override
+    public BodyMassIndexDAO getBodyMassIndexDAO(UserDAO userDAO, HeightDAO heightDAO, WeightDAO weightDAO) {
+        return new BodyMassIndexDAOImplPostgres(userDAO, heightDAO, weightDAO);
     }
 }
