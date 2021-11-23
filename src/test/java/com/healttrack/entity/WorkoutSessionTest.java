@@ -1,5 +1,6 @@
 package com.healttrack.entity;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
@@ -53,6 +54,9 @@ public class WorkoutSessionTest {
         workoutSession.setSessionDate(sessionDate);
         workoutSession.setDuration(3600); // Seconds
         workoutSession.setCalories(360);
-
+        assertTrue(workoutSession.getDuration() == 3600);
+        assertTrue(workoutSession.getCalories() == 360);
+        assertTrue(workoutSession.getUser().equals(userMock));
+        assertTrue(workoutSession.getWorkout().equals(workoutMock));
     }
 }
