@@ -10,9 +10,9 @@ public class WorkoutTest {
 
     @Test
     public void shoudInstanceObject() throws Exception {
-        Workout Workout = new Workout();
-        Workout.setName("Bike");
-        assertTrue(Workout.getName().equals("Bike"));
+        Workout workout = new Workout();
+        workout.setName("Bike");
+        assertTrue(workout.getName().equals("Bike"));
     }
 
 }
