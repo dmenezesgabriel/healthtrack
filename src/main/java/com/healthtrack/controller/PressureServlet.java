@@ -92,7 +92,7 @@ public class PressureServlet extends HttpServlet {
                 break;
             case "update":
                 logger.info("update");
-                updatePRESSURE(request, response);
+                updatePressure(request, response);
                 break;
             case "delete":
                 logger.info("delete");
@@ -158,7 +158,7 @@ public class PressureServlet extends HttpServlet {
         request.getRequestDispatcher("/pressure-form-update.jsp").forward(request, response);
     }
 
-    private void updatePRESSURE(HttpServletRequest request, HttpServletResponse response)
+    private void updatePressure(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         logger.info("update");
         HttpSession session = request.getSession();
@@ -174,8 +174,9 @@ public class PressureServlet extends HttpServlet {
             LocalDate measureDate = LocalDate.parse(request.getParameter("measureDate"), f);
 
             User user = userDAO.getOne(userId);
-            Pressure pressure = new Pressure();
+            int id = Integer.parseInt(request.getParameter("id"));
 
+            Pressure pressure = pressureDAO.getOne(id);
             pressure.setUser(user);
             pressure.setMeasureDate(measureDate);
             pressure.setDiastolicPressureValue(diastolicPressureValue);

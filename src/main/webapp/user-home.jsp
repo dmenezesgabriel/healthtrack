@@ -32,6 +32,8 @@
                     <jsp:include page="/_includes/alert.jsp" />
                     <div class="container w-75">
                       <canvas id="bmiChart"></canvas>
+                      <hr>
+                      <canvas id="pressureChart"></canvas>
                     </div>
                   </div>
                 </div>
@@ -39,7 +41,8 @@
             </div>
             <script src="resources/js/render-chart.js"></script>
             <script>
-              renderChart();
+              renderBmiChart();
+              renderPressureChart();
             </script>
           </jsp:body>
         </t:base>
