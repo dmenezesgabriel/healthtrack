@@ -14,7 +14,7 @@
                   <div class="col-md-8 col-lg-8 mb-3">
                     <div
                       class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                      <h2>índice de massa corporal</h2>
+                      <h2>Índice de massa corporal</h2>
                       <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
                           <c:url value="bmi" var="link">
@@ -49,10 +49,10 @@
                                 <c:param name="action" value="edit" />
                                 <c:param name="id" value="${bmi.id}" />
                               </c:url>
-                              <a class="btn btn-primary rounded-pill" href="${link}">Editar</a>
+                              <a class="btn btn-secondary rounded-pill" href="${link}">Editar</a>
                             </td>
                             <td>
-                              <button type="button" class="btn btn-danger rounded-pill"
+                              <button type="button" class="btn btn-light rounded-pill"
                                 data-bs-toggle="modal" data-bs-target="#excludeModal"
                                 onclick="exclusionId.value = ${bmi.id}">
                                 Excluir

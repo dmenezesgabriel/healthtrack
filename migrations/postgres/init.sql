@@ -483,5 +483,145 @@ INSERT INTO T_HT_IMC (
   and T_HT_ALTURA.cd_usuario = T_HT_PESO.cd_usuario
 );
 -------------------------------------------------------------------------------
--- TEST information!
+-- TEST Pressure information!
 -------------------------------------------------------------------------------
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );
+INSERT INTO T_HT_PRESSAO (
+	cd_usuario,
+	dt_pressao,
+	vl_pressao_sistolica,
+  vl_pressao_diastolica
+)
+VALUES (
+  1,
+  (select timestamp '2021-01-10 20:00:00' +
+       random() * (timestamp '2021-01-20 20:00:00' -
+                   timestamp '2021-11-10 10:00:00')),
+  (random()* (120-60 + 1) + 60),
+  (random()* (120-60 + 1) + 60)
+  );

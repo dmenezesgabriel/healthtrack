@@ -36,18 +36,18 @@
                       <tbody>
                         <c:forEach items="${pressures}" var="pressure">
                           <tr>
-                            <td>${pressure.systolicPressureValue}</td>
-                            <td>${pressure.diastolicPressureValue}</td>
+                            <td>${pressure.systolicPressureValue} mmHg</td>
+                            <td>${pressure.diastolicPressureValue} mmHg</td>
                             <td>${pressure.measureDate}</td>
                             <td>
                               <c:url value="pressure" var="link">
                                 <c:param name="action" value="edit" />
                                 <c:param name="id" value="${pressure.id}" />
                               </c:url>
-                              <a class="btn btn-primary rounded-pill" href="${link}">Editar</a>
+                              <a class="btn btn-secondary rounded-pill" href="${link}">Editar</a>
                             </td>
                             <td>
-                              <button type="button" class="btn btn-danger rounded-pill"
+                              <button type="button" class="btn btn-light rounded-pill"
                                 data-bs-toggle="modal" data-bs-target="#excludeModal"
                                 onclick="exclusionId.value = ${pressure.id}">
                                 Excluir

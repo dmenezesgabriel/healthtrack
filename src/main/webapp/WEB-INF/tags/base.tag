@@ -11,6 +11,7 @@
 
       <jsp:invoke fragment="title" />
 
+      <link rel="shortcut icon" href="resources/img/favicon.ico" />
       <link rel="stylesheet" href="resources/css/styles.css" />
       <link href="webjars/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet" />
       <script src="resources/lib/chart.min.js"></script>

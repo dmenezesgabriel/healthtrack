@@ -39,10 +39,10 @@
                               <c:param name="action" value="edit" />
                               <c:param name="id" value="${user.id}" />
                             </c:url>
-                            <a class="btn btn-primary rounded-pill" href="${link}">Editar</a>
+                            <a class="btn btn-secondary rounded-pill" href="${link}">Editar</a>
                           </td>
                           <td>
-                            <button type="button" class="btn btn-danger rounded-pill"
+                            <button type="button" class="btn btn-light rounded-pill"
                               data-bs-toggle="modal" data-bs-target="#excludeModal"
                               onclick="exclusionId.value = ${user.id}">
                               Excluir
